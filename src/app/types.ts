@@ -1,6 +1,3 @@
-import { SvgIconTypeMap } from "@mui/material";
-import { OverridableComponent } from "@mui/material/OverridableComponent";
-
 export type MenuItem = {
   title: string;
   href: string;
@@ -18,4 +15,39 @@ export type DiscoverCard = {
   description: string;
   icon: string;
   link: string;
+};
+
+export type Category =
+  | "All"
+  | "Home"
+  | "Electronics"
+  | "Fitness"
+  | "Hobbies"
+  | "Appliances"
+  | "Computers"
+  | "Mobile Phones"
+  | "Bedding"
+  | "Living"
+  | "Kitchen"
+  | "Garden"
+  | "Cardio"
+  | "Weights"
+  | "Laptops"
+  | "Desktops";
+
+export type Product = {
+  id: string;
+  title: string;
+  price: number;
+  image: string;
+  category: Category;
+  sale?: number;
+};
+
+export type Filter = {
+  title: string;
+  category: Category;
+  priceMin: number;
+  priceMax: number;
+  onSale: boolean;
 };

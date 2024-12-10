@@ -1,8 +1,8 @@
 import { MenuItem } from "@/app/types";
 
 export const computers: MenuItem[] = [
-  { title: "Laptops", href: "/home/computers/laptops" },
-  { title: "Desktops", href: "/home/computers/desktops" },
+  { title: "Laptops", href: "/computers/laptops" },
+  { title: "Desktops", href: "/computers/desktops" },
 ];
 
 export const home: MenuItem[] = [
@@ -13,21 +13,21 @@ export const home: MenuItem[] = [
 ];
 
 export const fitness: MenuItem[] = [
-  { title: "Cardio", href: "/home/cardio" },
-  { title: "Weights", href: "/home/weights" },
+  { title: "Cardio", href: "/fitness/cardio" },
+  { title: "Weights", href: "/fitness/weights" },
 ];
 
 export const electronics: MenuItem[] = [
-  { title: "Appliances", href: "/home/appliances" },
-  { title: "Computers", href: "/home/computers", children: computers },
-  { title: "Mobile Phones", href: "/home/mobile-phones" },
+  { title: "Appliances", href: "/electronics/appliances" },
+  { title: "Computers", href: "/electronics/computers", children: computers },
+  { title: "Mobile Phones", href: "/electronics/mobile-phones" },
 ];
 
 export const menu: MenuItem[] = [
-  { title: "Best Sellers", href: "/home/bestsellers" },
-  { title: "Today's Deals", href: "/home/deals" },
+  { title: "Best Sellers", href: "/bestsellers" },
+  { title: "Today's Deals", href: "/deals" },
   { title: "Home", href: "/home", children: home },
-  { title: "Fitness", href: "/home/fitness", children: fitness },
-  { title: "Electronics", href: "/home/electronics", children: electronics },
-  { title: "Hobbies", href: "/home/electronics" },
+  { title: "Fitness", href: "/fitness", children: fitness },
+  { title: "Electronics", href: "/electronics", children: electronics },
+  { title: "Hobbies", href: "/electronics" },
 ];

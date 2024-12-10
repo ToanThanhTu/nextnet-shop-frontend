@@ -21,7 +21,7 @@ function ScrollTopButton() {
   return (
     <button
       onClick={() => window.scrollTo({ top: 0 })}
-      className={`fixed sm:bottom-20 sm:right-20 bottom-10 right-10 p-2 rounded-full bg-dark text-white ${
+      className={`fixed sm:bottom-20 sm:right-20 bottom-10 right-10 p-2 rounded-full bg-black text-white ${
         scroll > 100 ? "block" : "hidden"
       }`}
     >

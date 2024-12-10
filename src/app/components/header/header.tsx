@@ -1,5 +1,5 @@
-import HeaderBottom from "@/app/components/header-bottom";
-import HeaderTop from "@/app/components/header-top";
+import HeaderBottom from "@/app/components/header/header-bottom";
+import HeaderTop from "@/app/components/header/header-top";
 
 function Header() {
   return (

@@ -15,14 +15,14 @@ import Link from "next/link";
 function Highlights() {
   return (
     <div className="py-12 bg-gray-100">
-      <div className="px-4 lg:max-w-screen-lg xl:max-w-screen-xl m-auto grid grid-cols-3 xl:grid-cols-4 gap-4">
+      <div className="px-4 lg:max-w-screen-lg xl:max-w-screen-xl m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         <TopDealsCard />
 
         {highlights.map((highlight) => (
           <HighlightCard key={highlight.title} highlight={highlight} />
         ))}
 
-        <Card className="xl:hidden">
+        <Card className="md:hidden lg:block xl:hidden">
           <CardHeader>
             <CardTitle>Hey, I'm Trevor</CardTitle>
           </CardHeader>
@@ -37,7 +37,7 @@ function Highlights() {
             </Link>
           </CardContent>
           <CardFooter>
-            <Link href="/contact-me">Contact Me</Link>
+            <Link href="/contact-me">Let's work together!</Link>
           </CardFooter>
         </Card>
       </div>

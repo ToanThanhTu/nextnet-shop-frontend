@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
-import Header from "@/app/components/header";
+import Header from "@/app/components/header/header";
 import ScrollTopButton from "@/app/components/ui/scrollTopButton";
-import Footer from "@/app/components/footer";
+import Footer from "@/app/components/footer/footer";
 
 export const metadata: Metadata = {
   title: {

@@ -10,7 +10,7 @@ function MembershipAds() {
     <div className="xl:max-w-screen-xl m-auto px-4 py-12 text-center uppercase">
       <h2>Become a member to save and get value on Next Net Shop</h2>
 
-      <div className="flex justify-between mt-8">
+      <div className="flex flex-col lg:flex-row gap-8 items-center justify-between mt-8">
         <Image
           src="/membership-card-tilted.png"
           alt="Membership Card Image"
@@ -19,19 +19,21 @@ function MembershipAds() {
           className="w-[150px]"
         />
 
-        <div>
-          <SwitchAccessShortcutAddIcon />
-          <p>Score Points and Save</p>
-        </div>
+        <div className="flex justify-between">
+          <div className="basis-1/3">
+            <SwitchAccessShortcutAddIcon fontSize="large" />
+            <p>Score Points and Save</p>
+          </div>
 
-        <div>
-          <LockOpenIcon />
-          <p>Exclusive Offers</p>
-        </div>
+          <div className="basis-1/3">
+            <LockOpenIcon fontSize="large" />
+            <p>Exclusive Offers</p>
+          </div>
 
-        <div>
-          <MonetizationOnIcon />
-          <p>Member Pricing</p>
+          <div className="basis-1/3">
+            <MonetizationOnIcon fontSize="large" />
+            <p>Member Pricing</p>
+          </div>
         </div>
 
         <Link href="/membership">

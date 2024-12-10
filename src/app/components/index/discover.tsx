@@ -23,15 +23,15 @@ const discoverIconsMap: { [key: string]: JSX.Element } = {
 function Discover() {
   return (
     <div className="py-12 bg-gray-100">
-      <div className="px-4 m-auto xl:max-w-screen-2xl">
+      <div className="px-6 max-w-screen-2xl m-auto overflow-x-auto">
         <h2 className="mb-6">Discover Next Net Shop</h2>
 
-        <div className="flex flex-nowrap gap-4 overflow-x-auto">
+        <div className="flex gap-4 w-fit">
           {discoverCards.map((card) => (
             <div key={card.title} className="w-48 shadow-md bg-white relative">
               <Link
                 href={card.link}
-                className="flex justify-center items-center p-10 bg-[#9DC09B]"
+                className="flex justify-center items-center p-10 bg-[#84B082]"
               >
                 {discoverIconsMap[card.icon]}
               </Link>
@@ -42,14 +42,13 @@ function Discover() {
               </div>
 
               <Button
-                variant="outlined"
+                variant="text"
                 href={card.link}
                 style={{
                   position: "absolute",
                   bottom: "0",
                   width: "100%",
                   color: "#84B082",
-                  borderColor: "#9DC09B",
                 }}
               >
                 Discover Now &gt;
@@ -60,7 +59,7 @@ function Discover() {
           <div className="w-48 shadow-md bg-white relative">
             <Link
               href="https://www.linkedin.com/in/trevor-tu/"
-              className="flex justify-center items-center p-5 bg-[#9DC09B]"
+              className="flex justify-center items-center p-5 bg-[#84B082]"
             >
               <Image
                 src="/cool-face.png"
@@ -80,14 +79,13 @@ function Discover() {
             </div>
 
             <Button
-              variant="outlined"
+              variant="text"
               href="https://www.linkedin.com/in/trevor-tu/"
               style={{
                 position: "absolute",
                 bottom: "0",
                 width: "100%",
                 color: "#84B082",
-                borderColor: "#9DC09B",
               }}
             >
               Contact Me &gt;
