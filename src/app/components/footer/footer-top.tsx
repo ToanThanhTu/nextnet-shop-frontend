@@ -1,4 +1,3 @@
-import { menu } from "@/app/data/menu";
 import Link from "next/link";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import EmailIcon from "@mui/icons-material/Email";
@@ -7,6 +6,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { info } from "@/app/data/contact-me";
 import Image from "next/image";
+import { categories } from "@/app/data/categories";
 
 function FooterTop() {
   return (
@@ -32,7 +32,7 @@ function FooterTop() {
           <h3>Quick Links</h3>
 
           <ul className="grid grid-cols-2 gap-4">
-            {menu.map((item) => (
+            {categories.map((item) => (
               <div key={item.title}>
                 <Link href={item.href}>{item.title}</Link>
               </div>

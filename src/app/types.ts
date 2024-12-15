@@ -17,36 +17,37 @@ export type DiscoverCard = {
   link: string;
 };
 
-export type Category =
-  | "All"
-  | "Home"
-  | "Electronics"
-  | "Fitness"
-  | "Hobbies"
-  | "Appliances"
-  | "Computers"
-  | "Mobile Phones"
-  | "Bedding"
-  | "Living"
-  | "Kitchen"
-  | "Garden"
-  | "Cardio"
-  | "Weights"
-  | "Laptops"
-  | "Desktops";
+export type Category = {
+  id: string;
+  title: string;
+  description?: string;
+  href: string;
+  image: string;
+};
+
+export type SubCategory = {
+  id: string;
+  title: string;
+  description?: string;
+  href: string;
+  image: string;
+  categoryId: string;
+};
 
 export type Product = {
   id: string;
   title: string;
+  description?: string;
   price: number;
   image: string;
-  category: Category;
   sale?: number;
+  stock: number;
+  subCategoryId: string;
 };
 
 export type Filter = {
   title: string;
-  category: Category;
+  category: string;
   priceMin: number;
   priceMax: number;
   onSale: boolean;

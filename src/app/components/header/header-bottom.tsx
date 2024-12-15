@@ -2,7 +2,7 @@
 
 import RandomQuotes from "@/app/components/index/random-quotes";
 import { Input } from "@/app/components/ui/input";
-import Menu from "@/app/components/ui/menu";
+import Menu from "@/app/components/menu/menu";
 import PlaceIcon from "@mui/icons-material/Place";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";

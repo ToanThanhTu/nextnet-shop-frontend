@@ -3,8 +3,8 @@
 import { Button } from "@/app/components/ui/button";
 import { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
-import { menu } from "@/app/data/menu";
 import Link from "next/link";
+import { categories } from "@/app/data/categories";
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,7 +58,7 @@ function Sidebar() {
               </h3>
             </li>
 
-            {menu.map((item) => (
+            {categories.map((item) => (
               <li
                 key={item.title}
                 className="py-4 border-t-4 border-primary-dark"
@@ -66,16 +66,6 @@ function Sidebar() {
                 <h3 className="py-2 px-4">
                   <Link href={item.href}>{item.title}</Link>
                 </h3>
-
-                {item.children && (
-                  <ul className="px-4">
-                    {item.children.map((child) => (
-                      <li key={child.title} className="py-2">
-                        <Link href={child.href}>{child.title}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
               </li>
             ))}
 
