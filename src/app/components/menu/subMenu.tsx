@@ -4,7 +4,7 @@ import { Category } from "@/app/types";
 import Image from "next/image";
 import Link from "next/link";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { SubCategories } from "@/app/data/categories";
+import { SubCategories } from "@/app/data/subCategories";
 
 function SubMenu({ category }: { category: Category }) {
   const subCategories = SubCategories.filter(s => s.categoryId === category.id);
@@ -12,7 +12,7 @@ function SubMenu({ category }: { category: Category }) {
   return (
     <>
       {subCategories && (
-        <div className="absolute top-20 -left-[50px] w-[800px] h-[400px] z-40 bg-white p-8 rounded-2xl">
+        <div className="absolute top-32 -left-[50px] w-[800px] h-[400px] z-40 bg-white p-8 rounded-2xl">
           <div className="relative">
             <Link
               href={category.href}
@@ -48,8 +48,8 @@ function SubMenu({ category }: { category: Category }) {
             </ul>
 
             <Image
-              src="/workspace.png"
-              alt={`Workstation image`}
+              src={category.image}
+              alt={`${category.title} Image`}
               width={900}
               height={600}
               className="absolute top-0 -right-0 w-[500px] z-40"

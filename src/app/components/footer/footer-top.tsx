@@ -29,41 +29,50 @@ function FooterTop() {
         </div>
 
         <div>
-          <h3>Quick Links</h3>
+          <h3 className="mb-4">Quick Links</h3>
 
           <ul className="grid grid-cols-2 gap-4">
+            <li>
+              <Link href="/bestsellers">Best Sellers</Link>
+            </li>
+            <li>
+              <Link href="/deals">Today's Deals</Link>
+            </li>
+            <li>
+              <Link href="/all-products">All Products</Link>
+            </li>
             {categories.map((item) => (
-              <div key={item.title}>
+              <li key={item.title}>
                 <Link href={item.href}>{item.title}</Link>
-              </div>
+              </li>
             ))}
           </ul>
         </div>
 
         <div>
-          <h3>Contact Me</h3>
+          <h3 className="mb-4">Contact Me</h3>
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 mb-2">
             <PhoneAndroidIcon />
             <Link href={`tel:${info.phone}`}>{info.phone}</Link>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 mb-2">
             <EmailIcon />
             <Link href={`mailto:${info.email}`}>{info.email}</Link>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 mb-2">
             <LinkedInIcon />
             <Link href={info.linkedin}>LinkedIn</Link>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 mb-2">
             <GitHubIcon />
             <Link href={info.github}>GitHub</Link>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 mb-2">
             <PlaceIcon />
             <p>{info.address}</p>
           </div>

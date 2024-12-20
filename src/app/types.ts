@@ -18,7 +18,7 @@ export type DiscoverCard = {
 };
 
 export type Category = {
-  id: string;
+  id: number;
   title: string;
   description?: string;
   href: string;
@@ -26,23 +26,23 @@ export type Category = {
 };
 
 export type SubCategory = {
-  id: string;
+  id: number;
   title: string;
   description?: string;
   href: string;
   image: string;
-  categoryId: string;
+  categoryId: number;
 };
 
 export type Product = {
-  id: string;
+  id: number;
   title: string;
   description?: string;
   price: number;
   image: string;
   sale?: number;
   stock: number;
-  subCategoryId: string;
+  subCategoryId: number;
 };
 
 export type Filter = {

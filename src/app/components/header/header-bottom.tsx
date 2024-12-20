@@ -13,22 +13,23 @@ import Sidebar from "@/app/components/sidebar";
 function HeaderBottom() {
   return (
     <div>
-      <div className="hidden lg:block p-6">
-        <div className="flex gap-6 justify-between items-center">
+      {/* Desktop Header */}
+      <div className="hidden lg:block bg-white">
+        <div className="flex gap-6 justify-between items-center px-6">
           <Link href="/">
             <Image
               src="/logo.png"
               alt="Logo"
               width={500}
               height={160}
-              className="w-32"
+              className="w-40"
             />
           </Link>
 
           <Menu />
 
           <div className="flex items-center gap-4">
-            <div className="flex">
+            <div className="flex items-center gap-2">
               <Input type="text" placeholder="Search" />
               <SearchIcon />
             </div>
@@ -39,6 +40,7 @@ function HeaderBottom() {
         </div>
       </div>
 
+      {/* Mobile Header */}
       <div className="lg:hidden p-4">
         <div className="flex justify-between items-center">
           <Sidebar />

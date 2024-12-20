@@ -16,17 +16,17 @@ function MenuItem({ category }: { category: Category }) {
   const toggleSubMenu = (event: MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
 
-    if (selectedMenu === (event.target as HTMLButtonElement).value) {
-      dispatch(setMenuSelect(""));
+    if (selectedMenu === Number((event.target as HTMLButtonElement).value)) {
+      dispatch(setMenuSelect(0));
     } else {
-      dispatch(setMenuSelect((event.target as HTMLButtonElement).value));
+      dispatch(setMenuSelect(Number((event.target as HTMLButtonElement).value)));
     }
   };
 
   return (
     <div>
       <button
-        className={`font-bold text-xs uppercase border-b-4 hover:border-black py-5 flex items-center ${clsx(
+        className={`font-bold text-sm uppercase border-b-4 hover:border-black py-10 flex items-center ${clsx(
           {
             "border-primary-dark text-primary-dark":
               selectedMenu === category.id,
@@ -36,7 +36,7 @@ function MenuItem({ category }: { category: Category }) {
         value={category.id}
         onClick={toggleSubMenu}
       >
-        {category.id}
+        {category.title}
         {selectedMenu === category.id ? (
           <KeyboardArrowUpIcon />
         ) : (
@@ -47,8 +47,8 @@ function MenuItem({ category }: { category: Category }) {
       {selectedMenu === category.id ? (
         <>
           <div
-            className="fixed inset-0 top-[120px] bg-black bg-opacity-50 z-10"
-            onClick={() => dispatch(setMenuSelect(""))}
+            className="fixed inset-0 top-[135px] bg-black bg-opacity-50 z-10"
+            onClick={() => dispatch(setMenuSelect(0))}
           />
           <SubMenu category={category} />
         </>

@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Header />
-        {children}
+        <main className="mt-[170px]">{children}</main>
         <ScrollTopButton />
         <Footer />
       </body>

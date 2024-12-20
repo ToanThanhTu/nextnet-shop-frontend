@@ -9,21 +9,21 @@ function Menu() {
       <ul className="flex gap-4 items-center relative w-[700px]">
         <Link
           href="/bestsellers"
-          className="uppercase font-bold text-xs border-b-4 border-transparent hover:border-black py-6"
+          className="uppercase font-bold text-sm border-b-4 border-transparent hover:border-black py-10"
         >
           Best Sellers
         </Link>
 
         <Link
           href="/deals"
-          className="uppercase font-bold text-xs border-b-4 border-transparent hover:border-black py-6 flex items-center"
+          className="uppercase font-bold text-sm border-b-4 border-transparent hover:border-black py-10 flex items-center"
         >
           Today's Deals
         </Link>
 
         <Link
           href="/all-products"
-          className="uppercase font-bold text-xs border-b-4 border-transparent hover:border-black py-6 flex items-center"
+          className="uppercase font-bold text-sm border-b-4 border-transparent hover:border-black py-10 flex items-center"
         >
           All Products
         </Link>

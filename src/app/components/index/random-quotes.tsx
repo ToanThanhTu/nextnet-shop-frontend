@@ -15,7 +15,7 @@ function RandomQuotes() {
 
   return (
     <Link href="/contact-me">
-      <div className="w-full bg-gray-100 text-center hover:opacity-60">
+      <div className="w-full bg-gray-100 text-center hover:opacity-95">
         <p className="text-sm p-2 font-semibold">{quotes[index]}</p>
       </div>
     </Link>

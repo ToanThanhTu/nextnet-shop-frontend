@@ -2,19 +2,19 @@ import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 
 // Define a type for the slice state
 export interface MenuSelectState {
-  selectedMenu: string;
+  selectedMenu: number;
 }
 
 // Define the initial state using that type
 const initialState: MenuSelectState = {
-  selectedMenu: "",
+  selectedMenu: 0,
 }
 
 const menuSelectSlice = createSlice({
   name: "menuSelect",
   initialState,
   reducers: {
-    setMenuSelect(state, action: PayloadAction<string>) {
+    setMenuSelect(state, action: PayloadAction<number>) {
       state.selectedMenu = action.payload;
     },
   },
@@ -22,7 +22,7 @@ const menuSelectSlice = createSlice({
 
 export const { setMenuSelect } = menuSelectSlice.actions;
 
-export const selectMenu = (menu: string) => {
+export const selectMenu = (menu: number) => {
   return (dispatch: Dispatch) => {
     dispatch(setMenuSelect(menu));
   };
