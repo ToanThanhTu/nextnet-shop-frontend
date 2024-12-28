@@ -1,4 +1,4 @@
-import Filter from "@/app/components/filter";
+import Filter from "@/app/components/filter/filter";
 import Sort from "@/app/components/sort";
 
 export default function Layout({

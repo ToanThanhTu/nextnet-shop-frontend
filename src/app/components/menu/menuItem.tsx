@@ -19,7 +19,9 @@ function MenuItem({ category }: { category: Category }) {
     if (selectedMenu === Number((event.target as HTMLButtonElement).value)) {
       dispatch(setMenuSelect(0));
     } else {
-      dispatch(setMenuSelect(Number((event.target as HTMLButtonElement).value)));
+      dispatch(
+        setMenuSelect(Number((event.target as HTMLButtonElement).value))
+      );
     }
   };
 
