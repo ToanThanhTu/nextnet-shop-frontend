@@ -1,10 +1,10 @@
 "use client";
 
-import { Button } from "@/app/components/ui/button";
 import { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
 import { categories } from "@/app/data/categories";
+import { Button } from "@/app/components/ui/button";
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);

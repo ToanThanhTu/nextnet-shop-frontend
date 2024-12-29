@@ -21,16 +21,17 @@ export type Category = {
   id: number;
   title: string;
   description?: string;
-  href: string;
-  image: string;
+  href?: string;
+  image?: string;
+  subCategories?: SubCategory[];
 };
 
 export type SubCategory = {
   id: number;
   title: string;
   description?: string;
-  href: string;
-  image: string;
+  href?: string;
+  image?: string;
   categoryId: number;
 };
 
@@ -39,7 +40,7 @@ export type Product = {
   title: string;
   description?: string;
   price: number;
-  image: string;
+  image?: string;
   sale?: number;
   stock: number;
   subCategoryId: number;

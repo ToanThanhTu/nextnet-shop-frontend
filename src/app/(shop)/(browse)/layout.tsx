@@ -7,10 +7,13 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
+    <div className="grid grid-cols-4 gap-4">
       <Filter />
-      <Sort />
-      {children}
+
+      <div className="col-span-3">
+        <Sort />
+        {children}
+      </div>
     </div>
   );
 }
