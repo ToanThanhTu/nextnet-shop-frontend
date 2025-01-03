@@ -1,21 +1,51 @@
 import MenuItem from "@/app/components/menu/menuItem";
-import { categories } from "@/app/data/categories";
-import StoreProvider from "@/app/StoreProvider";
+import { getCategories } from "@/app/requests";
+import { Category } from "@/app/types";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { useState, MouseEvent } from "react";
 
 function Menu() {
+  const [selectedMenu, setSelectedMenu] = useState(0);
+
+  const getCategoriesResult = useQuery({
+    queryKey: ["categories"],
+    queryFn: getCategories,
+  });
+
+  console.log(JSON.parse(JSON.stringify(getCategoriesResult)));
+
+  if (getCategoriesResult.isLoading) {
+    return <div>loading data...</div>;
+  }
+
+  const categories: Category[] = getCategoriesResult.data;
+
+  const toggleSubMenu = (event: MouseEvent): void => {
+    event.preventDefault();
+    if (selectedMenu === Number((event.target as HTMLButtonElement).value)) {
+      setSelectedMenu(0);
+    } else {
+      setSelectedMenu(Number((event.target as HTMLButtonElement).value));
+    }
+  };
+
+  const closeSubMenu = () => {
+    setSelectedMenu(0);
+  };
+
   return (
     <nav>
       <ul className="flex gap-4 items-center relative w-[700px]">
         <Link
-          href="/bestsellers"
+          href="/best-sellers"
           className="uppercase font-bold text-sm border-b-4 border-transparent hover:border-black py-10"
         >
           Best Sellers
         </Link>
 
         <Link
-          href="/deals"
+          href="/all-deals"
           className="uppercase font-bold text-sm border-b-4 border-transparent hover:border-black py-10 flex items-center"
         >
           Today's Deals
@@ -28,11 +58,15 @@ function Menu() {
           All Products
         </Link>
 
-        <StoreProvider>
-          {categories.map((category) => (
-            <MenuItem key={category.title} category={category} />
-          ))}
-        </StoreProvider>
+        {categories.map((category) => (
+          <MenuItem
+            key={category.title}
+            category={category}
+            selectedMenu={selectedMenu}
+            toggleSubMenu={toggleSubMenu}
+            closeSubMenu={closeSubMenu}
+          />
+        ))}
       </ul>
     </nav>
   );

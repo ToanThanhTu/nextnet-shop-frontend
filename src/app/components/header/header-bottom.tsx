@@ -3,12 +3,10 @@
 import RandomQuotes from "@/app/components/index/random-quotes";
 import { Input } from "@/app/components/ui/input";
 import Menu from "@/app/components/menu/menu";
-import PlaceIcon from "@mui/icons-material/Place";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import SearchIcon from "@mui/icons-material/Search";
 import Image from "next/image";
 import Link from "next/link";
 import Sidebar from "@/app/components/sidebar";
+import { MapPin, Search, ShoppingCart } from "lucide-react";
 
 function HeaderBottom() {
   return (
@@ -31,11 +29,11 @@ function HeaderBottom() {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <Input type="text" placeholder="Search" />
-              <SearchIcon />
+              <Search />
             </div>
 
-            <PlaceIcon />
-            <ShoppingCartIcon />
+            <MapPin />
+            <ShoppingCart />
           </div>
         </div>
       </div>
@@ -56,14 +54,14 @@ function HeaderBottom() {
           </Link>
 
           <div className="flex gap-2">
-            <PlaceIcon fontSize="large" />
-            <ShoppingCartIcon fontSize="large" />
+            <MapPin fontSize="large" />
+            <ShoppingCart fontSize="large" />
           </div>
         </div>
 
         <div className="flex items-center gap-2 mt-4">
           <Input type="text" placeholder="Search" />
-          <SearchIcon />
+          <Search />
         </div>
       </div>
 

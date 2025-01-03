@@ -3,6 +3,7 @@ import "@/app/globals.css";
 import Header from "@/app/components/header/header";
 import ScrollTopButton from "@/app/components/ui/scrollTopButton";
 import Footer from "@/app/components/footer/footer";
+import Providers from "@/app/providers";
 
 export const metadata: Metadata = {
   title: {
@@ -21,10 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        <main className="mt-[170px]">{children}</main>
-        <ScrollTopButton />
-        <Footer />
+        <Providers>
+          <Header />
+          <main className="mt-[170px]">{children}</main>
+          <ScrollTopButton />
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

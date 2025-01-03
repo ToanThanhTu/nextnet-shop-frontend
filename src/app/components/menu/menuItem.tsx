@@ -1,30 +1,19 @@
 "use client";
 
 import { Category } from "@/app/types";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import SubMenu from "@/app/components/menu/subMenu";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { MouseEvent } from "react";
-import { setMenuSelect } from "@/lib/features/menu/menuSelectSlice";
 import clsx from "clsx";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
-function MenuItem({ category }: { category: Category }) {
-  const selectedMenu = useAppSelector((state) => state.menuSelect.selectedMenu);
-  const dispatch = useAppDispatch();
+interface Props {
+  category: Category;
+  selectedMenu: number;
+  toggleSubMenu: (event: MouseEvent<HTMLButtonElement>) => void;
+  closeSubMenu: () => void;
+}
 
-  const toggleSubMenu = (event: MouseEvent<HTMLButtonElement>): void => {
-    event.preventDefault();
-
-    if (selectedMenu === Number((event.target as HTMLButtonElement).value)) {
-      dispatch(setMenuSelect(0));
-    } else {
-      dispatch(
-        setMenuSelect(Number((event.target as HTMLButtonElement).value))
-      );
-    }
-  };
-
+function MenuItem({ category, selectedMenu, toggleSubMenu, closeSubMenu }: Props) {
   return (
     <div>
       <button
@@ -40,9 +29,9 @@ function MenuItem({ category }: { category: Category }) {
       >
         {category.title}
         {selectedMenu === category.id ? (
-          <KeyboardArrowUpIcon />
+          <ChevronUp size={20} />
         ) : (
-          <KeyboardArrowDownIcon />
+          <ChevronDown size={20} />
         )}
       </button>
 
@@ -50,9 +39,9 @@ function MenuItem({ category }: { category: Category }) {
         <>
           <div
             className="fixed inset-0 top-[135px] bg-black bg-opacity-50 z-10"
-            onClick={() => dispatch(setMenuSelect(0))}
+            onClick={closeSubMenu}
           />
-          <SubMenu category={category} />
+          <SubMenu category={category} closeSubMenu={closeSubMenu} />
         </>
       ) : null}
     </div>

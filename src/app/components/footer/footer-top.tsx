@@ -1,14 +1,29 @@
+"use client";
+
 import Link from "next/link";
-import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
-import EmailIcon from "@mui/icons-material/Email";
-import PlaceIcon from "@mui/icons-material/Place";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { info } from "@/app/data/contact-me";
 import Image from "next/image";
-import { categories } from "@/app/data/categories";
+import { useQuery } from "@tanstack/react-query";
+import { getCategories } from "@/app/requests";
+import { Category } from "@/app/types";
+import { Mail, MapPin, Smartphone } from "lucide-react";
 
 function FooterTop() {
+  const getCategoriesResult = useQuery({
+    queryKey: ["categories"],
+    queryFn: getCategories,
+  });
+
+  console.log(JSON.parse(JSON.stringify(getCategoriesResult)));
+
+  if (getCategoriesResult.isLoading) {
+    return <div>loading data...</div>;
+  }
+
+  const categories: Category[] = getCategoriesResult.data;
+
   return (
     <div className="bg-footer">
       <div className="w-full h-4 bg-primary" />
@@ -41,9 +56,9 @@ function FooterTop() {
             <li>
               <Link href="/all-products">All Products</Link>
             </li>
-            {categories.map((item) => (
-              <li key={item.title}>
-                <Link href={item.href}>{item.title}</Link>
+            {categories.map((category) => (
+              <li key={category.title}>
+                <Link href="">{category.title}</Link>
               </li>
             ))}
           </ul>
@@ -53,12 +68,12 @@ function FooterTop() {
           <h3 className="mb-4">Contact Me</h3>
 
           <div className="flex gap-2 mb-2">
-            <PhoneAndroidIcon />
+            <Smartphone />
             <Link href={`tel:${info.phone}`}>{info.phone}</Link>
           </div>
 
           <div className="flex gap-2 mb-2">
-            <EmailIcon />
+            <Mail />
             <Link href={`mailto:${info.email}`}>{info.email}</Link>
           </div>
 
@@ -73,7 +88,7 @@ function FooterTop() {
           </div>
 
           <div className="flex gap-2 mb-2">
-            <PlaceIcon />
+            <MapPin />
             <p>{info.address}</p>
           </div>
         </div>

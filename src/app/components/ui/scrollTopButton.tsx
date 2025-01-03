@@ -1,6 +1,6 @@
 "use client";
 
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { ChevronUp } from "lucide-react";
 import { useEffect, useState } from "react";
 
 function ScrollTopButton() {
@@ -25,7 +25,7 @@ function ScrollTopButton() {
         scroll > 100 ? "block" : "hidden"
       }`}
     >
-      <KeyboardArrowUpIcon />
+      <ChevronUp />
     </button>
   );
 }

@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import menuSelectReducer from "./features/menu/menuSelectSlice";
+import filterAndSortReducer from "./features/filterAndSort/filterAndSortSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      menuSelect: menuSelectReducer,
+      filterAndSort: filterAndSortReducer,
     },
   });
 };
