@@ -2,12 +2,6 @@ import { Product } from "@/app/types";
 import Image from "next/image";
 
 function ProductCard({ product }: { product: Product }) {
-  let price = product.price;
-
-  if (product.sale) {
-    price = Math.round((price - (price * product.sale) / 100) * 100) / 100;
-  }
-
   return (
     <div>
       <Image
@@ -18,14 +12,14 @@ function ProductCard({ product }: { product: Product }) {
       />
       <h4>{product.title}</h4>
       <div>
-        <span>${price}</span>{" "}
-        {product.sale && <span>Was ${product.price}</span>}
+        <span className={`${product.sale > 0 && "text-red-500"} font-semibold`}>${product.salePrice}</span>{" "}
+        {product.sale > 0 && <span className="text-xs">was ${product.price}</span>}
       </div>
 
-      {product.sale && (
-        <div>
-          <span>SALE</span>
-          <span>{product.sale}% OFF</span>
+      {product.sale > 0 && (
+        <div className="mt-2">
+          <span className="p-1 bg-red-500 text-white text-xs mr-1">SALE</span>
+          <span className="p-1 bg-green-500 text-white text-xs">{product.sale}% OFF</span>
         </div>
       )}
     </div>

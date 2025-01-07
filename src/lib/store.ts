@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import filterAndSortReducer from "./features/filterAndSort/filterAndSortSlice";
+import filterReducer from "./features/filter/filterSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      filterAndSort: filterAndSortReducer,
+      filter: filterReducer,
     },
   });
 };

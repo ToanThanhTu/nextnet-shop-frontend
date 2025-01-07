@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Sidebar from "@/app/components/sidebar";
 import { MapPin, Search, ShoppingCart } from "lucide-react";
+import SearchBar from "@/app/components/search-bar/search-bar";
 
 function HeaderBottom() {
   return (
@@ -27,11 +28,7 @@ function HeaderBottom() {
           <Menu />
 
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <Input type="text" placeholder="Search" />
-              <Search />
-            </div>
-
+            <SearchBar />
             <MapPin />
             <ShoppingCart />
           </div>
@@ -59,10 +56,7 @@ function HeaderBottom() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 mt-4">
-          <Input type="text" placeholder="Search" />
-          <Search />
-        </div>
+        <SearchBar />
       </div>
 
       <RandomQuotes />

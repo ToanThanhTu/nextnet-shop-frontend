@@ -1,37 +1,7 @@
-"use client";
-
-import ProductCard from "@/app/components/products/product-card";
-import { getProducts } from "@/app/requests";
-import { Product } from "@/app/types";
-import { useQuery } from "@tanstack/react-query";
+import Products from "@/app/components/products/products";
 
 function Page() {
-  const {
-    data: products,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["products"],
-    queryFn: getProducts,
-  });
-
-  if (isLoading) {
-    return <div>loading data...</div>;
-  }
-
-  if (isError || !products) {
-    return <div>Error loading products. Please try again later.</div>;
-  }
-
-  return (
-    <div>
-      <div className="grid grid-cols-4 gap-4">
-        {products.map((product: Product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
-    </div>
-  );
+  return <Products endpoint="all" queryKey="all" />;
 }
 
 export default Page;

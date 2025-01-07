@@ -9,12 +9,25 @@ import {
   DropdownMenuTrigger,
 } from "@/app/components/ui/dropdown-menu";
 import { Slider } from "@/app/components/ui/slider";
+import { setLimit, setSortBy, updateCurrentFilter } from "@/lib/features/filter/filterSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { ChevronDown } from "lucide-react";
-import { useState } from "react";
 
-function FilterAndSort() {
-  const [sortBy, setSortBy] = useState("none");
-  const [limit, setLimit] = useState("12");
+function Filter() {
+  const dispatch = useAppDispatch();
+  const { initial, current } = useAppSelector((state) => state.filter);
+
+  const handlePriceChange = (value: number[]) => {
+    dispatch(updateCurrentFilter({ priceMin: value[0], priceMax: value[1] }));
+  };
+
+  const handleSortByChange = (value: string) => {
+    dispatch(setSortBy(value));
+  };
+
+  const handleLimitChange = (value: string) => {
+    dispatch(setLimit(value));
+  };
 
   return (
     <div className="flex justify-end items-center gap-2">
@@ -25,10 +38,19 @@ function FilterAndSort() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <div className="flex gap-2 w-80 p-2">
-            0
-            <Slider defaultValue={[3000]} max={3000} step={1} />
-            3000
+          <div className="flex gap-2 w-80 px-2 py-4">
+            ${initial.priceMin}
+            <Slider
+              defaultValue={[current.priceMin, current.priceMax]}
+              onValueChange={handlePriceChange}
+              value={[current.priceMin, current.priceMax]}
+              onValueCommit={handlePriceChange}
+              min={initial.priceMin}
+              max={initial.priceMax}
+              step={1}
+              minStepsBetweenThumbs={1}
+            />
+            ${initial.priceMax}
           </div>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -40,14 +62,10 @@ function FilterAndSort() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuRadioGroup value={sortBy} onValueChange={setSortBy}>
+          <DropdownMenuRadioGroup value={current.sortBy} onValueChange={handleSortByChange}>
             <DropdownMenuRadioItem value="none">None</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="priceLowHigh">
-              Price Low-High
-            </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="priceHighLow">
-              Price High-Low
-            </DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="priceLowHigh">Price Low-High</DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="priceHighLow">Price High-Low</DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -55,11 +73,11 @@ function FilterAndSort() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline">
-            SHOW {limit} <ChevronDown />
+            SHOW {current.limit} <ChevronDown />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuRadioGroup value={limit} onValueChange={setLimit}>
+          <DropdownMenuRadioGroup value={current.limit} onValueChange={handleLimitChange}>
             <DropdownMenuRadioItem value="12">12</DropdownMenuRadioItem>
             <DropdownMenuRadioItem value="24">24</DropdownMenuRadioItem>
             <DropdownMenuRadioItem value="36">36</DropdownMenuRadioItem>
@@ -71,4 +89,4 @@ function FilterAndSort() {
   );
 }
 
-export default FilterAndSort;
+export default Filter;

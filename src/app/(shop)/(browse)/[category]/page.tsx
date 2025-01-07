@@ -1,10 +1,6 @@
 "use client";
 
-import Layout from "@/app/(shop)/(browse)/layout";
 import Products from "@/app/components/products/products";
-import { getProductsByCategoryName } from "@/app/requests";
-import { Product } from "@/app/types";
-import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
 function Page({ params }: { params: Promise<{ category: string }> }) {
@@ -20,24 +16,13 @@ function Page({ params }: { params: Promise<{ category: string }> }) {
 
   let category = "";
 
-  if (resolvedParams !== null) {
-    category = resolvedParams.category;
+  if (!resolvedParams) {
+    return <div>Loading...</div>;
   }
 
-  const productsResult = useQuery({
-    queryKey: ["products", category],
-    queryFn: () => getProductsByCategoryName(category),
-  });
+  category = resolvedParams.category;
 
-  if (productsResult.isLoading) {
-    return <div>Loading products...</div>;
-  }
-
-  const products: Product[] = productsResult.data;
-
-  const headerTitle = category.replace(/-/g, " ").toUpperCase();
-
-  return <Products products={products} />;
+  return <Products endpoint="all" queryKey={category} category={category} />;
 }
 
 export default Page;

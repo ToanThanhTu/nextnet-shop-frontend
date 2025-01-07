@@ -1,6 +1,9 @@
 "use client";
 
-import FilterAndSort from "@/app/components/filter-and-sort";
+import Filter from "@/app/components/filter-and-sort/filter";
+import FilterTags from "@/app/components/filter-and-sort/filter-tags";
+import { resetToInitial } from "@/lib/features/filter/filterSlice";
+import { useAppDispatch } from "@/lib/hooks";
 import { usePathname } from "next/navigation";
 
 export default function Layout({
@@ -8,8 +11,10 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const dispatch = useAppDispatch();
+
   const pathName = usePathname();
-  const slug = pathName.split('/');
+  const slug = pathName.split("/");
 
   let headerTitle = "";
 
@@ -19,12 +24,15 @@ export default function Layout({
     headerTitle = slug[1].replace(/-/g, " ");
   }
 
+  dispatch(resetToInitial());
+
   return (
     <div className="mx-32">
       <div className="uppercase text-center">{headerTitle}</div>
 
-      <div className="my-4">
-        <FilterAndSort />
+      <div className="flex justify-between items-center my-4">
+        <FilterTags />
+        <Filter />
       </div>
 
       {children}

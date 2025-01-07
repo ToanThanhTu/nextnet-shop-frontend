@@ -43,14 +43,22 @@ export type Product = {
   description?: string;
   price: number;
   image?: string;
-  sale?: number;
+  sale: number;
+  salePrice: number;
   stock: number;
   subCategoryId: number;
 };
 
-export type FilterAndSort = {
-  priceMin: number;
-  priceMax: number;
-  sortBy: string;
-  limit: number;
+export type Filter = {
+  initial: {
+    priceMin: number;
+    priceMax: number;
+  };
+  current: {
+    priceMin: number;
+    priceMax: number;
+    sortBy: string;
+    limit: string;
+    page: string;
+  };
 };

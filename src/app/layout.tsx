@@ -4,6 +4,7 @@ import Header from "@/app/components/header/header";
 import ScrollTopButton from "@/app/components/ui/scrollTopButton";
 import Footer from "@/app/components/footer/footer";
 import Providers from "@/app/providers";
+import StoreProvider from "@/app/StoreProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -24,7 +25,10 @@ export default function RootLayout({
       <body>
         <Providers>
           <Header />
-          <main className="mt-[170px]">{children}</main>
+          {/* Redux Store for Filter and Sort states */}
+          <StoreProvider>
+            <main className="mt-[170px]">{children}</main>
+          </StoreProvider>
           <ScrollTopButton />
           <Footer />
         </Providers>
