@@ -16,7 +16,7 @@ function SubMenu({ category, closeSubMenu }: Props) {
       <div className="absolute top-32 -left-[50px] w-[800px] h-[400px] z-40 bg-white p-8 rounded-2xl">
         <div className="relative">
           <Link
-            href={`/${category.name}`}
+            href={`/${category.slug}`}
             className="uppercase w-1/4 flex justify-between items-center border-b-2 pb-4"
             onClick={closeSubMenu}
           >
@@ -31,7 +31,7 @@ function SubMenu({ category, closeSubMenu }: Props) {
                 className="my-6 flex border-b-2 pb-4 w-1/4"
               >
                 <Link
-                  href={`/${category.name}/${subCategory.name}`}
+                  href={`/${category.slug}/${subCategory.slug}`}
                   className="hover:opacity-75 peer w-full flex justify-between items-center"
                   onClick={closeSubMenu}
                 >
@@ -40,7 +40,7 @@ function SubMenu({ category, closeSubMenu }: Props) {
                 </Link>
 
                 <Image
-                  src={`http://localhost:3001/subcategories/${subCategory.id}/image`}
+                  src={`/api/subcategories/${subCategory.id}/image`}
                   alt={`${subCategory.title} image`}
                   width={900}
                   height={600}
@@ -51,7 +51,7 @@ function SubMenu({ category, closeSubMenu }: Props) {
           </ul>
 
           <Image
-            src={`http://localhost:3001/categories/${category.id}/image`}
+            src={`/api/categories/${category.id}/image`}
             alt={`${category.title} Image`}
             width={900}
             height={600}

@@ -20,7 +20,7 @@ export type DiscoverCard = {
 export type Category = {
   id: number;
   title: string;
-  name?: string;
+  slug?: string;
   description?: string;
   href?: string;
   image?: string;
@@ -30,7 +30,7 @@ export type Category = {
 export type SubCategory = {
   id: number;
   title: string;
-  name?: string;
+  slug?: string;
   description?: string;
   href?: string;
   image?: string;
@@ -40,6 +40,7 @@ export type SubCategory = {
 export type Product = {
   id: number;
   title: string;
+  slug: string;
   description?: string;
   price: number;
   image?: string;

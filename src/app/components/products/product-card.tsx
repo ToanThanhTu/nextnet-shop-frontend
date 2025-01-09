@@ -1,16 +1,20 @@
 import { Product } from "@/app/types";
 import Image from "next/image";
+import Link from "next/link";
 
 function ProductCard({ product }: { product: Product }) {
   return (
     <div>
-      <Image
-        src={`http://localhost:3001/products/${product.id}/image`}
-        alt={product.title}
-        width={500}
-        height={500}
-      />
-      <h4>{product.title}</h4>
+      <Link href={`/products/${product.slug}`}>
+        <Image
+          src={`/api/products/${product.id}/image`}
+          alt={product.title}
+          width={500}
+          height={500}
+        />
+        <h4>{product.title}</h4>
+      </Link>
+
       <div>
         <span className={`${product.sale > 0 && "text-red-500"} font-semibold`}>${product.salePrice}</span>{" "}
         {product.sale > 0 && <span className="text-xs">was ${product.price}</span>}

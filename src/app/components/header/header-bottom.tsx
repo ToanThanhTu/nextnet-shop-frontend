@@ -1,13 +1,13 @@
 "use client";
 
 import RandomQuotes from "@/app/components/index/random-quotes";
-import { Input } from "@/app/components/ui/input";
 import Menu from "@/app/components/menu/menu";
 import Image from "next/image";
 import Link from "next/link";
 import Sidebar from "@/app/components/sidebar";
-import { MapPin, Search, ShoppingCart } from "lucide-react";
+import { MapPin } from "lucide-react";
 import SearchBar from "@/app/components/search-bar/search-bar";
+import Cart from "@/app/components/cart/cart";
 
 function HeaderBottom() {
   return (
@@ -30,7 +30,7 @@ function HeaderBottom() {
           <div className="flex items-center gap-4">
             <SearchBar />
             <MapPin />
-            <ShoppingCart />
+            <Cart />
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@ function HeaderBottom() {
 
           <div className="flex gap-2">
             <MapPin fontSize="large" />
-            <ShoppingCart fontSize="large" />
+            <Cart />
           </div>
         </div>
 
