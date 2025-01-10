@@ -1,5 +1,6 @@
 import HeaderBottom from "@/app/components/header/header-bottom";
 import HeaderTop from "@/app/components/header/header-top";
+import StoreProvider from "@/app/StoreProvider";
 
 function Header() {
   return (
@@ -7,7 +8,7 @@ function Header() {
       <HeaderTop />
       <HeaderBottom />
     </header>
-  )
+  );
 }
 
 export default Header;

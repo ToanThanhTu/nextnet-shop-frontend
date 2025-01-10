@@ -11,8 +11,7 @@ export const metadata: Metadata = {
     template: "%s | Next Net Shop",
     default: "Next Net Shop",
   },
-  description:
-    "Next Net Shop, an e-commerce shop, the best place to buy your next favorite thing.",
+  description: "Next Net Shop, an e-commerce shop, the best place to buy your next favorite thing.",
 };
 
 export default function RootLayout({
@@ -24,9 +23,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <Header />
-          {/* Redux Store for Filter and Sort states */}
+          {/* Redux Store for Filter and Cart states */}
           <StoreProvider>
+            <Header />
             <main className="mt-[170px]">{children}</main>
           </StoreProvider>
           <ScrollTopButton />

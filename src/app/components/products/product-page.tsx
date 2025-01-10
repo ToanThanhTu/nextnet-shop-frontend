@@ -1,16 +1,24 @@
 "use client";
 
+import Quantity from "@/app/components/products/quantity";
 import Recommendations from "@/app/components/products/recommendations";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/app/components/ui/breadcrumb";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "@/app/components/ui/breadcrumb";
 import { Button } from "@/app/components/ui/button";
-import { Input } from "@/app/components/ui/input";
 import { getProductBySlug } from "@/app/requests";
 import { Product } from "@/app/types";
+import { setCart } from "@/lib/features/cart/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useState } from "react";
 
-interface ProductResults {
+interface ProductResult {
   product: Product;
   subCategory: {
     title: string;
@@ -24,52 +32,46 @@ interface ProductResults {
 
 function ProductPage({ slug }: { slug: string }) {
   const [quantity, setQuantity] = useState(1);
+  const cart = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
 
-  const results = useQuery({
+  const result = useQuery({
     queryKey: ["product", slug],
     queryFn: async () => getProductBySlug(slug),
   });
 
-  if (results.isLoading) {
+  if (result.isLoading) {
     return <div>Loading product...</div>;
   }
 
-  const productResults: ProductResults = results.data;
-  const product = productResults.product;
-  const subCategory = productResults.subCategory;
-  const category = productResults.category;
+  const productResult: ProductResult = result.data;
+  const product = productResult.product;
+  const subCategory = productResult.subCategory;
+  const category = productResult.category;
 
-  const handleAddQuantity = () => {
-    const newQuantity = quantity + 1;
+  const handleAddToCart = () => {
+    const existingItem = cart.find((item) => item.productId === product.id);
 
-    if (newQuantity > product.stock) {
-      setQuantity(product.stock);
-      alert("You can't add more than the available stock");
+    if (existingItem) {
+      const updatedCart = cart.map((item) =>
+        item.productId === product.id ? { ...item, quantity: item.quantity + quantity } : item
+      );
+      dispatch(setCart(updatedCart));
     } else {
-      setQuantity(newQuantity);
-    }
-  };
-
-  const handleSubtractQuantity = () => {
-    const newQuantity = quantity - 1;
-
-    if (newQuantity < 1) {
-      setQuantity(1);
-    } else {
-      setQuantity(newQuantity);
-    }
-  };
-
-  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuantity = Number(e.target.value);
-
-    if (newQuantity > product.stock) {
-      setQuantity(product.stock);
-      alert("You can't add more than the available stock");
-    } else if (newQuantity < 1) {
-      setQuantity(1);
-    } else {
-      setQuantity(newQuantity);
+      dispatch(
+        setCart([
+          ...cart,
+          {
+            productId: product.id,
+            title: product.title,
+            price: product.price,
+            salePrice: product.salePrice,
+            sale: product.sale,
+            quantity,
+            stock: product.stock,
+          },
+        ])
+      );
     }
   };
 
@@ -113,19 +115,10 @@ function ProductPage({ slug }: { slug: string }) {
 
           {product.stock > 0 && (
             <div>
-              <p className="uppercase">Quantity</p>
-              <div className="flex items-center gap-1">
-                <Button variant="outline" onClick={handleSubtractQuantity}>
-                  -
-                </Button>
-                <Input type="number" value={quantity} onChange={handleQuantityChange} className="w-16" />
-                <Button variant="outline" onClick={handleAddQuantity}>
-                  +
-                </Button>
-              </div>
+              <Quantity quantity={quantity} setQuantity={setQuantity} stock={product.stock} />
 
               {product.stock < 10 ? <p>Low stock - {product.stock} items left</p> : null}
-              <Button>Add to cart</Button>
+              <Button onClick={handleAddToCart}>Add to cart</Button>
             </div>
           )}
 

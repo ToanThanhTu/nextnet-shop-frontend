@@ -63,3 +63,22 @@ export type Filter = {
     page: string;
   };
 };
+
+export type CartItem = {
+  productId: number;
+  title: string;
+  price: number;
+  salePrice: number;
+  sale: number;
+  quantity: number;
+  stock: number;
+};
+
+export type Cart = CartItem[];
+
+export type PaymentDetails = {
+  number: string;
+  name: string;
+  expiry: string;
+  cvv: string;
+};
