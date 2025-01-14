@@ -82,3 +82,37 @@ export type PaymentDetails = {
   expiry: string;
   cvv: string;
 };
+
+export type User = {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+}
+
+export type UserDTO = {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+}
+
+export type UserResigtration = {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export type Auth = {
+  token: null | string;
+  user: null | {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+  };
+  loading: boolean;
+  error: null | string;
+  success: boolean;
+};

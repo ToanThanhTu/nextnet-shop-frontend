@@ -22,14 +22,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        {/* React Query Providers */}
         <Providers>
-          {/* Redux Store for Filter and Cart states */}
+          {/* Redux Store for Filter, Cart, Auth states */}
           <StoreProvider>
             <Header />
             <main className="mt-[170px]">{children}</main>
+            <ScrollTopButton />
+            <Footer />
           </StoreProvider>
-          <ScrollTopButton />
-          <Footer />
         </Providers>
       </body>
     </html>

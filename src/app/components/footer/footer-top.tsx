@@ -58,7 +58,7 @@ function FooterTop() {
             </li>
             {categories.map((category) => (
               <li key={category.title}>
-                <Link href="">{category.title}</Link>
+                <Link href={`/${category.slug}`}>{category.title}</Link>
               </li>
             ))}
           </ul>

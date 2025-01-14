@@ -1,13 +1,20 @@
 import { configureStore } from "@reduxjs/toolkit";
 import filterReducer from "./features/filter/filterSlice";
 import cartReducer from "./features/cart/cartSlice";
+import authReducer from "./features/auth/authSlice";
+import { apiSlice } from "@/lib/features/api/apiSlice";
+import { listenerMiddleware } from "@/app/listenerMiddleware";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       filter: filterReducer,
       cart: cartReducer,
+      auth: authReducer,
+      [apiSlice.reducerPath]: apiSlice.reducer,
     },
+    middleware: (getDefaultMiddeware) =>
+      getDefaultMiddeware().prepend(listenerMiddleware.middleware).concat(apiSlice.middleware),
   });
 };
 

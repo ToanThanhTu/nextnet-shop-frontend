@@ -1,11 +1,11 @@
 import FooterBottom from "@/app/components/footer/footer-bottom";
-import FooterSignIn from "@/app/components/footer/footer-signin";
+import PersonalisedRecommendations from "@/app/components/footer/recommendations";
 import FooterTop from "@/app/components/footer/footer-top";
 
 function Footer() {
   return (
     <footer>
-      <FooterSignIn />
+      <PersonalisedRecommendations />
       <FooterTop />
       <FooterBottom />
     </footer>
