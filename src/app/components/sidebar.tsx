@@ -3,11 +3,13 @@
 import { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
-import { categories } from "@/app/data/categories";
 import { Button } from "@/app/components/ui/button";
+import { useGetCategoriesQuery } from "@/lib/features/api/apiSlice";
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { data: categories = [], isLoading, isSuccess, isError, error } = useGetCategoriesQuery();
 
   useEffect(() => {
     if (isOpen) {
@@ -20,6 +22,26 @@ function Sidebar() {
       document.body.style.overflow = "auto";
     };
   }, [isOpen]);
+
+  let content: React.ReactNode;
+
+  if (isLoading) {
+    content = <div>loading categories...</div>;
+  } else if (isSuccess) {
+    content = (
+      <>
+        {categories.map((category) => (
+          <li key={category.title} className="py-4 border-t-4 border-primary-dark">
+            <h3 className="py-2 px-4">
+              <Link href={`/${category.slug}`}>{category.title}</Link>
+            </h3>
+          </li>
+        ))}
+      </>
+    );
+  } else if (isError) {
+    content = <div>Error: {error.toString()}</div>;
+  }
 
   return (
     <div>
@@ -58,16 +80,7 @@ function Sidebar() {
               </h3>
             </li>
 
-            {categories.map((item) => (
-              <li
-                key={item.title}
-                className="py-4 border-t-4 border-primary-dark"
-              >
-                <h3 className="py-2 px-4">
-                  <Link href={item.href}>{item.title}</Link>
-                </h3>
-              </li>
-            ))}
+            {content}
 
             <div className="pt-4 pb-12 border-t-4 border-primary-dark">
               <li className="py-2 px-4">
@@ -85,11 +98,7 @@ function Sidebar() {
           </ul>
         </div>
 
-        <Button
-          variant="outline"
-          onClick={() => setIsOpen(false)}
-          className="m-4"
-        >
+        <Button variant="outline" onClick={() => setIsOpen(false)} className="m-4">
           X
         </Button>
       </div>

@@ -1,4 +1,4 @@
-import { User } from "@/app/types";
+import { Category, User } from "@/app/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
@@ -22,10 +22,15 @@ export const apiSlice = createApi({
     // By default, query endpoints will use a GET HTTP request
     getUserDetails: builder.query<User, number>({
       query: (userId) => ({
-        url: `/users/${userId}`,
+        url: `/users/id/${userId}`,
       }),
     }),
+    getCategories: builder.query<Category[], void>({
+      query: () => ({
+        url: "/categories",
+      })
+    })
   }),
 });
 
-export const { useGetUserDetailsQuery } = apiSlice;
+export const { useGetUserDetailsQuery, useGetCategoriesQuery } = apiSlice;

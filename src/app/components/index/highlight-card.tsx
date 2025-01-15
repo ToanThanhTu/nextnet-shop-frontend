@@ -1,32 +1,21 @@
-import {
-  Card,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/app/components/ui/card";
-import { Highlight } from "@/app/types";
+import { Card, CardFooter, CardHeader, CardTitle } from "@/app/components/ui/card";
 import { CardContent } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 
-function HighlightCard({ highlight }: { highlight: Highlight }) {
+function HighlightCard({ title, image, url }: { title: string; image: string; url: string }) {
   return (
-    <Card>
+    <Card className="flex flex-col justify-between">
       <CardHeader>
-        <CardTitle>{highlight.title}</CardTitle>
+        <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <Link href={highlight.href}>
-          <Image
-            src={highlight.image}
-            alt={`${highlight.title} image`}
-            width={500}
-            height={500}
-          />
+        <Link href={url}>
+          <Image src={image} alt={`${title} image`} width={500} height={500} />
         </Link>
       </CardContent>
       <CardFooter>
-        <Link href={highlight.href}>Shop now</Link>
+        <Link href={url}>Shop now</Link>
       </CardFooter>
     </Card>
   );

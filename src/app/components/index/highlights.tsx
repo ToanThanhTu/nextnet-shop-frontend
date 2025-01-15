@@ -19,7 +19,7 @@ function Highlights() {
         <TopDealsCard />
 
         {highlights.map((highlight) => (
-          <HighlightCard key={highlight.title} highlight={highlight} />
+          <HighlightCard key={highlight.title} title={highlight.title} image={highlight.image} url={highlight.href} />
         ))}
 
         <Card className="md:hidden lg:block xl:hidden">

@@ -2,87 +2,86 @@
 
 import PaginationSection from "@/app/components/pagination/pagination";
 import ProductCard from "@/app/components/products/product-card";
-import { getProducts } from "@/app/requests";
 import { Product } from "@/app/types";
 import { setInitialFilter, setPage, updateCurrentFilter } from "@/lib/features/filter/filterSlice";
+import { useGetProductsQuery } from "@/lib/features/products/productsSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 
 interface ProductsPageProps {
   endpoint: string;
-  queryKey: string;
   category?: string;
   subcategory?: string;
 }
 
-function Products({ endpoint, queryKey, category, subcategory }: ProductsPageProps) {
+function Products({ endpoint, category, subcategory }: ProductsPageProps) {
   const dispatch = useAppDispatch();
   const { initial, current } = useAppSelector((state) => state.filter);
 
-  const productsResult = useQuery({
-    queryKey: [endpoint, queryKey, { current }],
-    queryFn: async () => {
-      const query = new URLSearchParams();
+  const params = {
+    category,
+    subcategory,
+    priceMin: current.priceMin,
+    priceMax: current.priceMax,
+    sortBy: current.sortBy,
+    limit: current.limit,
+    page: current.page,
+  };
 
-      if (category) query.set("category", category);
-      if (subcategory) query.set("subcategory", subcategory);
+  const { data, isLoading, isSuccess, isError, error } = useGetProductsQuery({ endpoint, params });
 
-      if (current) {
-        query.set("priceMin", current.priceMin.toString());
-        query.set("priceMax", current.priceMax.toString());
-        query.set("sortBy", current.sortBy);
-        query.set("limit", current.limit);
-        query.set("page", current.page);
-      }
-
-      const { products, totalItems } = await getProducts(endpoint, query);
-
-      // Calculate price range
-      const prices = products.map((product: Product) => product.salePrice);
+  useEffect(() => {
+    if (isSuccess && initial.priceMin === 0 && initial.priceMax === 10000) {
+      // Calculate filter price range
+      const prices = data.products.map((product: Product) => product.salePrice);
       const initialPriceMin = Math.min(...prices);
       const initialPriceMax = Math.max(...prices);
 
-      return { products, totalItems, initialPriceMin, initialPriceMax };
-    },
-  });
-
-  useEffect(() => {
-    if (productsResult.data && initial.priceMin === 0 && initial.priceMax === 10000) {
-      const { initialPriceMin, initialPriceMax } = productsResult.data;
-      dispatch(setInitialFilter({ priceMin: initialPriceMin, priceMax: initialPriceMax }));
+      dispatch(
+        setInitialFilter({
+          priceMin: initialPriceMin,
+          priceMax: initialPriceMax,
+          sortBy: "none",
+          limit: "12",
+          page: "1",
+        })
+      );
       dispatch(updateCurrentFilter({ priceMin: initialPriceMin, priceMax: initialPriceMax }));
     }
-  }, [productsResult.data, initial, dispatch]);
+  }, [data, initial, isSuccess, dispatch]);
 
-  if (productsResult.isLoading) {
-    return <div>Loading products...</div>;
-  }
-
-  const products: Product[] = productsResult.data?.products || [];
+  let content: React.ReactNode;
 
   const handlePageChange = (page: number) => {
     dispatch(setPage(page.toString()));
   };
 
-  return (
-    <div>
-      <div className="grid grid-cols-4 gap-4">
-        {products.map((product: Product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+  if (isLoading) {
+    content = <div>Loading products...</div>;
+  } else if (isSuccess) {
+    content = (
+      <>
+        <div className="grid grid-cols-4 gap-4">
+          {data.products.map((product: Product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
 
-      <div className="my-10">
-        <PaginationSection
-          totalItems={productsResult.data?.totalItems || 0}
-          itemsPerPage={Number(current.limit)}
-          currentPage={Number(current.page)}
-          onPageChange={handlePageChange}
-        />
-      </div>
-    </div>
-  );
+        <div className="my-10">
+          <PaginationSection
+            totalItems={data.totalItems || 0}
+            itemsPerPage={Number(current.limit)}
+            currentPage={Number(current.page)}
+            onPageChange={handlePageChange}
+          />
+        </div>
+      </>
+    );
+  } else if (isError) {
+    content = <div>Error: {error.toString()}</div>;
+  }
+
+  return <div>{content}</div>;
 }
 
 export default Products;

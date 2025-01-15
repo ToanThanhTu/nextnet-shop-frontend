@@ -46,14 +46,17 @@ export type Product = {
   image?: string;
   sale: number;
   salePrice: number;
-  stock: number;
-  subCategoryId: number;
+  stock?: number;
+  subCategoryId?: number;
 };
 
 export type Filter = {
   initial: {
     priceMin: number;
     priceMax: number;
+    sortBy: string;
+    limit: string;
+    page: string;
   };
   current: {
     priceMin: number;
@@ -71,7 +74,7 @@ export type CartItem = {
   salePrice: number;
   sale: number;
   quantity: number;
-  stock: number;
+  stock?: number;
 };
 
 export type Cart = CartItem[];

@@ -9,29 +9,43 @@ function Account() {
   const { user } = useAppSelector((state) => state.auth);
 
   if (!user) {
-    router.push('/login');
-    return
+    router.push("/login");
+    return;
   }
 
-  const { data, isFetching } = useGetUserDetailsQuery(user.id, {
+  const {
+    data: userDetails,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetUserDetailsQuery(user.id, {
     // perform a refetch every 15mins
     pollingInterval: 900_000,
   });
 
-  console.log("useGetUserDetailsQuery data: ", data);
+  let content: React.ReactNode;
 
-  if (isFetching) {
-    return <div>Loading your profile...</div>
+  if (isLoading) {
+    content = <div>Loading your profile...</div>;
+  } else if (isSuccess) {
+    content = (
+      <div>
+        <h1>{userDetails.name} Account</h1>
+        <h2>User ID: {userDetails.id}</h2>
+        <p>Email: {userDetails.email}</p>
+        <p>Role: {userDetails.role}</p>
+      </div>
+    );
+  } else if (isError) {
+    content = <div>Error: {error.toString()}</div>;
   }
 
   return (
     <div>
-      <h1>{user.name} Account</h1>
-      <h2>User ID: {user.id}</h2>
-      <p>Email: {user.email}</p>
-      <p>Role: {user.role}</p>
+      {content}
     </div>
-  )
+  );
 }
 
 export default Account;

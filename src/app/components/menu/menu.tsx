@@ -1,25 +1,14 @@
 import MenuItem from "@/app/components/menu/menuItem";
-import { getCategories } from "@/app/requests";
-import { Category } from "@/app/types";
-import { useQuery } from "@tanstack/react-query";
+import { useGetCategoriesQuery } from "@/lib/features/api/apiSlice";
 import Link from "next/link";
 import { useState, MouseEvent } from "react";
 
 function Menu() {
   const [selectedMenu, setSelectedMenu] = useState(0);
 
-  const getCategoriesResult = useQuery({
-    queryKey: ["categories"],
-    queryFn: getCategories,
-  });
+  const { data: categories, isLoading, isSuccess, isError, error } = useGetCategoriesQuery();
 
-  console.log(JSON.parse(JSON.stringify(getCategoriesResult)));
-
-  if (getCategoriesResult.isLoading) {
-    return <div>loading data...</div>;
-  }
-
-  const categories: Category[] = getCategoriesResult.data;
+  let content: React.ReactNode;
 
   const toggleSubMenu = (event: MouseEvent): void => {
     event.preventDefault();
@@ -33,6 +22,26 @@ function Menu() {
   const closeSubMenu = () => {
     setSelectedMenu(0);
   };
+
+  if (isLoading) {
+    content = <div>Loading menu...</div>;
+  } else if (isSuccess) {
+    content = (
+      <>
+        {categories.map((category) => (
+          <MenuItem
+            key={category.title}
+            category={category}
+            selectedMenu={selectedMenu}
+            toggleSubMenu={toggleSubMenu}
+            closeSubMenu={closeSubMenu}
+          />
+        ))}
+      </>
+    );
+  } else if (isError) {
+    content = <div>Error: {error.toString()}</div>;
+  }
 
   return (
     <nav>
@@ -58,15 +67,7 @@ function Menu() {
           All Products
         </Link>
 
-        {categories.map((category) => (
-          <MenuItem
-            key={category.title}
-            category={category}
-            selectedMenu={selectedMenu}
-            toggleSubMenu={toggleSubMenu}
-            closeSubMenu={closeSubMenu}
-          />
-        ))}
+        {content}
       </ul>
     </nav>
   );

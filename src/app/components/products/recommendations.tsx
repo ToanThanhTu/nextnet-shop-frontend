@@ -1,32 +1,34 @@
 "use client";
 
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/app/components/ui/carousel";
-import { getProductsRecommendations } from "@/app/requests";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/app/components/ui/carousel";
 import { Product } from "@/app/types";
-import { useQuery } from "@tanstack/react-query";
+import { useGetProductsRecommendationsQuery } from "@/lib/features/products/productsSlice";
 import Image from "next/image";
 import Link from "next/link";
 
 function Recommendations({ productId }: { productId: number }) {
-  const productsResult = useQuery({
-    queryKey: ["recommendations", { productId }],
-    queryFn: async () => getProductsRecommendations(productId),
-  });
+  const {
+    data: products = [],
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetProductsRecommendationsQuery(productId);
 
-  if (productsResult.isLoading) {
-    return <div className="text-center">Loading recommendations...</div>;
-  }
+  let content: React.ReactNode;
 
-  const products: Product[] = productsResult.data;
-
-  if (!products || products.length === 0) {
-    return <div className="text-center">Sorry, no recommendations for now</div>;
-  }
-
-  return (
-    <div>
-      <h2 className="text-center">You may also like</h2>
-
+  if (isLoading) {
+    content = <div className="text-center">Loading recommendations...</div>;
+  } else if (isError || !products || products.length === 0) {
+    content = <div className="text-center">Sorry, no recommendations for now</div>;
+  } else if (isSuccess) {
+    content = (
       <Carousel className="w-full max-w-5xl m-auto">
         <CarouselContent>
           {products.map((product) => (
@@ -54,6 +56,13 @@ function Recommendations({ productId }: { productId: number }) {
         <CarouselPrevious className="-left-16" />
         <CarouselNext className="-right-16" />
       </Carousel>
+    );
+  }
+
+  return (
+    <div>
+      <h2 className="text-center">You may also like</h2>
+      {content}
     </div>
   );
 }

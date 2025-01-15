@@ -18,7 +18,7 @@ function Page({ params }: { params: Promise<{ category: string; subcategory: str
 
   const { category, subcategory } = resolvedParams;
 
-  return <Products endpoint="all" queryKey={subcategory} category={category} subcategory={subcategory} />;
+  return <Products endpoint="all" category={category} subcategory={subcategory} />;
 }
 
 export default Page;

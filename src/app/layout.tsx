@@ -3,7 +3,6 @@ import "@/app/globals.css";
 import Header from "@/app/components/header/header";
 import ScrollTopButton from "@/app/components/ui/scrollTopButton";
 import Footer from "@/app/components/footer/footer";
-import Providers from "@/app/providers";
 import StoreProvider from "@/app/StoreProvider";
 
 export const metadata: Metadata = {
@@ -22,16 +21,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {/* React Query Providers */}
-        <Providers>
-          {/* Redux Store for Filter, Cart, Auth states */}
-          <StoreProvider>
-            <Header />
-            <main className="mt-[170px]">{children}</main>
-            <ScrollTopButton />
-            <Footer />
-          </StoreProvider>
-        </Providers>
+        {/* Redux Store for Filter, Cart, Auth states, and RTK Query */}
+        <StoreProvider>
+          <Header />
+          <main className="mt-[170px]">{children}</main>
+          <ScrollTopButton />
+          <Footer />
+        </StoreProvider>
       </body>
     </html>
   );

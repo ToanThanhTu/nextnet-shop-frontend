@@ -18,7 +18,7 @@ function Page({ params }: { params: Promise<{ category: string }> }) {
 
   const { category } = resolvedParams;
 
-  return <Products endpoint="all" queryKey={category} category={category} />;
+  return <Products endpoint="all" category={category} />;
 }
 
 export default Page;

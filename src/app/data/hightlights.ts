@@ -4,12 +4,12 @@ export const highlights: Highlight[] = [
   {
     title: "Select Electronics under $25",
     image: "/highlights/electronics.png",
-    href: "/electronics",
+    href: "/electronics-under-25",
   },
   {
     title: "Select Kitchen under $25",
     image: "/highlights/kitchen.png",
-    href: "/kitchen",
+    href: "/kitchen-under-25",
   },
   {
     title: "All-new Razer Barracuda X Chroma",
@@ -24,7 +24,7 @@ export const highlights: Highlight[] = [
   {
     title: "Set up your home gym: Fitness under $25",
     image: "/highlights/fitness.png",
-    href: "/fitness",
+    href: "/fitness-under-25",
   },
   {
     title: "Lorem ipsum dolor sit amet",
