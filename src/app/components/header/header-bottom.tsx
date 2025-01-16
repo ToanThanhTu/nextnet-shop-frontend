@@ -16,13 +16,7 @@ function HeaderBottom() {
       <div className="hidden lg:block bg-white">
         <div className="flex gap-6 justify-between items-center px-6">
           <Link href="/">
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              width={500}
-              height={160}
-              className="w-40"
-            />
+            <Image src="/logo.png" alt="Logo" width={500} height={160} className="w-40" />
           </Link>
 
           <Menu />
@@ -41,13 +35,7 @@ function HeaderBottom() {
           <Sidebar />
 
           <Link href="/">
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              width={500}
-              height={160}
-              className="w-32"
-            />
+            <Image src="/logo.png" alt="Logo" width={500} height={160} className="w-32" />
           </Link>
 
           <div className="flex gap-2">

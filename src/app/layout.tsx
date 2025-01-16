@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
-import Header from "@/app/components/header/header";
 import ScrollTopButton from "@/app/components/ui/scrollTopButton";
-import Footer from "@/app/components/footer/footer";
 import StoreProvider from "@/app/StoreProvider";
 
 export const metadata: Metadata = {
@@ -23,10 +21,8 @@ export default function RootLayout({
       <body>
         {/* Redux Store for Filter, Cart, Auth states, and RTK Query */}
         <StoreProvider>
-          <Header />
           <main className="mt-[170px]">{children}</main>
           <ScrollTopButton />
-          <Footer />
         </StoreProvider>
       </body>
     </html>
