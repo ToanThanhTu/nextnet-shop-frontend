@@ -1,41 +1,16 @@
-"use client";
-
-import Filter from "@/app/components/filter-and-sort/filter";
-import FilterTags from "@/app/components/filter-and-sort/filter-tags";
-import { resetToInitial } from "@/lib/features/filter/filterSlice";
-import { useAppDispatch } from "@/lib/hooks";
-import { usePathname } from "next/navigation";
+import Footer from "@/app/components/footer/footer";
+import Header from "@/app/components/header/header";
 
 export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const dispatch = useAppDispatch();
-
-  const pathName = usePathname();
-  const slug = pathName.split("/");
-
-  let headerTitle = "";
-
-  if (slug.length === 3) {
-    headerTitle = slug[2].replace(/-/g, " ");
-  } else if (slug.length === 2) {
-    headerTitle = slug[1].replace(/-/g, " ");
-  }
-
-  dispatch(resetToInitial());
-
   return (
-    <div className="mx-32">
-      <div className="uppercase text-center">{headerTitle}</div>
-
-      <div className="flex justify-between items-center my-4">
-        <FilterTags />
-        <Filter />
-      </div>
-
-      {children}
-    </div>
+    <>
+      <Header />
+      <div className="mt-[170px]">{children}</div>
+      <Footer />
+    </>
   );
 }
