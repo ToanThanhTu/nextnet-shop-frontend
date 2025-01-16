@@ -17,7 +17,7 @@ type Inputs = {
   password: string;
 };
 
-function Login() {
+function SignIn() {
   const { user, loading, success, error } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
@@ -76,4 +76,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default SignIn;

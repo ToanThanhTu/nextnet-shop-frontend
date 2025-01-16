@@ -21,7 +21,7 @@ export default function RootLayout({
       <body>
         {/* Redux Store for Filter, Cart, Auth states, and RTK Query */}
         <StoreProvider>
-          <main className="mt-[170px]">{children}</main>
+          <main>{children}</main>
           <ScrollTopButton />
         </StoreProvider>
       </body>

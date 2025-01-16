@@ -1,17 +1,22 @@
 "use client";
 
 import { useGetUserDetailsQuery } from "@/lib/features/api/apiSlice";
-import { useAppSelector } from "@/lib/hooks";
-import { useRouter } from "next/navigation";
+import { setCredentials } from "@/lib/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useEffect } from "react";
 
 function Account() {
-  const router = useRouter();
+  const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
 
-  if (!user) {
-    router.push("/login");
-    return;
-  }
+  useEffect(() => {
+    const signedInUser = localStorage.getItem("signedInNextNetShopUser");
+
+    if (signedInUser) {
+      const data = JSON.parse(signedInUser);
+      dispatch(setCredentials(data));
+    }
+  }, [dispatch]);
 
   const {
     data: userDetails,
@@ -19,9 +24,10 @@ function Account() {
     isSuccess,
     isError,
     error,
-  } = useGetUserDetailsQuery(user.id, {
+  } = useGetUserDetailsQuery(user?.id as number, {
     // perform a refetch every 15mins
     pollingInterval: 900_000,
+    skip: !user,
   });
 
   let content: React.ReactNode;
@@ -41,11 +47,7 @@ function Account() {
     content = <div>Error: {error.toString()}</div>;
   }
 
-  return (
-    <div>
-      {content}
-    </div>
-  );
+  return <div>{content}</div>;
 }
 
 export default Account;

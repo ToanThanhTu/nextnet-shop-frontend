@@ -10,11 +10,9 @@ import { logout, setCredentials } from "@/lib/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { CircleUser } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 function HeaderTop() {
-  const router = useRouter();
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
@@ -71,7 +69,7 @@ function HeaderTop() {
               <div>Sign in or Register</div>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="p-2">
-              <Link href="/login">
+              <Link href="/signin">
                 <DropdownMenuItem className="bg-black uppercase text-white justify-center hover:opacity-75">
                   Sign in
                 </DropdownMenuItem>

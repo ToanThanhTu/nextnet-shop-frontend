@@ -1,3 +1,5 @@
+"use client";
+
 import { quotes } from "@/app/data/quotes";
 import Link from "next/link";
 import { useEffect, useState } from "react";
