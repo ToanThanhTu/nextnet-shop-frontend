@@ -13,6 +13,7 @@ import { setCart } from "@/lib/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import { useEffect } from "react";
 
 function Cart() {
@@ -118,7 +119,7 @@ function Cart() {
             <p>Order Subtotal</p>
             <p>{subTotal}</p>
           </div>
-          <Button className="uppercase">Checkout</Button>
+          <Button className="uppercase" onClick={() => redirect('/checkout')}>Checkout</Button>
         </SheetFooter>
       </SheetContent>
     </Sheet>
