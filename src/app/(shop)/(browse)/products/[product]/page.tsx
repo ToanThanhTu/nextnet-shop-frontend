@@ -1,7 +1,6 @@
 "use client";
 
 import ProductPage from "@/app/components/products/product-page";
-import StoreProvider from "@/app/StoreProvider";
 import { useEffect, useState } from "react";
 
 function Page({ params }: { params: Promise<{ product: string }> }) {

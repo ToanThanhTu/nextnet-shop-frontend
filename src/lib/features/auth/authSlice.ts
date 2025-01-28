@@ -1,6 +1,6 @@
 "use client";
 
-import { Auth, User, UserDTO } from "@/app/types";
+import { Auth, UserDTO } from "@/app/types";
 import { loginUser, registerUser } from "@/lib/features/auth/authActions";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
@@ -27,14 +27,12 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.success = false;
+      
       localStorage.removeItem("signedInNextNetShopUser");
     },
     setCredentials: (state, action: PayloadAction<Credentials>) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
-      state.loading = false;
-      state.error = null;
-      state.success = true;
     }
   },
   extraReducers: (builder) => {

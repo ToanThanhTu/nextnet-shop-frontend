@@ -15,6 +15,7 @@ export const apiSlice = createApi({
       }
     },
   }),
+  tagTypes: ["User", "Category", "Cart", "Orders"],
   // The "endpoints" represent operations and requests for this server
   endpoints: (builder) => ({
     // The `getUserDetails` endpoint is a "query" operation that returns data.

@@ -43,10 +43,10 @@ export type Product = {
   slug: string;
   description?: string;
   price: number;
-  image?: string;
   sale: number;
   salePrice: number;
   stock?: number;
+  image?: string;
   subCategoryId?: number;
 };
 
@@ -68,16 +68,59 @@ export type Filter = {
 };
 
 export type CartItem = {
+  id?: number;
+  userId?: number | null;
   productId: number;
-  title: string;
-  price: number;
-  salePrice: number;
-  sale: number;
   quantity: number;
-  stock?: number;
+  user?: User;
+  product: Product;
 };
 
-export type Cart = CartItem[];
+export type CartItemDTO = {
+  id?: number;
+  userId?: number | null;
+  productId: number;
+  quantity: number;
+}
+
+export type CartState = {
+  cart: CartItem[];
+  totalPrice: number;
+}
+
+export type Order = {
+  id: number;
+  userId: number;
+  orderDate: string;
+  totalPrice: number;
+  status: string;
+  orderItems: OrderItem[];
+}
+
+export type OrderDTO = {
+  id: number;
+  orderDate: string;
+  totalPrice: number;
+  status: string;
+  orderItems: OrderItem[];
+}
+
+export type OrderItem = {
+  id: number;
+  orderId: number;
+  productId: number;
+  quantity: number;
+  price: number;
+  product: Product;
+}
+
+export type OrderItemDTO = {
+  id: number;
+  productId: number;
+  quantity: number;
+  price: number;
+  product: Product;
+}
 
 export type PaymentDetails = {
   number: string;
@@ -92,6 +135,8 @@ export type User = {
   email: string;
   password: string;
   role: string;
+  cartItems?: CartItemDTO[];
+  orders?: Order[];
 }
 
 export type UserDTO = {
@@ -99,6 +144,8 @@ export type UserDTO = {
   name: string;
   email: string;
   role: string;
+  cartItems?: CartItemDTO[];
+  orders?: OrderDTO[];
 }
 
 export type UserResigtration = {
@@ -109,12 +156,7 @@ export type UserResigtration = {
 
 export type Auth = {
   token: null | string;
-  user: null | {
-    id: number;
-    name: string;
-    email: string;
-    role: string;
-  };
+  user: null | User;
   loading: boolean;
   error: null | string;
   success: boolean;

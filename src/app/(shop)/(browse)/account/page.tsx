@@ -1,22 +1,10 @@
 "use client";
 
 import { useGetUserDetailsQuery } from "@/lib/features/api/apiSlice";
-import { setCredentials } from "@/lib/features/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { useEffect } from "react";
+import { useAuth } from "@/lib/hooks";
 
 function Account() {
-  const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.auth);
-
-  useEffect(() => {
-    const signedInUser = localStorage.getItem("signedInNextNetShopUser");
-
-    if (signedInUser) {
-      const data = JSON.parse(signedInUser);
-      dispatch(setCredentials(data));
-    }
-  }, [dispatch]);
+  const user = useAuth({ needSignIn: true });
 
   const {
     data: userDetails,
@@ -25,8 +13,6 @@ function Account() {
     isError,
     error,
   } = useGetUserDetailsQuery(user?.id as number, {
-    // perform a refetch every 15mins
-    pollingInterval: 900_000,
     skip: !user,
   });
 

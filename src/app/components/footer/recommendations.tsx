@@ -1,10 +1,10 @@
 "use client";
 
-import { useAppSelector } from "@/lib/hooks";
+import { useAuth } from "@/lib/hooks";
 import Link from "next/link";
 
 function PersonalisedRecommendations() {
-  const { user } = useAppSelector((state) => state.auth);
+  const user = useAuth({ needSignIn: false });
 
   return (
     <div>

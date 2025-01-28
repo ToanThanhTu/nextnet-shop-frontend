@@ -7,7 +7,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/app/components/ui/carousel";
-import { Product } from "@/app/types";
 import { useGetProductsRecommendationsQuery } from "@/lib/features/products/productsSlice";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,7 +17,6 @@ function Recommendations({ productId }: { productId: number }) {
     isLoading,
     isSuccess,
     isError,
-    error,
   } = useGetProductsRecommendationsQuery(productId);
 
   let content: React.ReactNode;

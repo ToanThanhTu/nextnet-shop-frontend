@@ -10,7 +10,8 @@ import {
   BreadcrumbSeparator,
 } from "@/app/components/ui/breadcrumb";
 import { Button } from "@/app/components/ui/button";
-import { setCart } from "@/lib/features/cart/cartSlice";
+import { CartItem, CartItemDTO } from "@/app/types";
+import { addCartItemLocal, useAddCartItemServerMutation } from "@/lib/features/cart/cartSlice";
 import { useGetProductBySlugQuery } from "@/lib/features/products/productsSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import Image from "next/image";
@@ -18,10 +19,12 @@ import { useState } from "react";
 
 function ProductPage({ slug }: { slug: string }) {
   const [quantity, setQuantity] = useState(1);
-  const cart = useAppSelector((state) => state.cart);
+  const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   const { data, isLoading, isSuccess, isError, error } = useGetProductBySlugQuery(slug);
+
+  const [addCartItemServer, { isLoading: isAddCartLoading }] = useAddCartItemServerMutation();
 
   let content: React.ReactNode;
 
@@ -34,29 +37,23 @@ function ProductPage({ slug }: { slug: string }) {
     const subCategory = data.subCategory;
     const category = data.category;
 
-    const handleAddToCart = () => {
-      const existingItem = cart.find((item) => item.productId === product.id);
+    const handleAddToCart = async () => {
+      const newCartItem: CartItem = {
+        productId: product.id,
+        product: product,
+        quantity: quantity,
+      };
 
-      if (existingItem) {
-        const updatedCart = cart.map((item) =>
-          item.productId === product.id ? { ...item, quantity: item.quantity + quantity } : item
-        );
-        dispatch(setCart(updatedCart));
+      if (user) {
+        const newCartItemServer: CartItemDTO = {
+          userId: user.id,
+          productId: product.id,
+          quantity: quantity,
+        };
+
+        await addCartItemServer(newCartItemServer);
       } else {
-        dispatch(
-          setCart([
-            ...cart,
-            {
-              productId: product.id,
-              title: product.title,
-              price: product.price,
-              salePrice: product.salePrice,
-              sale: product.sale,
-              quantity,
-              stock: product.stock,
-            },
-          ])
-        );
+        dispatch(addCartItemLocal(newCartItem));
       }
     };
 
@@ -110,7 +107,7 @@ function ProductPage({ slug }: { slug: string }) {
                 <Quantity quantity={quantity} setQuantity={setQuantity} stock={product.stock} />
 
                 {product.stock < 10 ? <p>Low stock - {product.stock} items left</p> : null}
-                <Button onClick={handleAddToCart}>Add to cart</Button>
+                <Button onClick={handleAddToCart} disabled={isAddCartLoading}>Add to cart</Button>
               </div>
             )}
 

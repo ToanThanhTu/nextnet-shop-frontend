@@ -6,24 +6,20 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/app/components/ui/dropdown-menu";
-import { logout, setCredentials } from "@/lib/features/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { logout } from "@/lib/features/auth/authSlice";
+import { resetCartLocal } from "@/lib/features/cart/cartSlice";
+import { useAppDispatch, useAuth } from "@/lib/hooks";
 import { CircleUser } from "lucide-react";
 import Link from "next/link";
-import { useEffect } from "react";
 
 function HeaderTop() {
-  const { user } = useAppSelector((state) => state.auth);
+  const user = useAuth({ needSignIn: false });
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    const signedInUser = localStorage.getItem("signedInNextNetShopUser");
-
-    if (signedInUser) {
-      const data = JSON.parse(signedInUser);
-      dispatch(setCredentials(data));
-    }
-  }, [dispatch]);
+  const handleSignOut = () => {
+    dispatch(logout());
+    dispatch(resetCartLocal());
+  };
 
   return (
     <div className="flex justify-between gap-4 bg-black">
@@ -56,7 +52,7 @@ function HeaderTop() {
                   Account
                 </DropdownMenuItem>
               </Link>
-              <Link href="/" onClick={() => dispatch(logout())}>
+              <Link href="/" onClick={handleSignOut}>
                 <DropdownMenuItem className="uppercase justify-center hover:opacity-75">
                   Sign Out
                 </DropdownMenuItem>

@@ -26,7 +26,6 @@ function Register() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -34,6 +33,7 @@ function Register() {
 
   useEffect(() => {
     if (success) {
+      alert("Registration successful. Redirecting to Sign In page.");
       router.push("/login");
     }
 

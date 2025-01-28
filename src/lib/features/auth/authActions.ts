@@ -62,7 +62,7 @@ export const loginUser = createAsyncThunk(
       const signedInUser = {
         user: data.userDto,
         token: data.userToken,
-      }
+      };
 
       localStorage.setItem("signedInNextNetShopUser", JSON.stringify(signedInUser));
 

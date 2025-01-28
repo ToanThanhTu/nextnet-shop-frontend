@@ -6,6 +6,7 @@ import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
 import { loginUser } from "@/lib/features/auth/authActions";
+import { useSyncCartServerMutation } from "@/lib/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { LoaderPinwheel } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -18,28 +19,40 @@ type Inputs = {
 };
 
 function SignIn() {
-  const { user, loading, success, error } = useAppSelector((state) => state.auth);
+  const router = useRouter();
   const dispatch = useAppDispatch();
+  const { user, loading, success, error } = useAppSelector((state) => state.auth);
+  const { cart } = useAppSelector((state) => state.cart);
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>();
 
-  const router = useRouter();
+  const [syncCartServer, { isLoading: isSyncCartLoading }] = useSyncCartServerMutation();
 
   useEffect(() => {
-    if (success && user) {
+    if (user) {
       router.push("/");
     }
+  }, [router, user]);
+
+  useEffect(() => {
+    const syncUserCart = async () => {
+      if (success && user) {
+        await syncCartServer({ userId: user.id, localCart: cart });
+        router.push("/");
+      }
+    };
+
+    syncUserCart();
   }, [router, user, success]);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     data.email = data.email.toLowerCase();
     dispatch(loginUser(data));
-  };
+  };  
 
   return (
     <div>
@@ -68,8 +81,12 @@ function SignIn() {
           {errors.password && <div className="text-red-500">Please enter your password</div>}
         </div>
 
-        <Button type="submit" className="hover:cursor-pointer uppercase w-full" disabled={loading}>
-          {loading ? <LoaderPinwheel className="animate-spin" /> : "Sign In"}
+        <Button
+          type="submit"
+          className="hover:cursor-pointer uppercase w-full"
+          disabled={loading || isSyncCartLoading}
+        >
+          {loading || isSyncCartLoading ? <LoaderPinwheel className="animate-spin" /> : "Sign In"}
         </Button>
       </form>
     </div>
