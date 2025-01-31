@@ -11,12 +11,12 @@ function OrderSummary({
   user: User | null;
 }) {
   return (
-    <div>
-      <h2>Order Summary</h2>
+    <div className="lg:order-2">
+      <h3 className="py-4 font-bold">Order Summary</h3>
 
       <CartList cart={cart} user={user} />
 
-      <div className="flex justify-between">
+      <div className="flex justify-between py-4">
         <h3>Total</h3>
         <p>${totalPrice}</p>
       </div>

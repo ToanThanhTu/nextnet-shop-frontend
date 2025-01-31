@@ -34,66 +34,78 @@ function Billing({ cart, user }: { cart: CartItem[]; user: User | null }) {
   };
 
   return (
-    <>
+    <div className="lg:order-1">
       {user ? (
         <form>
-          <p>Information are prefilled for demo purpose</p>
-          <h2>Contact</h2>
+          <p className="text-sm italic">Information are prefilled for demo purpose</p>
 
-          <div className="flex flex-col space-y-2 my-4">
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" type="text" value={user.name ?? "Demo User"} readOnly />
-          </div>
-          <div className="flex flex-col space-y-2 my-4">
-            <Label htmlFor="phone">Phone</Label>
-            <Input id="phone" type="tel" value="1234567890" readOnly />
-          </div>
-          <div className="flex flex-col space-y-2 my-4">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" value={user.email ?? "demo@nextnetshop.com"} readOnly />
-          </div>
+          <h3 className="py-4">Contact</h3>
 
-          <h2>Delivery</h2>
-
-          <div className="flex flex-col space-y-2 my-4">
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" type="text" value="Demo User" readOnly />
-          </div>
-          <div className="flex flex-col space-y-2 my-4">
-            <Label htmlFor="address">Address</Label>
-            <Input id="address" type="text" value="1234 Demo St" readOnly />
-          </div>
-
-          <div className="grid grid-cols-3 gap-2">
+          <div className="space-y-4">
             <div className="flex flex-col space-y-2">
-              <Label htmlFor="city">City</Label>
-              <Input id="city" type="text" value="Demo City" readOnly />
+              <Label htmlFor="name">Name</Label>
+              <Input id="name" type="text" value={user.name ?? "Demo User"} readOnly />
             </div>
             <div className="flex flex-col space-y-2">
-              <Label htmlFor="state">State</Label>
-              <Input id="state" type="text" value="Demo State" readOnly />
+              <Label htmlFor="phone">Phone</Label>
+              <Input id="phone" type="tel" value="1234567890" readOnly />
             </div>
             <div className="flex flex-col space-y-2">
-              <Label htmlFor="zip">Postcode</Label>
-              <Input id="zip" type="text" value="12345" readOnly />
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                value={user.email ?? "demo@nextnetshop.com"}
+                readOnly
+              />
             </div>
           </div>
 
-          <h2>Payment</h2>
+          <h3 className="py-4">Delivery</h3>
 
-          <div className="flex flex-col space-y-2 my-4">
-            <Label htmlFor="card">Card number</Label>
-            <Input id="card" type="text" value="4242 4242 4242 4242" readOnly />
-          </div>
-
-          <div className="grid grid-cols-2 gap-2">
+          <div className="space-y-4">
             <div className="flex flex-col space-y-2">
-              <Label htmlFor="expiry">Expiry</Label>
-              <Input id="expiry" type="text" value="01/23" readOnly />
+              <Label htmlFor="name">Name</Label>
+              <Input id="name" type="text" value="Demo User" readOnly />
             </div>
             <div className="flex flex-col space-y-2">
-              <Label htmlFor="cvc">CVC</Label>
-              <Input id="cvc" type="text" value="123" readOnly />
+              <Label htmlFor="address">Address</Label>
+              <Input id="address" type="text" value="1234 Demo St" readOnly />
+            </div>
+
+            <div className="grid grid-cols-3 gap-2">
+              <div className="flex flex-col space-y-2">
+                <Label htmlFor="city">City</Label>
+                <Input id="city" type="text" value="Demo City" readOnly />
+              </div>
+              <div className="flex flex-col space-y-2">
+                <Label htmlFor="state">State</Label>
+                <Input id="state" type="text" value="Demo State" readOnly />
+              </div>
+              <div className="flex flex-col space-y-2">
+                <Label htmlFor="zip">Postcode</Label>
+                <Input id="zip" type="text" value="12345" readOnly />
+              </div>
+            </div>
+          </div>
+
+          <h3 className="py-4">Payment</h3>
+
+          <div className="space-y-4">
+            <div className="flex flex-col space-y-2">
+              <Label htmlFor="card">Card number</Label>
+              <Input id="card" type="text" value="4242 4242 4242 4242" readOnly />
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+              <div className="flex flex-col space-y-2">
+                <Label htmlFor="expiry">Expiry</Label>
+                <Input id="expiry" type="text" value="01/23" readOnly />
+              </div>
+              <div className="flex flex-col space-y-2">
+                <Label htmlFor="cvc">CVC</Label>
+                <Input id="cvc" type="text" value="123" readOnly />
+              </div>
             </div>
           </div>
 
@@ -133,7 +145,7 @@ function Billing({ cart, user }: { cart: CartItem[]; user: User | null }) {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

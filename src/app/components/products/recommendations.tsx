@@ -1,15 +1,7 @@
 "use client";
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/app/components/ui/carousel";
+import RecommendationsCarousel from "@/app/components/products/recommendations-carousel";
 import { useGetProductsRecommendationsQuery } from "@/lib/features/products/productsSlice";
-import Image from "next/image";
-import Link from "next/link";
 
 function Recommendations({ productId }: { productId: number }) {
   const {
@@ -26,40 +18,12 @@ function Recommendations({ productId }: { productId: number }) {
   } else if (isError || !products || products.length === 0) {
     content = <div className="text-center">Sorry, no recommendations for now</div>;
   } else if (isSuccess) {
-    content = (
-      <Carousel className="w-full max-w-5xl m-auto">
-        <CarouselContent>
-          {products.map((product) => (
-            <CarouselItem key={product.id} className="basis-1/4">
-              <Link href={`/products/${product.slug}`} className="flex flex-col items-center">
-                <Image
-                  src={`/api/products/${product.id}/image`}
-                  alt={`${product.title} Image`}
-                  width={250}
-                  height={250}
-                />
-                <h4>{product.title}</h4>
-                <p>${product.salePrice}</p>
-
-                {product.sale > 0 && (
-                  <p className="text-xs">
-                    <span className="bg-red-700 text-white p-1">{product.sale}% OFF</span>{" "}
-                    <span>was ${product.price}</span>
-                  </p>
-                )}
-              </Link>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious className="-left-16" />
-        <CarouselNext className="-right-16" />
-      </Carousel>
-    );
+    content = <RecommendationsCarousel products={products} />;
   }
 
   return (
-    <div>
-      <h2 className="text-center">You may also like</h2>
+    <div className="py-12">
+      <h2 className="text-center py-12">You may also like</h2>
       {content}
     </div>
   );

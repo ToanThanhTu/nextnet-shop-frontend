@@ -19,20 +19,21 @@ function CartItemQuantity({
     <div className="flex text-sm">
       <button
         onClick={handleSubtractQuantity}
-        className="px-2 hover:bg-black hover:text-white border border-black"
+        className="px-1 hover:bg-black hover:text-white border border-black"
         disabled={isLoading}
       >
         <Minus size={18} />
       </button>
       <input
         value={quantity}
+        type="number"
         onChange={handleQuantityChange}
-        className="px-1 w-10 text-center border border-black"
+        className="w-10 text-center border border-black"
         disabled={isLoading}
       />
       <button
         onClick={handleAddQuantity}
-        className="px-2 hover:bg-black hover:text-white border border-black"
+        className="px-1 hover:bg-black hover:text-white border border-black"
         disabled={isLoading}
       >
         <Plus size={18} />

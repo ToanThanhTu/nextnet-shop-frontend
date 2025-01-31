@@ -1,12 +1,17 @@
+"use client";
+
 import HeaderBottom from "@/app/components/header/header-bottom";
 import HeaderTop from "@/app/components/header/header-top";
+import Headroom from "react-headroom";
 
 function Header() {
   return (
-    <header className="fixed top-0 w-full z-50">
-      <HeaderTop />
-      <HeaderBottom />
-    </header>
+    <Headroom className="fixed top-0 z-50 w-full">
+      <header className="bg-white">
+        <HeaderTop />
+        <HeaderBottom />
+      </header>
+    </Headroom>
   );
 }
 

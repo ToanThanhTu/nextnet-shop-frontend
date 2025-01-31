@@ -71,6 +71,11 @@ export const apiSliceWithProducts = apiSlice.injectEndpoints({
         url: `/products/recommendations/${productId}`,
       }),
     }),
+    getPersonalRecommendations: builder.query<Product[], number>({
+      query: (userId) => ({
+        url: `/products/personal-recommendations/${userId}`,
+      })
+    }),
   }),
 });
 
@@ -83,4 +88,5 @@ export const {
   useGetProductBySlugQuery,
   useGetProductByIdQuery,
   useGetProductsRecommendationsQuery,
+  useGetPersonalRecommendationsQuery
 } = apiSliceWithProducts;

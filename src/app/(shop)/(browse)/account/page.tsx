@@ -22,9 +22,9 @@ function Account() {
     content = <div>Loading your profile...</div>;
   } else if (isSuccess) {
     content = (
-      <div>
-        <h1>{userDetails.name} Account</h1>
-        <h2>User ID: {userDetails.id}</h2>
+      <div className="space-y-2 py-4 text-center">
+        <h2>{userDetails.name} Account</h2>
+        <h3>User ID: {userDetails.id}</h3>
         <p>Email: {userDetails.email}</p>
         <p>Role: {userDetails.role}</p>
       </div>

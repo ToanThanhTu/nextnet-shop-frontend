@@ -27,10 +27,10 @@ export default function Layout({
   dispatch(resetToInitial());
 
   return (
-    <div className="mx-32">
-      <h1 className="uppercase text-center">{headerTitle}</h1>
+    <div className="mx-4 lg:mx-32">
+      <h1 className="uppercase text-center py-12">{headerTitle}</h1>
 
-      <section className="flex justify-between items-center my-4">
+      <section className="block space-y-2 lg:flex justify-between items-center my-4">
         <FilterTags />
         <Filter />
       </section>

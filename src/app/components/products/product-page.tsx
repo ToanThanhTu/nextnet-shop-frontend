@@ -58,7 +58,7 @@ function ProductPage({ slug }: { slug: string }) {
     };
 
     content = (
-      <div className="px-40">
+      <div className="px-4 lg:px-40">
         <Breadcrumb className="py-4">
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -81,37 +81,45 @@ function ProductPage({ slug }: { slug: string }) {
           </BreadcrumbList>
         </Breadcrumb>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="lg:grid grid-cols-2 gap-4">
           <Image
             src={`/api/products/${product.id}/image`}
             alt={product.title}
             width={1000}
             height={1000}
           />
-          <div>
-            <h1>{product.title}</h1>
-            <p>{product.salePrice}</p>
+          <div className="py-4 space-y-2 lg:py-0 lg:space-y-0">
+            <h2>{product.title}</h2>
+
+            <div className="flex gap-2">
+              <p className={`${product.sale > 0 && "text-red-500"} sale-price`}>
+                ${product.salePrice}
+              </p>
+              <p className="org-price">was ${product.price}</p>
+            </div>
 
             {product.sale > 0 && (
-              <div>
-                <p>Was ${product.price}</p>
-                <p className="p-1 bg-red-500 text-white text-xs mr-1">SALE</p>
-                <p className="p-1 bg-green-500 text-white text-xs">{product.sale}% OFF</p>
+              <div className="flex">
+                <p className="py-1 px-2 bg-red-500 text-white sale-text mr-1">SALE</p>
+                <p className="py-1 px-2 bg-green-500 text-white sale-text">{product.sale}% OFF</p>
               </div>
             )}
 
             {product.stock === 0 && <p>Out of stock</p>}
 
             {product.stock && product.stock > 0 && (
-              <div>
+              <div className="space-y-4">
                 <Quantity quantity={quantity} setQuantity={setQuantity} stock={product.stock} />
 
                 {product.stock < 10 ? <p>Low stock - {product.stock} items left</p> : null}
-                <Button onClick={handleAddToCart} disabled={isAddCartLoading}>Add to cart</Button>
+                <Button className="w-full uppercase" size="lg" onClick={handleAddToCart} disabled={isAddCartLoading}>
+                  Add to cart
+                </Button>
               </div>
             )}
 
-            <p>{product.description}</p>
+            <h3 className="pt-8">Description</h3>
+            <p className="py-2">{product.description}</p>
           </div>
         </div>
 

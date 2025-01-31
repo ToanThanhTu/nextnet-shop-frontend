@@ -6,7 +6,7 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
+    <div className="pt-5 px-4 lg:px-80">
       <AccountNav />
       {children}
     </div>

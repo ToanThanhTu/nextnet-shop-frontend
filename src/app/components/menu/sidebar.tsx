@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
 import { Button } from "@/app/components/ui/button";
 import { useGetCategoriesQuery } from "@/lib/features/api/apiSlice";
+import { Menu } from "lucide-react";
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,9 +31,11 @@ function Sidebar() {
     content = (
       <>
         {categories.map((category) => (
-          <li key={category.title} className="py-4 border-t-4 border-primary-dark">
+          <li key={category.title} className="py-4 border-t-2 border-primary-dark">
             <h3 className="py-2 px-4">
-              <Link href={`/${category.slug}`}>{category.title}</Link>
+              <Link href={`/${category.slug}`} onClick={() => setIsOpen(false)}>
+                {category.title}
+              </Link>
             </h3>
           </li>
         ))}
@@ -45,27 +47,19 @@ function Sidebar() {
 
   return (
     <div>
-      <Button
-        variant="default"
-        size="icon"
-        onClick={() => setIsOpen(true)}
-        className="focus:outline-none"
-      >
-        <MenuIcon fontSize="large" />
-      </Button>
+      <Menu size={32} onClick={() => setIsOpen(true)} />
 
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          className="fixed top-0 bg-black bg-opacity-50 h-screen w-screen z-40"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       <div
-        className={`flex fixed top-0 left-0 h-full transition-transform transform ${
+        className={`flex fixed top-0 left-0 h-screen transition-transform transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } z-50`}
-        aria-hidden={!isOpen}
       >
         <div className="w-[300px] h-full bg-white overflow-y-auto">
           <div className="pt-16 pb-6 bg-primary-dark text-white tracking-wide px-4">
@@ -76,23 +70,55 @@ function Sidebar() {
           <ul>
             <li className="py-8">
               <h3 className="px-4">
-                <Link href="/">Next Net Home</Link>
+                <Link href="/" onClick={() => setIsOpen(false)}>
+                  Next Net Home
+                </Link>
+              </h3>
+            </li>
+
+            <li className="py-4 border-t-2 border-primary-dark">
+              <h3 className="py-2 px-4">
+                <Link href="/all-products" onClick={() => setIsOpen(false)}>
+                  All Products
+                </Link>
+              </h3>
+            </li>
+
+            <li className="py-4 border-t-2 border-primary-dark">
+              <h3 className="py-2 px-4">
+                <Link href="/best-sellers" onClick={() => setIsOpen(false)}>
+                  Best Sellers
+                </Link>
+              </h3>
+            </li>
+
+            <li className="py-4 border-t-2 border-primary-dark">
+              <h3 className="py-2 px-4">
+                <Link href="/all-deals" onClick={() => setIsOpen(false)}>
+                  Today's Deals
+                </Link>
               </h3>
             </li>
 
             {content}
 
-            <div className="pt-4 pb-12 border-t-4 border-primary-dark">
+            <div className="pt-4 pb-12 border-t-2 border-primary-dark">
               <li className="py-2 px-4">
-                <Link href="/track-my-order">Track My Order</Link>
+                <Link href="/track-my-order" onClick={() => setIsOpen(false)}>
+                  Track My Order
+                </Link>
               </li>
 
               <li className="py-2 px-4">
-                <Link href="/gift-cards">Gift Cards</Link>
+                <Link href="/gift-cards" onClick={() => setIsOpen(false)}>
+                  Gift Cards
+                </Link>
               </li>
 
               <li className="py-2 px-4">
-                <Link href="/contact-me">Contact Me</Link>
+                <Link href="/contact-me" onClick={() => setIsOpen(false)}>
+                  Contact Me
+                </Link>
               </li>
             </div>
           </ul>

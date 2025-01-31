@@ -12,10 +12,10 @@ function OrderHeader({ id, date, price, status }: Props) {
 
   return (
     <div className="flex justify-between w-full">
-      <p>Order {id}</p>
+      <p>ID {id}</p>
       <p>{formattedDate}</p>
       <p>${price}</p>
-      <p>Status: {status}</p>
+      <p>{status}</p>
     </div>
   );
 }

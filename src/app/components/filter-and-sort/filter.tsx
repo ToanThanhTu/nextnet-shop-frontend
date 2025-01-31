@@ -30,15 +30,15 @@ function Filter() {
   };
 
   return (
-    <div className="flex justify-end items-center gap-2">
+    <div className="flex lg:justify-end items-center gap-2">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline">
+          <Button variant="outline" className="text-xs lg:text-sm">
             FILTER BY PRICE <ChevronDown />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <div className="flex gap-2 w-80 px-2 py-4">
+          <div className="flex gap-2 w-80 p-2">
             ${initial.priceMin}
             <Slider
               defaultValue={[current.priceMin, current.priceMax]}
@@ -57,7 +57,7 @@ function Filter() {
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline">
+          <Button variant="outline" className="text-xs lg:text-sm">
             SORT BY <ChevronDown />
           </Button>
         </DropdownMenuTrigger>
@@ -72,7 +72,7 @@ function Filter() {
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline">
+          <Button variant="outline" className="text-xs lg:text-sm">
             SHOW {current.limit} <ChevronDown />
           </Button>
         </DropdownMenuTrigger>

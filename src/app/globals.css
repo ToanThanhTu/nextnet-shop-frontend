@@ -31,6 +31,7 @@
     --radius: 0.5rem;
     --footer: 117 23% 44%;
     --primary-dark: 118 24% 20%;
+    --spacing: 1;
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -79,7 +80,31 @@
   h4,
   h5,
   h6 {
-    @apply font-header font-bold;
+    @apply font-header;
+  }
+
+  h1 {
+    @apply text-4xl/10 font-bold;
+  }
+
+  h2 {
+    @apply text-3xl/8 font-bold;
+  }
+
+  h3 {
+    @apply text-2xl/7 font-semibold;
+  }
+
+  h4 {
+    @apply text-xl/7 font-medium;
+  }
+
+  h5 {
+    @apply text-lg/6 font-normal;
+  }
+
+  h6 {
+    @apply text-base/5 font-light;
   }
 
   p {
@@ -89,10 +114,43 @@
   a {
     @apply font-code hover:opacity-75;
   }
+
+  /* Remove Input type number arrows */
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Firefox */
+  input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+  }
 }
 
 @layer components {
   .button {
     @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 uppercase;
+  }
+
+  .sale-price {
+    @apply text-xl/5 font-bold;
+  }
+
+  .org-price {
+    @apply text-base font-normal;
+  }
+
+  .sale-text {
+    @apply text-sm font-semibold;
+  }
+
+  .at-to-card-btn {
+    @apply w-full h-12;
+  }
+
+  .account-nav-item {
+    @apply py-4 px-2 bg-gray-100 border-2 border-gray-200;
   }
 }

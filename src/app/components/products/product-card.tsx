@@ -4,26 +4,28 @@ import Link from "next/link";
 
 function ProductCard({ product }: { product: Product }) {
   return (
-    <div>
-      <Link href={`/products/${product.slug}`}>
+    <div className="space-y-2">
+      <Link href={`/products/${product.slug}`} className="space-y-2">
         <Image
           src={`/api/products/${product.id}/image`}
           alt={product.title}
           width={500}
           height={500}
         />
-        <h4>{product.title}</h4>
+        <h5 className="font-semibold">{product.title}</h5>
       </Link>
 
       <div>
-        <span className={`${product.sale > 0 && "text-red-500"} font-semibold`}>${product.salePrice}</span>{" "}
-        {product.sale > 0 && <span className="text-xs">was ${product.price}</span>}
+          <span className={`${product.sale > 0 && "text-red-500"} sale-price`}>
+            ${product.salePrice}
+          </span>{" "}
+          {product.sale > 0 && <span className="org-price">was ${product.price}</span>}
       </div>
 
       {product.sale > 0 && (
-        <div className="mt-2">
-          <span className="p-1 bg-red-500 text-white text-xs mr-1">SALE</span>
-          <span className="p-1 bg-green-500 text-white text-xs">{product.sale}% OFF</span>
+        <div className="sale-text space-x-1">
+          <span className="py-1 px-2 bg-red-500 text-white">SALE</span>
+          <span className="py-1 px-2 bg-green-500 text-white">{product.sale}% OFF</span>
         </div>
       )}
     </div>

@@ -43,8 +43,8 @@ function Quantity({ quantity, setQuantity, stock }: Props) {
   };
 
   return (
-    <div>
-      <p className="uppercase">Quantity</p>
+    <div className="space-y-2">
+      <h5 className="">Quantity:</h5>
       <div className="flex items-center gap-1">
         <Button variant="outline" onClick={handleSubtractQuantity}>
           -

@@ -48,16 +48,17 @@ function Cart() {
           <SheetTitle>Your Cart</SheetTitle>
           <SheetDescription>Your Shopping Cart</SheetDescription>
         </SheetHeader>
-        <div>
+        <div className="py-6">
           <CartList cart={cart} user={user} />
         </div>
+
         {cart.length > 0 && (
           <SheetFooter className="block">
-            <div className="flex justify-between">
-              <p>Order Subtotal</p>
-              <p>{totalPrice}</p>
+            <div className="flex justify-between items-center py-4">
+              <h4>Order Subtotal</h4>
+              <p className="sale-price">${totalPrice}</p>
             </div>
-            <Button className="uppercase" onClick={() => redirect("/checkout")}>
+            <Button className="uppercase w-full" size="lg" onClick={() => redirect("/checkout")}>
               Checkout
             </Button>
           </SheetFooter>

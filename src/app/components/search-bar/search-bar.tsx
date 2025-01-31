@@ -2,12 +2,32 @@ import SearchResults from "@/app/components/search-bar/search-results";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { Search, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function SearchBar() {
   const [search, setSearch] = useState("");
   const [onFocus, setOnFocus] = useState(false);
   const [showResults, setShowResults] = useState(false);
+
+  useEffect(() => {
+    if (search.length >= 3) {
+      setShowResults(true);
+    } else {
+      setShowResults(false);
+    }
+  }, [search]);
+
+  useEffect(() => {
+    if (onFocus) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [onFocus]);
 
   const handleFocus = () => {
     setOnFocus(true);
@@ -25,7 +45,7 @@ function SearchBar() {
       <Input
         type="text"
         placeholder="What are you looking for?"
-        className="px-8 w-80"
+        className="px-8 w-full"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         onFocus={handleFocus}
@@ -38,7 +58,7 @@ function SearchBar() {
       </Button>
 
       {onFocus && (
-        <div className="fixed inset-0 top-[135px] bg-black bg-opacity-50 z-10" onClick={() => setOnFocus(false)} />
+        <div className="fixed inset-0 top-[140px] h-screen bg-black bg-opacity-50 z-10" onClick={() => setOnFocus(false)} />
       )}
 
       {showResults && search.length >= 3 && <SearchResults search={search} setShowResults={setShowResults} />}

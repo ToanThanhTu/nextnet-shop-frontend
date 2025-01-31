@@ -31,7 +31,7 @@ function Page() {
   } else if (isSuccess) {
     content = (
       <div>
-        <h1>Order History</h1>
+        <h1 className="text-center py-4">Order History</h1>
 
         <Accordion type="single" collapsible className="w-full">
           {orders.map((order) => (

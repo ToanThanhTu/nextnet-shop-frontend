@@ -10,7 +10,7 @@ export default function Layout({
   return (
     <>
       <CheckoutHeader />
-      <div className="mx-64 m-auto mt-28">
+      <div className="lg:mx-64 m-auto mt-20 lg:mt-32">
         <RandomQuotes />
         {children}
       </div>

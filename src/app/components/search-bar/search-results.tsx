@@ -35,7 +35,7 @@ function SearchResults({ search, setShowResults }: Props) {
           <Link
             key={product.id}
             href={`/products/${product.slug}`}
-            className="flex gap-2"
+            className="flex gap-2 items-center"
             onClick={handleClick}
           >
             <Image

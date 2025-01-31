@@ -5,12 +5,12 @@ import MembershipAds from "@/app/components/index/membership-ads";
 
 function Index() {
   return (
-    <>
+    <div>
       <CarouselDisplay />
       <Highlights />
       <MembershipAds />
       <Discover />
-    </>
+    </div>
   );
 }
 

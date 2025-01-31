@@ -70,16 +70,17 @@ function CartList({ cart, user }: { cart: CartItem[]; user: User | null }) {
         <ul className="space-y-2">
           {cart.map((item) => (
             <li key={item.productId}>
-              <div className="flex items-center justify-between space-x-4">
-                <div className="flex items-center space-x-4">
-                  <Image
-                    src={`/api/products/${item.productId}/image`}
-                    width={80}
-                    height={80}
-                    alt={`${item.product.title} image`}
-                  />
-                  <div className="col-span-2">
-                    <p>{item.product.title}</p>
+              <div className="flex items-center gap-2">
+                <Image
+                  src={`/api/products/${item.productId}/image`}
+                  width={90}
+                  height={90}
+                  alt={`${item.product.title} image`}
+                />
+                <div className="w-full space-y-2">
+                  <h6 className="font-semibold">{item.product.title}</h6>
+
+                  <div className="lg:flex items-center justify-between space-y-2">
                     <CartItemQuantity
                       quantity={item.quantity}
                       handleAddQuantity={() => updateQuantity(item.productId, item.quantity + 1)}
@@ -91,10 +92,9 @@ function CartList({ cart, user }: { cart: CartItem[]; user: User | null }) {
                       }
                       isLoading={isUpdateItemLoading || isRemoveItemLoading}
                     />
+                    <p>${item.product.price}</p>
                   </div>
                 </div>
-
-                <p>${item.product.price}</p>
               </div>
             </li>
           ))}
