@@ -1,7 +1,5 @@
 import type { NextConfig } from "next"
 
-const API_BASE_URL = process.env.API_BASE_URL
-
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
@@ -25,14 +23,6 @@ const nextConfig: NextConfig = {
         pathname: "/products/**",
       },
     ],
-  },
-  async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination: `${API_BASE_URL}/:path*`,
-      },
-    ]
   },
   output: "standalone",
 }
