@@ -10,6 +10,6 @@ fi
 # Assign the version argument to a variable
 version=$1
 
-docker build --platform linux/amd64 --pull -f ./deployments/Dockerfile -t nextnetshop-frontend-v$version . --no-cache
+docker build --platform linux/amd64 --pull -f ./deployments/Dockerfile -t toantu3005/nextnetshop-frontend-v1.0.0:$version . --no-cache
 
-docker push nextnetshop-frontend-v$version
+docker push toantu3005/nextnetshop-frontend-v1.0.0:$version

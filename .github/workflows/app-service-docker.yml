@@ -17,6 +17,7 @@ jobs:
       id-token: write
     env:
       API_BASE_URL: ${{ secrets.API_BASE_URL }}
+      VERSION: 1.0.0
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
@@ -26,23 +27,23 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-      
+
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: nextnetshop-frontend-v1.0.0
+          images: toantu3005/nextnetshop-frontend-v1.0.0:${{ env.VERSION }}
 
       - name: Set execute permission for publish.sh
-        run: chmod +x scripts/publish.sh        
+        run: chmod +x scripts/publish.sh
 
       - name: Build and push Docker image with Makefile
         id: push
-        run: make publish 1.0.0
+        run: make publish ${{ env.VERSION }}
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v2
         with:
-          subject-name: index.docker.io/nextnetshop-frontend-v1.0.0
+          subject-name: index.docker.io/toantu3005/nextnetshop-frontend-v1.0.0:${{ env.VERSION }}
           subject-digest: ${{ steps.meta.outputs.digest }}
           push-to-registry: true
