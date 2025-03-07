@@ -13,7 +13,6 @@ function PersonalisedRecommendations() {
     isLoading,
     isSuccess,
     isError,
-    error,
   } = useGetPersonalRecommendationsQuery(user ? user.id : -1);
 
   let content: React.ReactNode;

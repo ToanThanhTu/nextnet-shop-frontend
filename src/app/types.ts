@@ -156,7 +156,7 @@ export type UserResigtration = {
 
 export type Auth = {
   token: null | string;
-  user: null | User;
+  user: null | UserDTO;
   loading: boolean;
   error: null | string;
   success: boolean;

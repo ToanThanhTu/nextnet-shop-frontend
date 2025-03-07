@@ -1,6 +1,6 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from "next"
 
-const API_BASE_URL = process.env.API_BASE_URL;
+const API_BASE_URL = process.env.API_BASE_URL
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -23,8 +23,8 @@ const nextConfig: NextConfig = {
         hostname: "localhost",
         port: "3001",
         pathname: "/products/**",
-      }
-    ]
+      },
+    ],
   },
   async rewrites() {
     return [
@@ -32,8 +32,9 @@ const nextConfig: NextConfig = {
         source: "/api/:path*",
         destination: `${API_BASE_URL}/:path*`,
       },
-    ];
+    ]
   },
-};
+  output: "standalone",
+}
 
-export default nextConfig;
+export default nextConfig

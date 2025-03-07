@@ -1,5 +1,5 @@
 import CartItemQuantity from "@/app/components/cart/cart-item-quantity";
-import { CartItem, CartItemDTO, User } from "@/app/types";
+import { CartItem, CartItemDTO, UserDTO } from "@/app/types";
 import {
   removeCartItemLocal,
   updateCartItemLocal,
@@ -9,7 +9,7 @@ import {
 import { useAppDispatch } from "@/lib/hooks";
 import Image from "next/image";
 
-function CartList({ cart, user }: { cart: CartItem[]; user: User | null }) {
+function CartList({ cart, user }: { cart: CartItem[]; user: UserDTO | null }) {
   const dispatch = useAppDispatch();
 
   const [

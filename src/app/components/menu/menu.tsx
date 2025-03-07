@@ -59,7 +59,7 @@ function Menu() {
           className="uppercase font-bold text-sm border-b-4 border-transparent hover:border-black py-10 flex items-center"
           onClick={closeSubMenu}
         >
-          Today's Deals
+          Today&apos;s Deals
         </Link>
 
         <Link

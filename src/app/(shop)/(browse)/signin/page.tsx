@@ -47,7 +47,7 @@ function SignIn() {
     };
 
     syncUserCart();
-  }, [router, user, success]);
+  }, [cart, syncCartServer, router, user, success]);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     data.email = data.email.toLowerCase();

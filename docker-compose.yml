@@ -1,0 +1,9 @@
+version: "1.0.0"
+services:
+  next-net-shop:
+    image: nextnetshop-frontend
+    container_name: nextnetshop-frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    env_file: .env.production

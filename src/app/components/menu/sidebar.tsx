@@ -95,7 +95,7 @@ function Sidebar() {
             <li className="py-4 border-t-2 border-primary-dark">
               <h3 className="py-2 px-4">
                 <Link href="/all-deals" onClick={() => setIsOpen(false)}>
-                  Today's Deals
+                  Today&apos;s Deals
                 </Link>
               </h3>
             </li>

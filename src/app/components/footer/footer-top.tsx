@@ -49,7 +49,7 @@ function FooterTop() {
               <Link href="/bestsellers">Best Sellers</Link>
             </li>
             <li>
-              <Link href="/deals">Today's Deals</Link>
+              <Link href="/deals">Today&apos;s Deals</Link>
             </li>
             <li>
               <Link href="/all-products">All Products</Link>

@@ -1,7 +1,7 @@
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
-import { CartItem, User } from "@/app/types";
+import { CartItem, UserDTO } from "@/app/types";
 import { resetCartLocal } from "@/lib/features/cart/cartSlice";
 import { usePlaceOrderMutation } from "@/lib/features/order/orderSlice";
 import { useAppDispatch } from "@/lib/hooks";
@@ -9,7 +9,7 @@ import { LoaderPinwheel } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-function Billing({ cart, user }: { cart: CartItem[]; user: User | null }) {
+function Billing({ cart, user }: { cart: CartItem[]; user: UserDTO | null }) {
   const dispatch = useAppDispatch();
   const router = useRouter();
 

@@ -1,5 +1,5 @@
 import CartList from "@/app/components/cart/cart-list";
-import { CartItem, User } from "@/app/types";
+import { CartItem, UserDTO } from "@/app/types";
 
 function OrderSummary({
   cart,
@@ -8,7 +8,7 @@ function OrderSummary({
 }: {
   cart: CartItem[];
   totalPrice: number;
-  user: User | null;
+  user: UserDTO | null;
 }) {
   return (
     <div className="lg:order-2">

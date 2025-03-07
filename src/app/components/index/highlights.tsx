@@ -24,7 +24,7 @@ function Highlights() {
 
         <Card className="md:hidden lg:block xl:hidden">
           <CardHeader>
-            <CardTitle>Hey, I'm Trevor</CardTitle>
+            <CardTitle>Hey, I&apos;m Trevor</CardTitle>
           </CardHeader>
           <CardContent>
             <Link href="/contact-me">
@@ -37,7 +37,7 @@ function Highlights() {
             </Link>
           </CardContent>
           <CardFooter>
-            <Link href="/contact-me">Let's work together!</Link>
+            <Link href="/contact-me">Let&apos;s work together!</Link>
           </CardFooter>
         </Card>
       </div>
