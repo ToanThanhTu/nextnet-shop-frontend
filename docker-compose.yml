@@ -1,7 +1,6 @@
-version: "1.0.0"
 services:
   next-net-shop:
-    image: nextnetshop-frontend
+    image: nextnetshop-frontend-v1.0.0
     container_name: nextnetshop-frontend
     restart: always
     ports:
