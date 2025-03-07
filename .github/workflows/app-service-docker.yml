@@ -31,6 +31,9 @@ jobs:
         with:
           images: nextnetshop-frontend-v1.0.0
 
+      - name: Set execute permission for publish.sh
+        run: chmod +x scripts/publish.sh        
+
       - name: Build and push Docker image with Makefile
         id: push
         run: make publish 1.0.0
