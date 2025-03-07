@@ -39,10 +39,3 @@ jobs:
       - name: Build and push Docker image with Makefile
         id: push
         run: make publish
-
-      - name: Generate artifact attestation
-        uses: actions/attest-build-provenance@v2
-        with:
-          subject-name: index.docker.io/toantu3005/nextnetshop-frontend-v1.0.0
-          subject-digest: ${{ steps.meta.outputs.digest }}
-          push-to-registry: true
