@@ -1,6 +1,6 @@
 services:
   next-net-shop:
-    image: nextnetshop-frontend-v1.0.0
+    image: toantu3005/nextnetshop-frontend-v1.0.0
     container_name: nextnetshop-frontend
     restart: always
     ports:

@@ -10,7 +10,7 @@ export const config = {
 export function middleware(request: NextRequest) {
   const nextUrlPath = request.nextUrl.pathname.substring(4)
 
-  return NextResponse.rewrite(
+  return NextResponse.redirect(
     new URL(`${API_BASE_URL}${nextUrlPath}${request.nextUrl.search}`)
   )
 }
