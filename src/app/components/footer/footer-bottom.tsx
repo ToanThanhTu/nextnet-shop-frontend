@@ -15,7 +15,7 @@ function FooterBottom() {
         </div>
 
         <div className="text-center my-2">
-          <p>Copyright © 2024 Next Net Shop. All Rights Reserved.</p>
+          <p>Copyright © 2025 Next Net Shop v1.0.4. All Rights Reserved.</p>
         </div>
       </div>
     </div>
