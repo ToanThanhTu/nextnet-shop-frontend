@@ -17,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className="antialiased scroll-smooth">
+      <body className="bg-background text-foreground">
         {/* Redux Store for Filter, Cart, Auth states, and RTK Query */}
         <StoreProvider>
           <main>{children}</main>

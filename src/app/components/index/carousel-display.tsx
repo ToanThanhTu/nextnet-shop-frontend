@@ -39,8 +39,8 @@ function CarouselDisplay() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="hover:cursor-pointer" />
+      <CarouselNext className="hover:cursor-pointer" />
     </Carousel>
   );
 }

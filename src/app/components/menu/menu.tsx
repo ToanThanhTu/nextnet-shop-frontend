@@ -1,30 +1,42 @@
-import MenuItem from "@/app/components/menu/menuItem";
-import { useGetCategoriesQuery } from "@/lib/features/api/apiSlice";
-import Link from "next/link";
-import { useState, MouseEvent } from "react";
+import MenuItem from "@/app/components/menu/menuItem"
+import { useGetCategoriesQuery } from "@/lib/features/api/apiSlice"
+import Link from "next/link"
+import { useState, MouseEvent, useEffect } from "react"
 
 function Menu() {
-  const [selectedMenu, setSelectedMenu] = useState(0);
+  const [selectedMenu, setSelectedMenu] = useState(0)
 
-  const { data: categories, isLoading, isSuccess, isError, error } = useGetCategoriesQuery();
+  const { data: categories, isLoading, isSuccess, isError, error } = useGetCategoriesQuery()
 
-  let content: React.ReactNode;
+  useEffect(() => {
+    if (selectedMenu !== 0) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "auto"
+    }
+
+    return () => {
+      document.body.style.overflow = "auto"
+    }
+  }, [selectedMenu])
+
+  let content: React.ReactNode
 
   const toggleSubMenu = (event: MouseEvent): void => {
-    event.preventDefault();
+    event.preventDefault()
     if (selectedMenu === Number((event.target as HTMLButtonElement).value)) {
-      setSelectedMenu(0);
+      setSelectedMenu(0)
     } else {
-      setSelectedMenu(Number((event.target as HTMLButtonElement).value));
+      setSelectedMenu(Number((event.target as HTMLButtonElement).value))
     }
-  };
+  }
 
   const closeSubMenu = () => {
-    setSelectedMenu(0);
-  };
+    setSelectedMenu(0)
+  }
 
   if (isLoading) {
-    content = <div>Loading menu...</div>;
+    content = <div>Loading menu...</div>
   } else if (isSuccess) {
     content = (
       <>
@@ -38,9 +50,9 @@ function Menu() {
           />
         ))}
       </>
-    );
+    )
   } else if (isError) {
-    content = <div>Error: {error.toString()}</div>;
+    content = <div>Error: {error.toString()}</div>
   }
 
   return (
@@ -73,7 +85,7 @@ function Menu() {
         {content}
       </ul>
     </nav>
-  );
+  )
 }
 
-export default Menu;
+export default Menu
