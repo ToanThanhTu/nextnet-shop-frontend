@@ -1,41 +1,52 @@
-import { useGetProductsBySearchTextQuery } from "@/lib/features/products/productsSlice";
-import Image from "next/image";
-import Link from "next/link";
-import { Dispatch, SetStateAction } from "react";
+import { useGetProductsBySearchTextQuery } from "@/lib/features/products/productsSlice"
+import Image from "next/image"
+import Link from "next/link"
+import { Dispatch, SetStateAction } from "react"
 
 interface Props {
-  search: string;
-  setShowResults: Dispatch<SetStateAction<boolean>>;
+  search: string
+  setSearch: Dispatch<SetStateAction<string>>
+  setSearchBarFocus: (focus: boolean) => void
 }
 
-function SearchResults({ search, setShowResults }: Props) {
+function SearchResults({ search, setSearch, setSearchBarFocus }: Props) {
   const {
     data: products = [],
     isLoading,
     isSuccess,
     isError,
-  } = useGetProductsBySearchTextQuery({ search });
+  } = useGetProductsBySearchTextQuery({ search })
 
   const handleClick = () => {
-    setShowResults(false);
-  };
+    setSearch("")
+    setSearchBarFocus(false)
+  }
 
-  let content: React.ReactNode;
+  let content: React.ReactNode
 
-  if (isLoading) {
+  if (search.length < 1) {
+    content = null
+  }
+  else if (search.length < 3) {
     content = (
-      <div className="absolute top-10 p-4 rounded-md shadow-md bg-white space-y-2">
+      <div className="absolute top-10 p-4 rounded-md shadow-md bg-white space-y-2 z-50">
+        Please enter at least 3 characters
+      </div>
+    )
+  } else if (isLoading) {
+    content = (
+      <div className="absolute top-10 p-4 rounded-md shadow-md bg-white space-y-2 z-50">
         Searching...
       </div>
-    );
+    )
   } else if (isSuccess) {
     content = (
-      <div className="absolute top-10 w-full p-4 rounded-md shadow-md bg-white space-y-2 z-50">
+      <div className="absolute top-10 w-full rounded-md shadow-md bg-white space-y-2 z-50 overflow-hidden">
         {products.map((product) => (
           <Link
             key={product.id}
             href={`/products/${product.slug}`}
-            className="flex gap-2 items-center"
+            className="flex p-4 items-center hover:opacity-80 hover:bg-gray-100"
             onClick={handleClick}
           >
             <Image
@@ -57,16 +68,16 @@ function SearchResults({ search, setShowResults }: Props) {
           </Link>
         ))}
       </div>
-    );
+    )
   } else if (isError) {
     content = (
-      <div className="absolute top-10 p-4 rounded-md shadow-md bg-white space-y-2">
-        Product not found
+      <div className="absolute top-10 p-4 rounded-md shadow-md bg-white space-y-2 flex items-center justify-center z-50">
+        Product not found :(
       </div>
-    );
+    )
   }
 
-  return <>{content}</>;
+  return <>{content}</>
 }
 
-export default SearchResults;
+export default SearchResults

@@ -10,7 +10,7 @@ interface Props {
 
 function HighlightCard({ title, children }: PropsWithChildren<Props>) {
   return (
-    <Card className="flex flex-col justify-between rounded-none shadow-none">
+    <Card className="flex flex-col justify-between gap-2 rounded-none shadow-none">
       <CardHeader className="pb-0">
         <CardTitle className="text-2xl">{title}</CardTitle>
       </CardHeader>

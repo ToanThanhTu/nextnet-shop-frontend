@@ -1,69 +1,43 @@
-import SearchResults from "@/app/components/search-bar/search-results";
-import { Button } from "@/app/components/ui/button";
-import { Input } from "@/app/components/ui/input";
-import { Search, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import SearchResults from "@/app/components/search-bar/search-results"
+import { Input } from "@/app/components/ui/input"
+import { Search, X } from "lucide-react"
+import { useEffect, useState } from "react"
 
-function SearchBar() {
-  const [search, setSearch] = useState("");
-  const [onFocus, setOnFocus] = useState(false);
-  const [showResults, setShowResults] = useState(false);
+interface Props {
+  searchBarFocus: boolean
+  setSearchBarFocus: (focus: boolean) => void
+}
 
-  useEffect(() => {
-    if (search.length >= 3) {
-      setShowResults(true);
-    } else {
-      setShowResults(false);
-    }
-  }, [search]);
+function SearchBar({ searchBarFocus, setSearchBarFocus }: Props) {
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
-    if (onFocus) {
-      document.body.style.overflow = "hidden";
+    if (searchBarFocus) {
+      document.body.style.overflow = "hidden"
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = "auto"
     }
 
     return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [onFocus]);
-
-  const handleFocus = () => {
-    setOnFocus(true);
-    setShowResults(true);
-  };
-  const handleBlur = () => {
-    setTimeout(() => {
-      setOnFocus(false);
-      setShowResults(false);
-    }, 150);
-  };
+      document.body.style.overflow = "auto"
+    }
+  }, [searchBarFocus])
 
   return (
-    <div className="flex items-center gap-2 w-full relative" onBlur={handleBlur} onAbort={handleBlur}>
+    <div className="flex items-center gap-2 w-full relative">
       <Input
         type="text"
-        placeholder="What are you looking for?"
-        className="px-8 w-full"
+        placeholder={searchBarFocus ? "What are you looking for?" : "Search"}
+        className="w-full py-4"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
+        onFocus={() => setSearchBarFocus(true)}
       />
-      <Search className="absolute p-1 ml-1" />
+      <Search className="absolute right-0 mr-2" size={18} strokeWidth={3} />
 
-      <Button variant="ghost" className="absolute right-2 p-1" onClick={() => setSearch("")}>
-        <X />
-      </Button>
-
-      {onFocus && (
-        <div className="fixed inset-0 top-[140px] h-screen bg-black bg-opacity-50 z-10" onClick={() => setOnFocus(false)} />
-      )}
-
-      {showResults && search.length >= 3 && <SearchResults search={search} setShowResults={setShowResults} />}
+      <SearchResults search={search} setSearch={setSearch} setSearchBarFocus={setSearchBarFocus} />
     </div>
-  );
+  )
 }
 
-export default SearchBar;
+export default SearchBar

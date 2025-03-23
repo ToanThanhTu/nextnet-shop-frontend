@@ -1,6 +1,8 @@
 "use client"
 
 import HighlightCard from "@/app/components/index/highlight-card"
+import Loading from "@/app/components/loading/loading"
+import Discount from "@/app/components/price/sale/discount"
 import { CardContent, CardFooter } from "@/app/components/ui/card"
 import { highlights } from "@/app/data/hightlights"
 import { useGetTopDealsQuery } from "@/lib/features/products/productsSlice"
@@ -13,20 +15,24 @@ function Highlights() {
   let topDealsContent: React.ReactNode
 
   if (isLoading) {
-    topDealsContent = <div>Loading Top Deals...</div>
+    topDealsContent = <Loading />
   } else if (isError) {
     topDealsContent = <div>Error: {error.toString()}</div>
   } else if (isSuccess) {
     topDealsContent = products.map((product) => (
       <div key={product.title}>
-        <Link href={`/products/${product.slug}`}>
+        <Link
+          href={`/products/${product.slug}`}
+          className="hover:cursor-pointer hover:opacity-80 relative"
+        >
           <Image
             src={`/api/products/${product.id}/image`}
             alt={`${product.title} image`}
             width={500}
             height={500}
           />
-          <p>{product.sale}% OFF </p>
+
+          <Discount sale={product.sale} className="absolute bottom-0 opacity-80 w-full" />
         </Link>
       </div>
     ))
@@ -40,16 +46,21 @@ function Highlights() {
         }
       >
         <HighlightCard title="Top Deals">
-          <CardContent className="grid grid-cols-2 gap-2">{topDealsContent}</CardContent>
-          <CardFooter>
-            <Link href="/all-deals">See all deals</Link>
+          <CardContent className="grid grid-cols-2 gap-2 py-0">{topDealsContent}</CardContent>
+          <CardFooter className="pt-0">
+            <Link
+              href="/all-deals"
+              className="hover:cursor-pointer hover:opacity-80 text-ring font-semibold"
+            >
+              See all deals
+            </Link>
           </CardFooter>
         </HighlightCard>
 
         {highlights.map((highlight) => (
           <HighlightCard key={highlight.title} title={highlight.title}>
             <CardContent className="py-0">
-              <Link href={highlight.href}>
+              <Link href={highlight.href} className="hover:cursor-pointer hover:opacity-80">
                 <Image
                   src={highlight.image}
                   alt={`${highlight.title} image`}
@@ -58,8 +69,13 @@ function Highlights() {
                 />
               </Link>
             </CardContent>
-            <CardFooter>
-              <Link href={highlight.href}>Shop now</Link>
+            <CardFooter className="pt-0">
+              <Link
+                href={highlight.href}
+                className="hover:cursor-pointer hover:opacity-80 text-ring font-semibold"
+              >
+                Shop now
+              </Link>
             </CardFooter>
           </HighlightCard>
         ))}

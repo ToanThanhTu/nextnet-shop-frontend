@@ -28,7 +28,7 @@ export default function Layout({
 
   return (
     <div className="mx-4 lg:mx-32">
-      <h1 className="uppercase text-center py-12">{headerTitle}</h1>
+      <h1 className="uppercase text-center py-12 text-3xl font-bold">{headerTitle}</h1>
 
       <section className="block space-y-2 lg:flex justify-between items-center my-4">
         <FilterTags />

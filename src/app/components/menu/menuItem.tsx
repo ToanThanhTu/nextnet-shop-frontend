@@ -32,7 +32,7 @@ function MenuItem({ category, selectedMenu, toggleSubMenu, closeSubMenu }: Props
       {selectedMenu === category.id ? (
         <>
           <div
-            className="fixed inset-0 top-[135px] h-screen bg-black opacity-80 z-10"
+            className="fixed inset-0 top-[132px] h-screen bg-black opacity-80 z-10"
             onClick={closeSubMenu}
           />
           <SubMenu category={category} closeSubMenu={closeSubMenu} />

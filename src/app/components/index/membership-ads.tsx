@@ -8,7 +8,7 @@ import Link from "next/link";
 function MembershipAds() {
   return (
     <div className="xl:max-w-screen-xl m-auto px-4 py-12 text-center uppercase">
-      <h2>Become a member to save and get value on Next Net Shop</h2>
+      <h2 className="font-medium">Become a member to save and get value on Next Net Shop</h2>
 
       <div className="flex flex-col lg:flex-row gap-8 items-center justify-between mt-8">
         <Image
@@ -19,7 +19,7 @@ function MembershipAds() {
           className="w-[150px]"
         />
 
-        <div className="flex justify-between">
+        <div className="flex justify-between gap-8">
           <div className="basis-1/3">
             <SwitchAccessShortcutAddIcon fontSize="large" />
             <p>Score Points and Save</p>

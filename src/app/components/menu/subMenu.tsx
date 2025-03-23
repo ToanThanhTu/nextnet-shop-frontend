@@ -17,10 +17,10 @@ function SubMenu({ category, closeSubMenu }: Props) {
         <div className="relative">
           <Link
             href={`/${category.slug}`}
-            className="uppercase w-1/4 flex justify-between items-center border-b-2 pb-4"
+            className="uppercase w-1/4 flex justify-between items-center border-b-2 pb-4 hover:opacity-80"
             onClick={closeSubMenu}
           >
-            <h3>{category.title}</h3>
+            <h3 className="font-bold">{category.title}</h3>
             <p className="text-xs">View All</p>
           </Link>
 

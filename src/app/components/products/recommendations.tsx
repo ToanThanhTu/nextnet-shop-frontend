@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/app/components/loading/loading";
 import RecommendationsCarousel from "@/app/components/products/recommendations-carousel";
 import { useGetProductsRecommendationsQuery } from "@/lib/features/products/productsSlice";
 
@@ -14,7 +15,7 @@ function Recommendations({ productId }: { productId: number }) {
   let content: React.ReactNode;
 
   if (isLoading) {
-    content = <div className="text-center">Loading recommendations...</div>;
+    content = <Loading />;
   } else if (isError || !products || products.length === 0) {
     content = <div className="text-center">Sorry, no recommendations for now</div>;
   } else if (isSuccess) {

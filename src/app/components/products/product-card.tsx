@@ -1,6 +1,8 @@
-import { Product } from "@/app/types";
-import Image from "next/image";
-import Link from "next/link";
+import Price from "@/app/components/price/price"
+import Sale from "@/app/components/price/sale/sale"
+import { Product } from "@/app/types"
+import Image from "next/image"
+import Link from "next/link"
 
 function ProductCard({ product }: { product: Product }) {
   return (
@@ -16,20 +18,17 @@ function ProductCard({ product }: { product: Product }) {
       </Link>
 
       <div>
-          <span className={`${product.sale > 0 && "text-red-500"} sale-price`}>
-            ${product.salePrice}
-          </span>{" "}
-          {product.sale > 0 && <span className="org-price">was ${product.price}</span>}
+        {product.sale > 0 ? (
+          <Price variant="onSale" price={product.salePrice} />
+        ) : (
+          <Price variant="org" price={product.price} />
+        )}
+        {product.sale > 0 && <Price variant="strikethrough" price={product.price} />}
       </div>
 
-      {product.sale > 0 && (
-        <div className="sale-text space-x-1">
-          <span className="py-1 px-2 bg-red-500 text-white">SALE</span>
-          <span className="py-1 px-2 bg-green-500 text-white">{product.sale}% OFF</span>
-        </div>
-      )}
+      {product.sale > 0 && <Sale sale={product.sale} />}
     </div>
-  );
+  )
 }
 
-export default ProductCard;
+export default ProductCard

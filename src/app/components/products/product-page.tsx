@@ -1,61 +1,66 @@
-"use client";
+"use client"
 
-import Quantity from "@/app/components/products/quantity";
-import Recommendations from "@/app/components/products/recommendations";
+import Loading from "@/app/components/loading/loading"
+import Price from "@/app/components/price/price"
+import Discount from "@/app/components/price/sale/discount"
+import SaleText from "@/app/components/price/sale/saleText"
+import Quantity from "@/app/components/products/quantity"
+import Recommendations from "@/app/components/products/recommendations"
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-} from "@/app/components/ui/breadcrumb";
-import { Button } from "@/app/components/ui/button";
-import { CartItem, CartItemDTO } from "@/app/types";
-import { addCartItemLocal, useAddCartItemServerMutation } from "@/lib/features/cart/cartSlice";
-import { useGetProductBySlugQuery } from "@/lib/features/products/productsSlice";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import Image from "next/image";
-import { useState } from "react";
+} from "@/app/components/ui/breadcrumb"
+import { Button } from "@/app/components/ui/button"
+import { CartItem, CartItemDTO } from "@/app/types"
+import { addCartItemLocal, useAddCartItemServerMutation } from "@/lib/features/cart/cartSlice"
+import { useGetProductBySlugQuery } from "@/lib/features/products/productsSlice"
+import { useAppDispatch, useAppSelector } from "@/lib/hooks"
+import { cn } from "@/lib/utils"
+import Image from "next/image"
+import { useState } from "react"
 
 function ProductPage({ slug }: { slug: string }) {
-  const [quantity, setQuantity] = useState(1);
-  const { user } = useAppSelector((state) => state.auth);
-  const dispatch = useAppDispatch();
+  const [quantity, setQuantity] = useState(1)
+  const { user } = useAppSelector((state) => state.auth)
+  const dispatch = useAppDispatch()
 
-  const { data, isLoading, isSuccess, isError, error } = useGetProductBySlugQuery(slug);
+  const { data, isLoading, isSuccess, isError, error } = useGetProductBySlugQuery(slug)
 
-  const [addCartItemServer, { isLoading: isAddCartLoading }] = useAddCartItemServerMutation();
+  const [addCartItemServer, { isLoading: isAddCartLoading }] = useAddCartItemServerMutation()
 
-  let content: React.ReactNode;
+  let content: React.ReactNode
 
   if (isLoading) {
-    content = <div>Loading product...</div>;
+    content = <Loading />
   } else if (isError) {
-    content = <div>Error: {error.toString()}</div>;
+    content = <div>Error: {error.toString()}</div>
   } else if (isSuccess) {
-    const product = data.product;
-    const subCategory = data.subCategory;
-    const category = data.category;
+    const product = data.product
+    const subCategory = data.subCategory
+    const category = data.category
 
     const handleAddToCart = async () => {
       const newCartItem: CartItem = {
         productId: product.id,
         product: product,
         quantity: quantity,
-      };
+      }
 
       if (user) {
         const newCartItemServer: CartItemDTO = {
           userId: user.id,
           productId: product.id,
           quantity: quantity,
-        };
+        }
 
-        await addCartItemServer(newCartItemServer);
+        await addCartItemServer(newCartItemServer)
       } else {
-        dispatch(addCartItemLocal(newCartItem));
+        dispatch(addCartItemLocal(newCartItem))
       }
-    };
+    }
 
     content = (
       <div className="px-4 lg:px-40">
@@ -88,47 +93,54 @@ function ProductPage({ slug }: { slug: string }) {
             width={1000}
             height={1000}
           />
-          <div className="py-4 space-y-2 lg:py-0 lg:space-y-0">
-            <h2>{product.title}</h2>
+          <div className={cn("py-4 flex flex-col gap-4", "lg:py-0 lg:space-y-0")}>
+            <h2 className="text-3xl font-bold">{product.title}</h2>
 
-            <div className="flex gap-2">
-              <p className={`${product.sale > 0 && "text-red-500"} sale-price`}>
-                ${product.salePrice}
-              </p>
-              <p className="org-price">was ${product.price}</p>
+            <div className="flex">
+              {product.sale > 0 ? (
+                <Price variant="onSale" price={product.salePrice} />
+              ) : (
+                <Price variant="org" price={product.price} />
+              )}
+              {product.sale > 0 && <Price variant="strikethrough" price={product.price} />}
             </div>
 
             {product.sale > 0 && (
               <div className="flex">
-                <p className="py-1 px-2 bg-red-500 text-white sale-text mr-1">SALE</p>
-                <p className="py-1 px-2 bg-green-500 text-white sale-text">{product.sale}% OFF</p>
+                <SaleText />
+                <Discount sale={product.sale} />
               </div>
             )}
 
             {product.stock === 0 && <p>Out of stock</p>}
 
             {product.stock && product.stock > 0 && (
-              <div className="space-y-4">
+              <div className="flex flex-col gap-4">
                 <Quantity quantity={quantity} setQuantity={setQuantity} stock={product.stock} />
 
                 {product.stock < 10 ? <p>Low stock - {product.stock} items left</p> : null}
-                <Button className="w-full uppercase" size="lg" onClick={handleAddToCart} disabled={isAddCartLoading}>
+                <Button
+                  className="uppercase hover:cursor-pointer w-fit"
+                  size="lg"
+                  onClick={handleAddToCart}
+                  disabled={isAddCartLoading}
+                >
                   Add to cart
                 </Button>
               </div>
             )}
 
-            <h3 className="pt-8">Description</h3>
-            <p className="py-2">{product.description}</p>
+            <h3 className="text-xl font-semibold">Description</h3>
+            <p className="">{product.description}</p>
           </div>
         </div>
 
         <Recommendations productId={product.id} />
       </div>
-    );
+    )
   }
 
-  return <>{content}</>;
+  return <>{content}</>
 }
 
-export default ProductPage;
+export default ProductPage

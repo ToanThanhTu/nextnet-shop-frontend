@@ -34,8 +34,8 @@ function Cart() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button className="relative">
-          <ShoppingCart fontSize="large" />
+        <Button className="relative hover:cursor-pointer">
+          <ShoppingCart strokeWidth={3} className="text-black" />
           {cart.length > 0 && (
             <span className="absolute -bottom-1 -right-1 bg-red-500 text-white rounded-full px-2">
               {cart.length}

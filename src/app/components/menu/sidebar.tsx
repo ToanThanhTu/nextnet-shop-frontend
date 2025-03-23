@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button } from "@/app/components/ui/button";
 import { useGetCategoriesQuery } from "@/lib/features/api/apiSlice";
 import { Menu } from "lucide-react";
+import Loading from "@/app/components/loading/loading";
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +27,7 @@ function Sidebar() {
   let content: React.ReactNode;
 
   if (isLoading) {
-    content = <div>loading categories...</div>;
+    content = <Loading />;
   } else if (isSuccess) {
     content = (
       <>
@@ -51,7 +52,7 @@ function Sidebar() {
 
       {isOpen && (
         <div
-          className="fixed top-0 bg-black bg-opacity-50 h-screen w-screen z-40"
+          className="fixed top-0 bg-black opacity-80 h-screen w-screen z-40"
           onClick={() => setIsOpen(false)}
         />
       )}

@@ -8,8 +8,8 @@ import { JSX } from "react"
 
 import { discoverCards } from "@/app/data/discover-cards"
 import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@mui/material"
+import { Button } from "@/app/components/ui/button"
+import { cn } from "@/lib/utils"
 
 const discoverIconsMap: { [key: string]: JSX.Element } = {
   StoreIcon: <StoreIcon />,
@@ -24,7 +24,7 @@ function Discover() {
   return (
     <div className="py-12 bg-gray-100 w-full">
       <div className="px-6 max-w-screen-xl mx-auto">
-        <h2 className="mb-6">Discover Next Net Shop</h2>
+        <h2 className="mb-6 text-2xl font-bold">Discover Next Net Shop</h2>
 
         <div className="overflow-x-auto">
           <div className="flex gap-4 w-fit">
@@ -35,22 +35,19 @@ function Discover() {
                 </Link>
 
                 <div className="p-4">
-                  <h3>{card.title}</h3>
+                  <h3 className="font-bold">{card.title}</h3>
                   <p className="mt-4 mb-12">{card.description}</p>
                 </div>
 
-                <Button
-                  variant="text"
+                <Link
                   href={card.link}
-                  style={{
-                    position: "absolute",
-                    bottom: "0",
-                    width: "100%",
-                    color: "#84B082",
-                  }}
+                  className={cn(
+                    "absolute bottom-0 w-full flex justify-center items-center p-2 bg-primary-foreground text-primary font-medium",
+                    "hover:opacity-80 hover:underline"
+                  )}
                 >
                   Discover Now &gt;
-                </Button>
+                </Link>
               </div>
             ))}
           </div>

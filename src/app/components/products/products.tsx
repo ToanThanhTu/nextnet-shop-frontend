@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/app/components/loading/loading";
 import PaginationSection from "@/app/components/pagination/pagination";
 import ProductCard from "@/app/components/products/product-card";
 import { Product } from "@/app/types";
@@ -57,7 +58,7 @@ function Products({ endpoint, category, subcategory }: ProductsPageProps) {
   };
 
   if (isLoading) {
-    content = <div>Loading products...</div>;
+    content = <Loading />;
   } else if (isSuccess) {
     content = (
       <>

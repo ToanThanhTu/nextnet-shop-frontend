@@ -1,85 +1,94 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import { info } from "@/app/data/contact-me";
-import Image from "next/image";
-import { Mail, MapPin, Smartphone } from "lucide-react";
-import { useGetCategoriesQuery } from "@/lib/features/api/apiSlice";
+import Link from "next/link"
+import LinkedInIcon from "@mui/icons-material/LinkedIn"
+import GitHubIcon from "@mui/icons-material/GitHub"
+import { info } from "@/app/data/contact-me"
+import Image from "next/image"
+import { Mail, MapPin, Smartphone } from "lucide-react"
+import { useGetCategoriesQuery } from "@/lib/features/api/apiSlice"
+import Loading from "@/app/components/loading/loading"
 
 function FooterTop() {
-  const { data: categories = [], isLoading, isSuccess, isError, error } = useGetCategoriesQuery();
+  const { data: categories = [], isLoading, isSuccess, isError, error } = useGetCategoriesQuery()
 
-  let content: React.ReactNode;
+  let content: React.ReactNode
 
   if (isLoading) {
-    content = <div>loading data...</div>;
+    content = <Loading />
   } else if (isSuccess) {
     content = (
       <>
         {categories.map((category) => (
           <li key={category.title}>
-            <Link href={`/${category.slug}`}>{category.title}</Link>
+            <Link href={`/${category.slug}`} className="hover:cursor-pointer hover:underline">
+              {category.title}
+            </Link>
           </li>
         ))}
       </>
-    );
+    )
   } else if (isError) {
-    content = <div>Error: {error.toString()}</div>;
+    content = <div>Error: {error.toString()}</div>
   }
 
   return (
-    <div className="bg-footer">
+    <div className="bg-foreground text-background">
       <div className="w-full h-4 bg-primary" />
 
       <div className="flex flex-col gap-8 md:flex-row justify-between py-12 px-6 max-w-screen-xl m-auto">
         <div className="w-80">
-          <Image src="/logo.png" alt="Logo" width={500} height={160} className="w-60" />
+          <Image src="/logo-white.png" alt="Logo" width={500} height={160} className="w-60" />
           <p className="mt-4">
             A Demo E-commerce Website built with Next.js, Tailwind CSS, ASP.NET and Azure.
           </p>
         </div>
 
         <div>
-          <h3 className="mb-4">Quick Links</h3>
+          <h3 className="mb-4 text-lg font-bold">Quick Links</h3>
 
           <ul className="grid grid-cols-2 gap-4">
             <li>
-              <Link href="/bestsellers">Best Sellers</Link>
+              <Link href="/bestsellers" className="hover:cursor-pointer hover:underline">
+                Best Sellers
+              </Link>
             </li>
             <li>
-              <Link href="/deals">Today&apos;s Deals</Link>
+              <Link href="/deals" className="hover:cursor-pointer hover:underline">
+                Today&apos;s Deals
+              </Link>
             </li>
             <li>
-              <Link href="/all-products">All Products</Link>
+              <Link href="/all-products" className="hover:cursor-pointer hover:underline">
+                All Products
+              </Link>
             </li>
             {content}
           </ul>
         </div>
 
         <div>
-          <h3 className="mb-4">Contact Me</h3>
+          <h3 className="mb-4 text-lg font-bold">Contact Me</h3>
 
-          <div className="flex gap-2 mb-2">
+          <Link href={`tel:${info.phone}`} className="flex gap-2 mb-2 hover:cursor-pointer hover:underline">
             <Smartphone />
-            <Link href={`tel:${info.phone}`}>{info.phone}</Link>
-          </div>
+            <span>{info.phone}</span>
+          </Link>
 
-          <div className="flex gap-2 mb-2">
+          <Link href={`mailto:${info.email}`} className="flex gap-2 mb-2 hover:cursor-pointer hover:underline">
             <Mail />
-            <Link href={`mailto:${info.email}`}>{info.email}</Link>
-          </div>
+            <span>{info.email}</span>
+          </Link>
 
-          <div className="flex gap-2 mb-2">
+          <Link href={info.linkedin} className="flex gap-2 mb-2 hover:cursor-pointer hover:underline">
             <LinkedInIcon />
-            <Link href={info.linkedin}>LinkedIn</Link>
-          </div>
+            <span>LinkedIn</span>
+          </Link>
 
-          <div className="flex gap-2 mb-2">
+          <Link href={info.github} className="flex gap-2 mb-2 hover:cursor-pointer hover:underline">
             <GitHubIcon />
-            <Link href={info.github}>GitHub</Link>
-          </div>
+            <span>GitHub</span>
+          </Link>
 
           <div className="flex gap-2 mb-2">
             <MapPin />
@@ -88,7 +97,7 @@ function FooterTop() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default FooterTop;
+export default FooterTop

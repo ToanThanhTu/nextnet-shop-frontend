@@ -1,3 +1,4 @@
+import Loading from "@/app/components/loading/loading"
 import MenuItem from "@/app/components/menu/menuItem"
 import { useGetCategoriesQuery } from "@/lib/features/api/apiSlice"
 import Link from "next/link"
@@ -36,7 +37,7 @@ function Menu() {
   }
 
   if (isLoading) {
-    content = <div>Loading menu...</div>
+    content = <Loading />
   } else if (isSuccess) {
     content = (
       <>
