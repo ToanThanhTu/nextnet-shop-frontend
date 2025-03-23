@@ -8,7 +8,6 @@ import { JSX } from "react"
 
 import { discoverCards } from "@/app/data/discover-cards"
 import Link from "next/link"
-import { Button } from "@/app/components/ui/button"
 import { cn } from "@/lib/utils"
 
 const discoverIconsMap: { [key: string]: JSX.Element } = {

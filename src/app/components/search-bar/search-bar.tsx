@@ -1,6 +1,6 @@
 import SearchResults from "@/app/components/search-bar/search-results"
 import { Input } from "@/app/components/ui/input"
-import { Search, X } from "lucide-react"
+import { Search } from "lucide-react"
 import { useEffect, useState } from "react"
 
 interface Props {

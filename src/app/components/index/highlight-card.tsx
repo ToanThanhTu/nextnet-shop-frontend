@@ -1,7 +1,4 @@
-import { Card, CardFooter, CardHeader, CardTitle } from "@/app/components/ui/card";
-import { CardContent } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
+import { Card, CardHeader, CardTitle } from "@/app/components/ui/card";
 import { PropsWithChildren } from "react";
 
 interface Props {
