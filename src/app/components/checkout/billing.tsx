@@ -1,37 +1,37 @@
-import { Button } from "@/app/components/ui/button";
-import { Input } from "@/app/components/ui/input";
-import { Label } from "@/app/components/ui/label";
-import { CartItem, UserDTO } from "@/app/types";
-import { resetCartLocal } from "@/lib/features/cart/cartSlice";
-import { usePlaceOrderMutation } from "@/lib/features/order/orderSlice";
-import { useAppDispatch } from "@/lib/hooks";
-import { LoaderPinwheel } from "lucide-react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { Button } from "@/app/components/ui/button"
+import { Input } from "@/app/components/ui/input"
+import { Label } from "@/app/components/ui/label"
+import { CartItem, UserDTO } from "@/app/types"
+import { resetCartLocal } from "@/lib/features/cart/cartSlice"
+import { usePlaceOrderMutation } from "@/lib/features/order/orderSlice"
+import { useAppDispatch } from "@/lib/hooks"
+import { FerrisWheel, LoaderPinwheel } from "lucide-react"
+import Image from "next/image"
+import { useRouter } from "next/navigation"
 
 function Billing({ cart, user }: { cart: CartItem[]; user: UserDTO | null }) {
-  const dispatch = useAppDispatch();
-  const router = useRouter();
+  const dispatch = useAppDispatch()
+  const router = useRouter()
 
-  const [placeOrder, { isLoading: isPlaceOrderLoading }] = usePlaceOrderMutation();
+  const [placeOrder, { isLoading: isPlaceOrderLoading }] = usePlaceOrderMutation()
 
   const handlePlaceOrder = async () => {
     if (!user) {
-      alert("Please sign in to place order!");
-      return;
+      alert("Please sign in to place order!")
+      return
     }
 
     try {
-      await placeOrder({ userId: user.id, cartItems: cart });
+      await placeOrder({ userId: user.id, cartItems: cart })
 
-      dispatch(resetCartLocal());
-      alert("Order placed successfully!");
-      router.push("/account/orders");
+      dispatch(resetCartLocal())
+      alert("Order placed successfully!")
+      router.push("/account/orders")
     } catch (error) {
-      alert(`Error placing order: ${error}.\nPlease try again!`);
-      return;
+      alert(`Error placing order: ${error}.\nPlease try again!`)
+      return
     }
-  };
+  }
 
   return (
     <div className="lg:order-1">
@@ -39,7 +39,7 @@ function Billing({ cart, user }: { cart: CartItem[]; user: UserDTO | null }) {
         <form>
           <p className="text-sm italic">Information are prefilled for demo purpose</p>
 
-          <h3 className="py-4">Contact</h3>
+          <h3 className="py-4 text-xl font-semibold">Contact</h3>
 
           <div className="space-y-4">
             <div className="flex flex-col space-y-2">
@@ -61,7 +61,7 @@ function Billing({ cart, user }: { cart: CartItem[]; user: UserDTO | null }) {
             </div>
           </div>
 
-          <h3 className="py-4">Delivery</h3>
+          <h3 className="py-4 text-xl font-semibold">Delivery</h3>
 
           <div className="space-y-4">
             <div className="flex flex-col space-y-2">
@@ -110,7 +110,7 @@ function Billing({ cart, user }: { cart: CartItem[]; user: UserDTO | null }) {
           </div>
 
           <Button
-            className="uppercase w-full h-12 mt-4"
+            className="uppercase w-full h-12 mt-4 hover:cursor-pointer"
             onClick={handlePlaceOrder}
             disabled={isPlaceOrderLoading}
           >
@@ -132,11 +132,14 @@ function Billing({ cart, user }: { cart: CartItem[]; user: UserDTO | null }) {
           </div>
 
           <div className="space-x-4">
-            <Button className="uppercase w-60 h-12" onClick={() => router.push("/signin")}>
+            <Button
+              className="uppercase w-60 h-12 hover:cursor-pointer"
+              onClick={() => router.push("/signin")}
+            >
               Sign in to Next Net Shop
             </Button>
             <Button
-              className="uppercase w-60 h-12 border-black"
+              className="uppercase w-60 h-12 border-black hover:cursor-pointer"
               variant="outline"
               onClick={() => router.push("/register")}
             >
@@ -145,8 +148,14 @@ function Billing({ cart, user }: { cart: CartItem[]; user: UserDTO | null }) {
           </div>
         </div>
       )}
+
+      {isPlaceOrderLoading && (
+        <div className="fixed inset-0 top-0 bg-black opacity-80 z-50 flex justify-center items-center h-screen w-screen">
+          <FerrisWheel color="white" size={60} className="animate-spin z-50" />
+        </div>
+      )}
     </div>
-  );
+  )
 }
 
-export default Billing;
+export default Billing

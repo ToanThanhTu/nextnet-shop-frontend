@@ -14,7 +14,7 @@ export const highlights: Highlight[] = [
   {
     title: "All-new Razer Barracuda X Chroma",
     image: "/highlights/new-headset.webp",
-    href: "/razer-barracuda-x-chroma",
+    href: "/products/razer-barracuda-x-chroma",
   },
   {
     title: "Economical Elegance: Shop Amazon Basics!",
@@ -29,12 +29,12 @@ export const highlights: Highlight[] = [
   {
     title: "Lorem ipsum dolor sit amet",
     image: "/highlights/fitness.png",
-    href: "https://www.lipsum.com",
+    href: "https://www.example.com",
   },
   {
     title: "Proin vel velit",
     image: "/highlights/kitchen.png",
-    href: "https://www.lipsum.com",
+    href: "https://www.example.com",
   },
 ];
 

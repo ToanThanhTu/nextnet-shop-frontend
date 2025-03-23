@@ -55,10 +55,10 @@ function Cart() {
         {cart.length > 0 && (
           <SheetFooter className="block">
             <div className="flex justify-between items-center py-4">
-              <h4>Order Subtotal</h4>
+              <h4 className="font-semibold">Order Subtotal</h4>
               <p className="sale-price">${totalPrice}</p>
             </div>
-            <Button className="uppercase w-full" size="lg" onClick={() => redirect("/checkout")}>
+            <Button className="uppercase w-full hover:cursor-pointer" size="lg" onClick={() => redirect("/checkout")}>
               Checkout
             </Button>
           </SheetFooter>

@@ -1,11 +1,11 @@
 "use client"
 
-import Loading from "@/app/components/loading/loading"
 import Price from "@/app/components/price/price"
 import Discount from "@/app/components/price/sale/discount"
 import SaleText from "@/app/components/price/sale/saleText"
-import Quantity from "@/app/components/products/quantity"
-import Recommendations from "@/app/components/products/recommendations"
+import Loading from "@/app/components/products/product/loading"
+import Quantity from "@/app/components/products/product/quantity"
+import Recommendations from "@/app/components/products/recommendations/recommendations"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -19,6 +19,7 @@ import { addCartItemLocal, useAddCartItemServerMutation } from "@/lib/features/c
 import { useGetProductBySlugQuery } from "@/lib/features/products/productsSlice"
 import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { cn } from "@/lib/utils"
+import { LoaderPinwheel } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
 
@@ -93,7 +94,7 @@ function ProductPage({ slug }: { slug: string }) {
             width={1000}
             height={1000}
           />
-          <div className={cn("py-4 flex flex-col gap-4", "lg:py-0 lg:space-y-0")}>
+          <div className={cn("py-4 flex flex-col gap-4", "lg:py-0")}>
             <h2 className="text-3xl font-bold">{product.title}</h2>
 
             <div className="flex">
@@ -125,7 +126,7 @@ function ProductPage({ slug }: { slug: string }) {
                   onClick={handleAddToCart}
                   disabled={isAddCartLoading}
                 >
-                  Add to cart
+                  {isAddCartLoading ? <LoaderPinwheel color="white" className="animate-spin" /> : "Add to cart"}
                 </Button>
               </div>
             )}

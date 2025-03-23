@@ -46,7 +46,7 @@ function SearchResults({ search, setSearch, setSearchBarFocus }: Props) {
           <Link
             key={product.id}
             href={`/products/${product.slug}`}
-            className="flex p-4 items-center hover:opacity-80 hover:bg-gray-100"
+            className="flex gap-4 p-4 items-center hover:opacity-80 hover:bg-gray-100"
             onClick={handleClick}
           >
             <Image
@@ -56,7 +56,7 @@ function SearchResults({ search, setSearch, setSearchBarFocus }: Props) {
               height={100}
             />
             <div>
-              <h3>{product.title}</h3>
+              <h3 className="text-lg font-bold">{product.title}</h3>
               <p>
                 ${product.salePrice}{" "}
                 {product.sale > 0 && <span className="text-sm">was ${product.price}</span>}

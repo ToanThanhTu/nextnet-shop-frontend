@@ -1,7 +1,7 @@
 "use client"
 
 import HighlightCard from "@/app/components/index/highlight-card"
-import Loading from "@/app/components/loading/loading"
+import LoadingTopDeals from "@/app/components/index/loadingTopDeals"
 import Discount from "@/app/components/price/sale/discount"
 import { CardContent, CardFooter } from "@/app/components/ui/card"
 import { highlights } from "@/app/data/hightlights"
@@ -15,7 +15,7 @@ function Highlights() {
   let topDealsContent: React.ReactNode
 
   if (isLoading) {
-    topDealsContent = <Loading />
+    topDealsContent = <LoadingTopDeals />
   } else if (isError) {
     topDealsContent = <div>Error: {error.toString()}</div>
   } else if (isSuccess) {

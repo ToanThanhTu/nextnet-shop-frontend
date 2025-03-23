@@ -1,6 +1,6 @@
 "use client";
 
-import ProductPage from "@/app/components/products/product-page";
+import ProductPage from "@/app/components/products/product/product-page";
 import { useEffect, useState } from "react";
 
 function Page({ params }: { params: Promise<{ product: string }> }) {

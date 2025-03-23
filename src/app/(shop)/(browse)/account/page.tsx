@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/app/(shop)/(browse)/account/loading";
 import { useGetUserDetailsQuery } from "@/lib/features/api/apiSlice";
 import { useAuth } from "@/lib/hooks";
 
@@ -19,7 +20,7 @@ function Account() {
   let content: React.ReactNode;
 
   if (isLoading) {
-    content = <div>Loading your profile...</div>;
+    content = <Loading />;
   } else if (isSuccess) {
     content = (
       <div className="space-y-2 py-4 text-center">

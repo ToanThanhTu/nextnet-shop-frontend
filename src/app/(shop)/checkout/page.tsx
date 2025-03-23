@@ -24,7 +24,7 @@ function Page() {
 
   return (
     <>
-      <h1 className="py-12 text-center">Checkout</h1>
+      <h1 className="py-12 text-center text-3xl font-bold uppercase">Checkout</h1>
 
       <div className="px-2 lg:px-0 lg:grid grid-cols-2 gap-16 pb-12">
         <OrderSummary cart={cart} totalPrice={totalPrice} user={user} />

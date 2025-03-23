@@ -1,7 +1,7 @@
 "use client";
 
-import Loading from "@/app/components/loading/loading";
-import RecommendationsCarousel from "@/app/components/products/recommendations-carousel";
+import Loading from "@/app/components/products/recommendations/loading";
+import RecommendationsCarousel from "@/app/components/products/recommendations/recommendations-carousel";
 import { useGetPersonalRecommendationsQuery } from "@/lib/features/products/productsSlice";
 import { useAuth } from "@/lib/hooks";
 import { cn } from "@/lib/utils";

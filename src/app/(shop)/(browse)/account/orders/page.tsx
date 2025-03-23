@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/app/(shop)/(browse)/account/orders/loading";
 import OrderHeader from "@/app/components/order/order-header";
 import OrderItems from "@/app/components/order/order-items";
 import {
@@ -27,11 +28,11 @@ function Page() {
   let content: React.ReactNode;
 
   if (isLoading) {
-    content = <div>Loading your order history...</div>;
+    content = <Loading />;
   } else if (isSuccess) {
     content = (
       <div>
-        <h1 className="text-center py-4">Order History</h1>
+        <h1 className="text-center py-4 text-2xl font-bold">Order History</h1>
 
         <Accordion type="single" collapsible className="w-full">
           {orders.map((order) => (

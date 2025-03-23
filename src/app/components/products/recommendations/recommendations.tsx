@@ -1,7 +1,7 @@
 "use client";
 
-import Loading from "@/app/components/loading/loading";
-import RecommendationsCarousel from "@/app/components/products/recommendations-carousel";
+import Loading from "@/app/components/products/recommendations/loading";
+import RecommendationsCarousel from "@/app/components/products/recommendations/recommendations-carousel";
 import { useGetProductsRecommendationsQuery } from "@/lib/features/products/productsSlice";
 
 function Recommendations({ productId }: { productId: number }) {

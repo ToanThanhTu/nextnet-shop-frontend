@@ -16,8 +16,8 @@ function OrderSummary({
 
       <CartList cart={cart} user={user} />
 
-      <div className="flex justify-between py-4">
-        <h3>Total</h3>
+      <div className="flex justify-between items-center py-4">
+        <h3 className="text-lg font-semibold">Total</h3>
         <p>${totalPrice}</p>
       </div>
     </div>

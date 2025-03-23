@@ -1,7 +1,7 @@
 "use client";
 
-import Loading from "@/app/components/loading/loading";
 import PaginationSection from "@/app/components/pagination/pagination";
+import Loading from "@/app/components/products/loading";
 import ProductCard from "@/app/components/products/product-card";
 import { Product } from "@/app/types";
 import { setInitialFilter, setPage, updateCurrentFilter } from "@/lib/features/filter/filterSlice";
