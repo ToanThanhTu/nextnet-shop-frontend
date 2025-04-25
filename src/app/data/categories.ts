@@ -5,18 +5,18 @@ export const categories: Category[] = [
     id: 1,
     title: "Home",
     href: "/home",
-    image: "/workspace.png",
+    image: "/category-images/home.webp",
   },
   {
     id: 2,
     title: "Electronics",
     href: "/electronics",
-    image: "/workspace.png",
+    image: "/category-images/electronics.webp",
   },
   {
     id: 3,
     title: "Fitness",
     href: "/fitness",
-    image: "/workspace.png",
+    image: "/category-images/fitness.webp",
   },
 ];

@@ -9,7 +9,7 @@ function ProductCard({ product }: { product: Product }) {
     <div className="space-y-2">
       <Link href={`/products/${product.slug}`} className="space-y-2">
         <Image
-          src={`/api/products/${product.id}/image`}
+          src={`/product-images/${product.slug}.webp`}
           alt={product.title}
           width={500}
           height={500}

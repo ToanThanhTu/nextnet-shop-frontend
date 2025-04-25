@@ -50,7 +50,7 @@ function SearchResults({ search, setSearch, setSearchBarFocus }: Props) {
             onClick={handleClick}
           >
             <Image
-              src={`/api/products/${product.id}/image`}
+              src={`/product-images/${product.slug}.webp`}
               alt={`${product.title} image`}
               width={100}
               height={100}

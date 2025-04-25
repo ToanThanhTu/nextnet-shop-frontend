@@ -26,7 +26,7 @@ function Highlights() {
           className="hover:cursor-pointer hover:opacity-80 relative"
         >
           <Image
-            src={`/api/products/${product.id}/image`}
+            src={`/product-images/${product.slug}.webp`}
             alt={`${product.title} image`}
             width={500}
             height={500}

@@ -40,7 +40,7 @@ function SubMenu({ category, closeSubMenu }: Props) {
                 </Link>
 
                 <Image
-                  src={`/api/subcategories/${subCategory.id}/image`}
+                  src={`/subcategory-images/${subCategory.slug}.webp`}
                   alt={`${subCategory.title} image`}
                   width={900}
                   height={600}
@@ -51,7 +51,7 @@ function SubMenu({ category, closeSubMenu }: Props) {
           </ul>
 
           <Image
-            src={`/api/categories/${category.id}/image`}
+            src={`/category-images/${category.slug}.webp`}
             alt={`${category.title} Image`}
             width={900}
             height={600}

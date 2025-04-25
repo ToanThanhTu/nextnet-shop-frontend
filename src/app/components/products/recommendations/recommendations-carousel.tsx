@@ -22,7 +22,7 @@ function RecommendationsCarousel({ products }: { products: Product[] }) {
               className="flex flex-col items-center space-y-2"
             >
               <Image
-                src={`/api/products/${product.id}/image`}
+                src={`/product-images/${product.slug}.webp`}
                 alt={`${product.title} Image`}
                 width={250}
                 height={250}

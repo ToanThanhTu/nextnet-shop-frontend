@@ -89,7 +89,7 @@ function ProductPage({ slug }: { slug: string }) {
 
         <div className="lg:grid grid-cols-2 gap-4">
           <Image
-            src={`/api/products/${product.id}/image`}
+            src={`/product-images/${product.slug}.webp`}
             alt={product.title}
             width={1000}
             height={1000}

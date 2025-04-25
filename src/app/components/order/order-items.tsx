@@ -13,7 +13,7 @@ function OrderItems({ items }: Props) {
           <div className="flex items-center justify-between space-x-4">
             <div className="flex items-center space-x-4">
               <Image
-                src={`/api/products/${item.productId}/image`}
+                src={`/product-images/${item.product.slug}.webp`}
                 width={100}
                 height={100}
                 alt={`${item.product.title} image`}
