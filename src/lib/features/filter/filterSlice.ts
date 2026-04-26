@@ -1,5 +1,17 @@
-import { Filter } from "@/app/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+type FilterShape = {
+  priceMin: number;
+  priceMax: number;
+  sortBy: string;
+  limit: string;
+  page: string;
+};
+
+export type Filter = {
+  initial: FilterShape;
+  current: FilterShape;
+};
 
 const initialState: Filter = {
   initial: {

@@ -11,25 +11,14 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/app/components/ui/sheet";
-import { setCartLocal } from "@/lib/features/cart/cartSlice";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useAppSelector } from "@/lib/hooks";
 import { ShoppingCart } from "lucide-react";
 import { redirect } from "next/navigation";
-import { useEffect } from "react";
 
 function Cart() {
-  const dispatch = useAppDispatch();
+  // Cart hydration from localStorage happens once in AppHydrator (mounted in StoreProvider).
   const { cart, totalPrice } = useAppSelector((state) => state.cart);
   const { user } = useAppSelector((state) => state.auth);
-
-  useEffect(() => {
-    const storedCart = localStorage.getItem("NextNetShopCart");
-    if (storedCart) {
-      dispatch(setCartLocal(JSON.parse(storedCart)));
-    } else {
-      dispatch(setCartLocal([]));
-    }
-  }, [dispatch]);
 
   return (
     <Sheet>

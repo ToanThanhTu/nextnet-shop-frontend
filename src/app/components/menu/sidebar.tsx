@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/app/components/ui/button";
-import { useGetCategoriesQuery } from "@/lib/features/api/apiSlice";
+import { useGetCategoriesQuery } from "@/modules/categories";
 import { Menu } from "lucide-react";
 import Loading from "@/app/components/loading/loading";
 

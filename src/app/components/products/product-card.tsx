@@ -1,6 +1,6 @@
 import Price from "@/app/components/price/price"
 import Sale from "@/app/components/price/sale/sale"
-import { Product } from "@/app/types"
+import { Product } from "@/modules/products"
 import Image from "next/image"
 import Link from "next/link"
 

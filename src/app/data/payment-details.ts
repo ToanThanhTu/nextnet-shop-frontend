@@ -1,4 +1,4 @@
-import { PaymentDetails } from "@/app/types";
+import { PaymentDetails } from "@/modules/orders"
 
 const paymentDetails: PaymentDetails = {
   number: "5555666677778888",

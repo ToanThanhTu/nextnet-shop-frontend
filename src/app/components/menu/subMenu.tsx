@@ -1,6 +1,6 @@
 "use client";
 
-import { Category } from "@/app/types";
+import { Category } from "@/modules/categories"
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";

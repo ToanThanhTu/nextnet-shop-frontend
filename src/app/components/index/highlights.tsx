@@ -5,7 +5,7 @@ import LoadingTopDeals from "@/app/components/index/loadingTopDeals"
 import Discount from "@/app/components/price/sale/discount"
 import { CardContent, CardFooter } from "@/app/components/ui/card"
 import { highlights } from "@/app/data/hightlights"
-import { useGetTopDealsQuery } from "@/lib/features/products/productsSlice"
+import { useGetTopDealsQuery } from "@/modules/products"
 import Image from "next/image"
 import Link from "next/link"
 

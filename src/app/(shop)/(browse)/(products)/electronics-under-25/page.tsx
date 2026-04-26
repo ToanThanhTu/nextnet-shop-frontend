@@ -1,14 +1,16 @@
-"use client";
+"use client"
 
-import Products from "@/app/components/products/products";
-import { updateCurrentFilter } from "@/lib/features/filter/filterSlice";
-import { useAppDispatch } from "@/lib/hooks";
+import Products from "@/app/components/products/products"
+import { updateCurrentFilter } from "@/lib/features/filter/filterSlice"
+import { useAppDispatch } from "@/lib/hooks"
+import { useEffect } from "react"
 
-function Page() {
-  const dispatch = useAppDispatch();
-  dispatch(updateCurrentFilter({ priceMax: 25 }));
+export default function Page() {
+  const dispatch = useAppDispatch()
 
-  return <Products endpoint="all" category="electronics" />;
+  useEffect(() => {
+    dispatch(updateCurrentFilter({ priceMax: 25 }))
+  }, [dispatch])
+
+  return <Products endpoint="all" category="electronics" />
 }
-
-export default Page;

@@ -1,4 +1,4 @@
-import { OrderItem } from "@/app/types";
+import { OrderItem } from "@/modules/orders"
 import Image from "next/image";
 
 interface Props {

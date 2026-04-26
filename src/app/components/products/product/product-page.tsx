@@ -14,9 +14,9 @@ import {
   BreadcrumbSeparator,
 } from "@/app/components/ui/breadcrumb"
 import { Button } from "@/app/components/ui/button"
-import { CartItem, CartItemDTO } from "@/app/types"
-import { addCartItemLocal, useAddCartItemServerMutation } from "@/lib/features/cart/cartSlice"
-import { useGetProductBySlugQuery } from "@/lib/features/products/productsSlice"
+import { CartItem, CartItemDTO } from "@/modules/cart"
+import { addCartItemLocal, useAddCartItemServerMutation } from "@/modules/cart"
+import { useGetProductBySlugQuery } from "@/modules/products"
 import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { cn } from "@/lib/utils"
 import { LoaderPinwheel } from "lucide-react"

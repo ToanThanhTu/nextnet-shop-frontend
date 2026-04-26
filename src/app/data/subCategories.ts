@@ -1,4 +1,4 @@
-import { SubCategory } from "@/app/types";
+import { SubCategory } from "@/modules/categories"
 
 export const SubCategories: SubCategory[] = [
   {

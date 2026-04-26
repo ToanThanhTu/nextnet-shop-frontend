@@ -1,5 +1,6 @@
 import CartList from "@/app/components/cart/cart-list";
-import { CartItem, UserDTO } from "@/app/types";
+import { CartItem } from "@/modules/cart"
+import { UserDTO } from "@/modules/users"
 
 function OrderSummary({
   cart,

@@ -1,6 +1,6 @@
 import Loading from "@/app/components/loading/loading"
 import MenuItem from "@/app/components/menu/menuItem"
-import { useGetCategoriesQuery } from "@/lib/features/api/apiSlice"
+import { useGetCategoriesQuery } from "@/modules/categories"
 import Link from "next/link"
 import { useState, MouseEvent, useEffect } from "react"
 

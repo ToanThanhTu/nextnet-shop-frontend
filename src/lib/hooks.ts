@@ -1,4 +1,4 @@
-import { setCredentials } from "@/lib/features/auth/authSlice"
+import { setCredentials } from "@/modules/users"
 import { AppDispatch, AppStore, RootState } from "@/lib/store"
 import { redirect } from "next/navigation"
 import { useEffect } from "react"

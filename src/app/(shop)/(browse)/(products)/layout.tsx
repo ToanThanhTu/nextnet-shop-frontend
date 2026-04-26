@@ -5,6 +5,7 @@ import FilterTags from "@/app/components/filter-and-sort/filter-tags";
 import { resetToInitial } from "@/lib/features/filter/filterSlice";
 import { useAppDispatch } from "@/lib/hooks";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Layout({
   children,
@@ -12,19 +13,21 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   const dispatch = useAppDispatch();
-
   const pathName = usePathname();
+
+  // Reset the filter state whenever the user navigates to a new browse path,
+  // so a previous category's filters don't bleed into the next.
+  useEffect(() => {
+    dispatch(resetToInitial());
+  }, [dispatch, pathName]);
+
   const slug = pathName.split("/");
-
   let headerTitle = "";
-
   if (slug.length === 3) {
     headerTitle = slug[2].replace(/-/g, " ");
   } else if (slug.length === 2) {
     headerTitle = slug[1].replace(/-/g, " ");
   }
-
-  dispatch(resetToInitial());
 
   return (
     <div className="mx-4 lg:mx-32">

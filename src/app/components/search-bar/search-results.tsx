@@ -1,4 +1,4 @@
-import { useGetProductsBySearchTextQuery } from "@/lib/features/products/productsSlice"
+import { useGetProductsBySearchTextQuery } from "@/modules/products"
 import Image from "next/image"
 import Link from "next/link"
 import { Dispatch, SetStateAction } from "react"

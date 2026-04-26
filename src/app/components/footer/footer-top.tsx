@@ -6,7 +6,7 @@ import GitHubIcon from "@mui/icons-material/GitHub"
 import { info } from "@/app/data/contact-me"
 import Image from "next/image"
 import { Mail, MapPin, Smartphone } from "lucide-react"
-import { useGetCategoriesQuery } from "@/lib/features/api/apiSlice"
+import { useGetCategoriesQuery } from "@/modules/categories"
 import Loading from "@/app/components/loading/loading"
 
 function FooterTop() {

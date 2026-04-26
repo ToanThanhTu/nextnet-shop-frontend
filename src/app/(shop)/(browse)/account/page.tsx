@@ -1,7 +1,7 @@
 "use client";
 
 import Loading from "@/app/(shop)/(browse)/account/loading";
-import { useGetUserDetailsQuery } from "@/lib/features/api/apiSlice";
+import { useGetUserDetailsQuery } from "@/modules/users";
 import { useAuth } from "@/lib/hooks";
 
 function Account() {

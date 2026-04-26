@@ -1,4 +1,4 @@
-import { Category } from "@/app/types"
+import { Category } from "@/modules/categories"
 import SubMenu from "@/app/components/menu/subMenu"
 import { MouseEvent } from "react"
 import { ChevronDown, ChevronUp } from "lucide-react"

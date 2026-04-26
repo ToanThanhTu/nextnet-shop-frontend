@@ -6,8 +6,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/app/components/ui/dropdown-menu"
-import { logout } from "@/lib/features/auth/authSlice"
-import { resetCartLocal } from "@/lib/features/cart/cartSlice"
+import { logout } from "@/modules/users"
+import { resetCartLocal } from "@/modules/cart"
 import { useAppDispatch, useAuth } from "@/lib/hooks"
 import { cn } from "@/lib/utils"
 import { CircleUser } from "lucide-react"

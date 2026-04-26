@@ -7,7 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/app/components/ui/carousel"
-import { Product } from "@/app/types"
+import { Product } from "@/modules/products"
 import Image from "next/image"
 import Link from "next/link"
 

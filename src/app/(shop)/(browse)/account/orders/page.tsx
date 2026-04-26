@@ -9,7 +9,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/app/components/ui/accordion";
-import { useGetOrdersQuery } from "@/lib/features/order/orderSlice";
+import { useGetOrdersQuery } from "@/modules/orders";
 import { useAuth } from "@/lib/hooks";
 
 function Page() {

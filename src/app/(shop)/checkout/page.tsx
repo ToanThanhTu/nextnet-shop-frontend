@@ -1,26 +1,13 @@
-"use client";
+"use client"
 
-import Billing from "@/app/components/checkout/billing";
-import OrderSummary from "@/app/components/checkout/order-summary";
-import {
-  setCartLocal,
-} from "@/lib/features/cart/cartSlice";
-import { useAppDispatch, useAppSelector, useAuth } from "@/lib/hooks";
-import { useEffect } from "react";
+import Billing from "@/app/components/checkout/billing"
+import OrderSummary from "@/app/components/checkout/order-summary"
+import { useAppSelector, useAuth } from "@/lib/hooks"
 
-function Page() {
-  const { cart, totalPrice } = useAppSelector((state) => state.cart);
-  const user = useAuth({ needSignIn: false });
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    const storedCart = localStorage.getItem("NextNetShopCart");
-    if (storedCart) {
-      dispatch(setCartLocal(JSON.parse(storedCart)));
-    } else {
-      dispatch(setCartLocal([]));
-    }
-  }, [dispatch]);
+export default function Page() {
+  // Cart hydration from localStorage happens once in AppHydrator.
+  const { cart, totalPrice } = useAppSelector((state) => state.cart)
+  const user = useAuth({ needSignIn: false })
 
   return (
     <>
@@ -31,7 +18,5 @@ function Page() {
         <Billing cart={cart} user={user} />
       </div>
     </>
-  );
+  )
 }
-
-export default Page;

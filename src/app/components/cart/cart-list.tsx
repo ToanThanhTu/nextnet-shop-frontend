@@ -1,11 +1,12 @@
 import CartItemQuantity from "@/app/components/cart/cart-item-quantity";
-import { CartItem, CartItemDTO, UserDTO } from "@/app/types";
+import { CartItem, CartItemDTO } from "@/modules/cart"
+import { UserDTO } from "@/modules/users"
 import {
   removeCartItemLocal,
   updateCartItemLocal,
   useRemoveCartItemServerMutation,
   useUpdateCartItemServerMutation,
-} from "@/lib/features/cart/cartSlice";
+} from "@/modules/cart";
 import { useAppDispatch } from "@/lib/hooks";
 import Image from "next/image";
 

@@ -2,7 +2,7 @@
 
 import Loading from "@/app/components/products/recommendations/loading";
 import RecommendationsCarousel from "@/app/components/products/recommendations/recommendations-carousel";
-import { useGetPersonalRecommendationsQuery } from "@/lib/features/products/productsSlice";
+import { useGetPersonalRecommendationsQuery } from "@/modules/products";
 import { useAuth } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
 import Link from "next/link";

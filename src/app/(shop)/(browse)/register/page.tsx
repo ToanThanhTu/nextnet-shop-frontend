@@ -5,7 +5,7 @@ import MembershipAds from "@/app/components/index/membership-ads";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
-import { registerUser } from "@/lib/features/auth/authActions";
+import { registerUser } from "@/modules/users";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { LoaderPinwheel } from "lucide-react";
 import { useRouter } from "next/navigation";

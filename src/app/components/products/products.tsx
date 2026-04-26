@@ -3,9 +3,9 @@
 import PaginationSection from "@/app/components/pagination/pagination";
 import Loading from "@/app/components/products/loading";
 import ProductCard from "@/app/components/products/product-card";
-import { Product } from "@/app/types";
+import { Product } from "@/modules/products"
 import { setInitialFilter, setPage, updateCurrentFilter } from "@/lib/features/filter/filterSlice";
-import { useGetProductsQuery } from "@/lib/features/products/productsSlice";
+import { useGetProductsQuery } from "@/modules/products";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useEffect } from "react";
 
