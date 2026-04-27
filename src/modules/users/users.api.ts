@@ -4,7 +4,7 @@ import type { User } from "./entities"
 export const usersApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getUserDetails: builder.query<User, number>({
-      query: (userId) => ({ url: `/users/id/${userId}` }),
+      query: (userId) => ({ url: `/users/${userId}` }),
       providesTags: ["User"],
     }),
   }),

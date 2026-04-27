@@ -46,11 +46,8 @@ export const loginUser = createAsyncThunk(
         return rejectWithValue(error as string)
       }
 
-      const data = await response.json()
-      return {
-        user: data.userDto,
-        token: data.userToken,
-      }
+      // LoginResponse is { user, token } since the backend Users migration.
+      return await response.json()
     } catch (error: unknown) {
       return rejectWithValue(errorMessage(error))
     }
