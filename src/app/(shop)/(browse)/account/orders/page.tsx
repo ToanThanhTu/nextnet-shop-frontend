@@ -21,7 +21,7 @@ function Page() {
     isSuccess,
     isError,
     error,
-  } = useGetOrdersQuery(user?.id as number, {
+  } = useGetOrdersQuery(undefined, {
     skip: !user,
   });
 

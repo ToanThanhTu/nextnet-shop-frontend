@@ -1,21 +1,32 @@
 import { apiSlice } from "@/lib/api-slice"
-import type { CartItem } from "@/modules/cart/entities"
-import type { Order, OrderItem } from "./entities"
+import type { Order } from "./entities"
+
+/**
+ * The user is identified by the JWT bearer; orders endpoints don't take
+ * a userId from the client.
+ */
+
+export type PlaceOrderItem = {
+  productId: number
+  quantity: number
+  expectedSalePrice: number
+}
+
+export type PlaceOrderRequest = {
+  items: PlaceOrderItem[]
+}
 
 export const ordersApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getOrders: builder.query<Order[], number>({
-      query: (userId) => `/orders/user/${userId}`,
+    getOrders: builder.query<Order[], void>({
+      query: () => "/orders",
       providesTags: ["Orders"],
     }),
-    placeOrder: builder.mutation<
-      { order: Order; orderItems: OrderItem[] },
-      { userId: number; cartItems: CartItem[] }
-    >({
-      query: ({ userId, cartItems }) => ({
-        url: `/orders/user/${userId}`,
+    placeOrder: builder.mutation<Order, PlaceOrderRequest>({
+      query: (body) => ({
+        url: "/orders",
         method: "POST",
-        body: cartItems,
+        body,
       }),
       invalidatesTags: ["Orders", "Cart"],
     }),

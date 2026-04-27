@@ -23,13 +23,21 @@ function Billing({ cart, user }: { cart: CartItem[]; user: UserDTO | null }) {
     }
 
     try {
-      await placeOrder({ userId: user.id, cartItems: cart })
+      await placeOrder({
+        items: cart.map((item) => ({
+          productId: item.productId,
+          quantity: item.quantity,
+          // Server validates this matches the live product price; mismatch
+          // returns 400 with errorCode PRICE_CHANGED.
+          expectedSalePrice: item.product.salePrice,
+        })),
+      }).unwrap()
 
       dispatch(resetCartLocal())
       alert("Order placed successfully!")
       router.push("/account/orders")
     } catch (error) {
-      alert(`Error placing order: ${error}.\nPlease try again!`)
+      alert(`Error placing order: ${JSON.stringify(error)}.\nPlease try again!`)
       return
     }
   }
