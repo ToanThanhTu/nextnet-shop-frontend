@@ -15,7 +15,10 @@ function PersonalisedRecommendations() {
     isLoading,
     isSuccess,
     isError,
-  } = useGetPersonalRecommendationsQuery(user ? user.id : -1);
+  } = useGetPersonalRecommendationsQuery(undefined, {
+    // Skip the call entirely if not signed in; the query requires auth.
+    skip: !user,
+  });
 
   let content: React.ReactNode;
 

@@ -58,8 +58,9 @@ export const productsApi = apiSlice.injectEndpoints({
     getProductsRecommendations: builder.query<Product[], number>({
       query: (productId) => ({ url: `/products/recommendations/${productId}` }),
     }),
-    getPersonalRecommendations: builder.query<Product[], number>({
-      query: (userId) => ({ url: `/products/personal-recommendations/${userId}` }),
+    getPersonalRecommendations: builder.query<Product[], void>({
+      // User comes from the JWT NameIdentifier claim on the backend.
+      query: () => ({ url: "/products/personal-recommendations" }),
     }),
   }),
 })
