@@ -1,5 +1,5 @@
 import CartItemQuantity from "@/app/components/cart/cart-item-quantity";
-import { CartItem, CartItemDTO } from "@/modules/cart"
+import { CartItem } from "@/modules/cart"
 import { UserDTO } from "@/modules/users"
 import {
   removeCartItemLocal,
@@ -27,13 +27,7 @@ function CartList({ cart, user }: { cart: CartItem[]; user: UserDTO | null }) {
     // remove item if quantity is 0
     if (newQuantity < 1) {
       if (user) {
-        const removeCartItem: CartItemDTO = {
-          productId: productId,
-          userId: user.id,
-          quantity: 0,
-        };
-
-        await removeCartItemServer(removeCartItem);
+        await removeCartItemServer(productId);
 
         if (isRemoveItemError) {
           alert(`Error removing item from cart: ${removeItemError}.\nPlease try again!`);
@@ -45,21 +39,15 @@ function CartList({ cart, user }: { cart: CartItem[]; user: UserDTO | null }) {
       }
     }
 
-    const updatedCartItem: CartItemDTO = {
-      productId: productId,
-      quantity: newQuantity,
-    };
-
     if (user) {
-      updatedCartItem.userId = user.id;
-      await updateCartItemServer(updatedCartItem);
+      await updateCartItemServer({ productId, quantity: newQuantity });
 
       if (isUpdateItemError) {
         alert(`Error updating item in cart: ${updateItemError}.\nPlease try again!`);
         return;
       }
     } else {
-      dispatch(updateCartItemLocal(updatedCartItem));
+      dispatch(updateCartItemLocal({ productId, quantity: newQuantity }));
     }
   };
 

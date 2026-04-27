@@ -14,7 +14,7 @@ import {
   BreadcrumbSeparator,
 } from "@/app/components/ui/breadcrumb"
 import { Button } from "@/app/components/ui/button"
-import { CartItem, CartItemDTO } from "@/modules/cart"
+import { CartItem } from "@/modules/cart"
 import { addCartItemLocal, useAddCartItemServerMutation } from "@/modules/cart"
 import { useGetProductBySlugQuery } from "@/modules/products"
 import { useAppDispatch, useAppSelector } from "@/lib/hooks"
@@ -51,13 +51,12 @@ function ProductPage({ slug }: { slug: string }) {
       }
 
       if (user) {
-        const newCartItemServer: CartItemDTO = {
-          userId: user.id,
+        // userId comes from the JWT bearer; the request body only carries
+        // productId + quantity now.
+        await addCartItemServer({
           productId: product.id,
           quantity: quantity,
-        }
-
-        await addCartItemServer(newCartItemServer)
+        })
       } else {
         dispatch(addCartItemLocal(newCartItem))
       }

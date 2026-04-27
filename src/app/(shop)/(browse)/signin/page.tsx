@@ -41,7 +41,10 @@ function SignIn() {
   useEffect(() => {
     const syncUserCart = async () => {
       if (success && user) {
-        await syncCartServer({ userId: user.id, localCart: cart });
+        // Server identifies the user via JWT; we just send the local items.
+        await syncCartServer(
+          cart.map((item) => ({ productId: item.productId, quantity: item.quantity })),
+        );
         router.push("/");
       }
     };

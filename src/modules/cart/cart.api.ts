@@ -1,48 +1,68 @@
 import { apiSlice } from "@/lib/api-slice"
-import type { CartItem, CartItemDTO } from "./entities"
+import type { CartItem } from "./entities"
+
+/**
+ * The user is identified by the JWT bearer token in apiSlice.prepareHeaders;
+ * none of these endpoints take a userId from the client. Authorization is
+ * enforced server-side.
+ */
+
+export type AddCartItemRequest = {
+  productId: number
+  quantity: number
+}
+
+export type UpdateCartItemRequest = {
+  productId: number
+  quantity: number
+}
+
+export type SyncCartItem = {
+  productId: number
+  quantity: number
+}
 
 export const cartApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    fetchUserCartServer: builder.query<CartItem[], number>({
-      query: (userId) => `/cart/user/${userId}`,
+    fetchUserCartServer: builder.query<CartItem[], void>({
+      query: () => "/cart",
       providesTags: ["Cart"],
     }),
-    addCartItemServer: builder.mutation<CartItem, CartItemDTO>({
-      query: (cartItem) => ({
-        url: "/cart",
+    addCartItemServer: builder.mutation<CartItem, AddCartItemRequest>({
+      query: (body) => ({
+        url: "/cart/items",
         method: "POST",
-        body: cartItem,
+        body,
       }),
       invalidatesTags: ["Cart"],
     }),
-    removeCartItemServer: builder.mutation<CartItemDTO, CartItemDTO>({
-      query: (cartItemDto) => ({
-        url: "/cart/item/",
-        method: "DELETE",
-        body: cartItemDto,
-      }),
-      invalidatesTags: ["Cart"],
-    }),
-    updateCartItemServer: builder.mutation<CartItem, CartItemDTO>({
-      query: (cartItemDto) => ({
-        url: "/cart",
+    updateCartItemServer: builder.mutation<CartItem, UpdateCartItemRequest>({
+      query: (body) => ({
+        url: "/cart/items",
         method: "PUT",
-        body: cartItemDto,
+        body,
       }),
       invalidatesTags: ["Cart"],
     }),
-    clearCartServer: builder.mutation<void, number>({
-      query: (userId) => ({
-        url: `/cart/user/${userId}`,
+    removeCartItemServer: builder.mutation<void, number>({
+      query: (productId) => ({
+        url: `/cart/items/${productId}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Cart"],
     }),
-    syncCartServer: builder.mutation<CartItem[], { userId: number; localCart: CartItemDTO[] }>({
-      query: ({ userId, localCart }) => ({
-        url: `/cart/sync/${userId}`,
+    clearCartServer: builder.mutation<void, void>({
+      query: () => ({
+        url: "/cart",
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Cart"],
+    }),
+    syncCartServer: builder.mutation<CartItem[], SyncCartItem[]>({
+      query: (items) => ({
+        url: "/cart/sync",
         method: "POST",
-        body: localCart,
+        body: { items },
       }),
       invalidatesTags: ["Cart"],
     }),
@@ -52,8 +72,8 @@ export const cartApi = apiSlice.injectEndpoints({
 export const {
   useFetchUserCartServerQuery,
   useAddCartItemServerMutation,
-  useRemoveCartItemServerMutation,
   useUpdateCartItemServerMutation,
+  useRemoveCartItemServerMutation,
   useClearCartServerMutation,
   useSyncCartServerMutation,
 } = cartApi

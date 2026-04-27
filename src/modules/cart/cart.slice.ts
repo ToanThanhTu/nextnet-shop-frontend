@@ -66,7 +66,10 @@ const cartSlice = createSlice({
         state.totalPrice = calcTotalPrice(state.cart)
       })
       .addMatcher(cartApi.endpoints.removeCartItemServer.matchFulfilled, (state, action) => {
-        state.cart = state.cart.filter((i) => i.productId !== action.payload.productId)
+        // The mutation returns void (204); the productId we removed is the
+        // original mutation argument, accessible on action.meta.arg.originalArgs.
+        const productId = action.meta.arg.originalArgs
+        state.cart = state.cart.filter((i) => i.productId !== productId)
         state.totalPrice = calcTotalPrice(state.cart)
       })
       .addMatcher(cartApi.endpoints.updateCartItemServer.matchFulfilled, (state, action) => {
