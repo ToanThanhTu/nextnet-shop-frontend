@@ -195,6 +195,12 @@ npx tsc --noEmit         # type check
 
 Hot reload via Turbopack is reliable; restart only if the dev server itself crashes or after a major restructure (Turbopack caches deleted module references in some cases).
 
+## CI
+
+`.github/workflows/ci.yml` runs on every push to `main` and every PR targeting `main`. Three independent steps so the GitHub UI shows which one failed: `bun lint`, `bunx tsc --noEmit`, `bun run build`. The lint step exists because `next build` already runs `next lint` but folds its output into a single failure; surfacing lint as its own step makes regressions like `no-html-link-for-pages` obvious before they reach Vercel.
+
+`bun install --frozen-lockfile` is non-negotiable: if you bump a dep, commit the regenerated `bun.lockb` in the same change.
+
 ## Things to avoid
 
 - **Don't fetch `http://localhost:8080` directly.** Use `/api/*` and let the middleware handle it.

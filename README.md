@@ -175,6 +175,18 @@ docker run -p 3000:3000 -e API_BASE_URL=... nextnet-frontend
 
 Vercel is the default; the Dockerfile is for self-hosted deploy.
 
+## CI
+
+GitHub Actions runs [.github/workflows/ci.yml](.github/workflows/ci.yml) on every push to `main` and every PR targeting `main`. Three steps, each surfaced separately in the GitHub UI:
+
+| Step | Command | Catches |
+|---|---|---|
+| Lint | `bun lint` | ESLint + `eslint-config-next` rules (e.g. `no-html-link-for-pages`) |
+| Typecheck | `bunx tsc --noEmit` | type errors that `next build` doesn't surface on its own |
+| Build | `bun run build` | the same compile path Vercel uses, with a placeholder `API_BASE_URL` |
+
+`bun install --frozen-lockfile` fails the run if `bun.lockb` is out of sync with `package.json`. Concurrency is keyed on `github.ref` so a fast follow-up push supersedes the in-flight run.
+
 ## Troubleshooting
 
 - **`/api/...` returns 404**: verify `API_BASE_URL` is set in `.env.local` and the backend is up. The middleware needs the env var at request time.
