@@ -1,14 +1,18 @@
-import Image from "next/image";
-import SwitchAccessShortcutAddIcon from "@mui/icons-material/SwitchAccessShortcutAdd";
-import LockOpenIcon from "@mui/icons-material/LockOpen";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-import { Button } from "@/app/components/ui/button";
-import Link from "next/link";
+"use client"
+
+import { Button } from "@/app/components/ui/button"
+import LockOpenIcon from "@mui/icons-material/LockOpen"
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn"
+import SwitchAccessShortcutAddIcon from "@mui/icons-material/SwitchAccessShortcutAdd"
+import Image from "next/image"
+import Link from "next/link"
 
 function MembershipAds() {
   return (
     <div className="xl:max-w-screen-xl m-auto px-4 py-12 text-center uppercase">
-      <h2 className="font-medium">Become a member to save and get value on Next Net Shop</h2>
+      <h2 className="font-medium">
+        Become a member to save and get value on Next Net Shop
+      </h2>
 
       <div className="flex flex-col lg:flex-row gap-8 items-center justify-between mt-8">
         <Image
@@ -41,7 +45,7 @@ function MembershipAds() {
         </Link>
       </div>
     </div>
-  );
+  )
 }
 
-export default MembershipAds;
+export default MembershipAds

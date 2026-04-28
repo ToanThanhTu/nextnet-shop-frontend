@@ -1,6 +1,13 @@
 # Frontend conventions and gotchas
 
-Stack-specific rules for `next-frontend`. Project-wide conventions live in `../CLAUDE.md`.
+Stack-specific rules for `next-frontend`. Project-wide conventions live in `../CLAUDE.md`. Per-module specifics (API surface, slice/thunk wiring, dependencies) live one level deeper:
+
+- [src/modules/CLAUDE.md](src/modules/CLAUDE.md) — cross-module landscape (which modules exist, who has slices/thunks, RTK Query tags)
+- [src/modules/categories/CLAUDE.md](src/modules/categories/CLAUDE.md)
+- [src/modules/products/CLAUDE.md](src/modules/products/CLAUDE.md)
+- [src/modules/cart/CLAUDE.md](src/modules/cart/CLAUDE.md) — has a slice + listener middleware persistence
+- [src/modules/orders/CLAUDE.md](src/modules/orders/CLAUDE.md)
+- [src/modules/users/CLAUDE.md](src/modules/users/CLAUDE.md) — auth slice + thunks + JWT integration
 
 ## Architecture: domain-driven modules
 
