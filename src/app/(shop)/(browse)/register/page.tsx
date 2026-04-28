@@ -1,51 +1,53 @@
-"use client";
+"use client"
 
-import Error from "@/app/components/error/error";
-import MembershipAds from "@/app/components/index/membership-ads";
-import { Button } from "@/app/components/ui/button";
-import { Input } from "@/app/components/ui/input";
-import { Label } from "@/app/components/ui/label";
-import { registerUser } from "@/modules/users";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { LoaderPinwheel } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import Error from "@/app/components/error/error"
+import MembershipAds from "@/app/components/index/membership-ads"
+import { Button } from "@/app/components/ui/button"
+import { Input } from "@/app/components/ui/input"
+import { Label } from "@/app/components/ui/label"
+import { useAppDispatch, useAppSelector } from "@/lib/hooks"
+import { registerUser } from "@/modules/users"
+import { LoaderPinwheel } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
+import { SubmitHandler, useForm } from "react-hook-form"
 
 type Inputs = {
-  name: string;
-  email: string;
-  password: string;
-};
+  name: string
+  email: string
+  password: string
+}
 
 function Register() {
-  const { user, loading, error, success } = useAppSelector((state) => state.auth);
+  const { user, loading, error, success } = useAppSelector(
+    (state) => state.auth,
+  )
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>()
 
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
     if (success) {
-      alert("Registration successful. Redirecting to Sign In page.");
-      router.push("/login");
+      alert("Registration successful. Redirecting to Sign In page.")
+      router.push("/signin")
     }
 
     if (user) {
-      router.push("/");
+      router.push("/")
     }
-  }, [router, user, success]);
+  }, [router, user, success])
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    data.email = data.email.toLowerCase();
-    dispatch(registerUser(data));
-  };
+    data.email = data.email.toLowerCase()
+    dispatch(registerUser(data))
+  }
 
   return (
     <div>
@@ -60,7 +62,9 @@ function Register() {
             placeholder="Enter your name..."
             {...register("name", { required: true })}
           />
-          {errors.name && <div className="text-red-500">Please enter your name</div>}
+          {errors.name && (
+            <div className="text-red-500">Please enter your name</div>
+          )}
         </div>
 
         <div>
@@ -70,7 +74,9 @@ function Register() {
             placeholder="Enter your email..."
             {...register("email", { required: true })}
           />
-          {errors.email && <div className="text-red-500">Please enter your email</div>}
+          {errors.email && (
+            <div className="text-red-500">Please enter your email</div>
+          )}
         </div>
 
         <div>
@@ -80,15 +86,21 @@ function Register() {
             placeholder="Enter your password..."
             {...register("password", { required: true })}
           />
-          {errors.password && <div className="text-red-500">Please enter your password</div>}
+          {errors.password && (
+            <div className="text-red-500">Please enter your password</div>
+          )}
         </div>
 
-        <Button type="submit" className="hover:cursor-pointer w-full" disabled={loading}>
+        <Button
+          type="submit"
+          className="hover:cursor-pointer w-full"
+          disabled={loading}
+        >
           {loading ? <LoaderPinwheel className="animate-spin" /> : "Register"}
         </Button>
       </form>
     </div>
-  );
+  )
 }
 
-export default Register;
+export default Register
